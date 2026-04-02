@@ -1,0 +1,49 @@
+{
+  "name": "DJ DX — DJ, Producer & Recording Artist",
+  "short_name": "DJ DX",
+  "description": "New York/New Jersey DJ, producer, and recording artist. Book for events, stream music, and buy exclusive tracks.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0c0c0c",
+  "theme_color": "#C9A84C",
+  "lang": "en-US",
+  "categories": ["music", "entertainment"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "DJ DX — Music Store & Booking"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Music Store",
+      "short_name": "Store",
+      "description": "Browse and buy exclusive DJ DX tracks",
+      "url": "/#catalog"
+    },
+    {
+      "name": "Book DJ DX",
+      "short_name": "Book",
+      "description": "Book DJ DX for your event",
+      "url": "/#booking"
+    },
+    {
+      "name": "Soul Shades",
+      "short_name": "Soul Shades",
+      "description": "Soul Shades — New York duo",
+      "url": "/soul-shades"
+    }
+  ]
+}

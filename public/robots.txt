@@ -1,0 +1,54 @@
+# robots.txt — djdxmusic.com
+# Updated: 2026-03-31
+
+# ── Allow all crawlers ───────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+
+# Block backend / admin paths
+Disallow: /admin
+Disallow: /api/
+Disallow: /api/admin-login
+Disallow: /api/catalog
+Disallow: /api/create-checkout
+Disallow: /api/webhook
+Disallow: /api/booking
+
+# ── Google ───────────────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /api/
+
+User-agent: Googlebot-Video
+Allow: /
+Disallow: /api/
+
+# ── Bing ─────────────────────────────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+# ── AI / Answer Engine crawlers ──────────────────────────────────────────────
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# ── Sitemap ──────────────────────────────────────────────────────────────────
+Sitemap: https://djdxmusic.com/sitemap.xml

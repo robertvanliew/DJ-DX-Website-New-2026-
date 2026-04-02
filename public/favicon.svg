@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Dark background -->
+  <rect width="512" height="512" rx="100" ry="100" fill="#0c0c0c"/>
+
+  <!-- Gold gradient definition -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2C97E"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#9A7A2E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- D letter — bold custom shape -->
+  <path d="M72 140 L72 372 L192 372 C272 372 330 318 330 256 C330 194 272 140 192 140 Z
+           M152 196 L188 196 C236 196 268 222 268 256 C268 290 236 316 188 316 L152 316 Z"
+        fill="url(#goldGrad)"/>
+
+  <!-- X letter — two crossing bold bars -->
+  <line x1="358" y1="140" x2="492" y2="372" stroke="url(#goldGrad)" stroke-width="64" stroke-linecap="round"/>
+  <line x1="492" y1="140" x2="358" y2="372" stroke="url(#goldGrad)" stroke-width="64" stroke-linecap="round"/>
+</svg>
