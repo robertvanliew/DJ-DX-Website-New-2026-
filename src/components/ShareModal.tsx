@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Download, Link2, Check } from 'lucide-react';
 import type { Track } from '../catalog';
@@ -55,6 +55,49 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copiedTikTok, setCopiedTikTok] = useState(false);
+
+  // ── Swipe-to-dismiss ─────────────────────────────────────────────────────
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const dragY = useRef(0);
+  const startY = useRef(0);
+  const isDragging = useRef(false);
+
+  function onTouchStart(e: React.TouchEvent) {
+    // Only initiate drag from the handle or when sheet is scrolled to top
+    const sheet = sheetRef.current;
+    if (!sheet) return;
+    if (sheet.scrollTop > 0) return; // let normal scroll happen first
+    startY.current = e.touches[0].clientY;
+    dragY.current = 0;
+    isDragging.current = true;
+  }
+
+  function onTouchMove(e: React.TouchEvent) {
+    if (!isDragging.current || !sheetRef.current) return;
+    const sheet = sheetRef.current;
+    if (sheet.scrollTop > 0) { isDragging.current = false; return; }
+    const delta = e.touches[0].clientY - startY.current;
+    if (delta < 0) return; // don't allow upward drag
+    dragY.current = delta;
+    // Translate sheet as user drags, with slight resistance
+    sheet.style.transform = `translateX(-50%) translateY(${dragY.current * 0.75}px)`;
+    sheet.style.transition = 'none';
+  }
+
+  function onTouchEnd() {
+    if (!isDragging.current || !sheetRef.current) return;
+    isDragging.current = false;
+    const sheet = sheetRef.current;
+    sheet.style.transition = 'transform 0.3s cubic-bezier(0.22,1,0.36,1)';
+    if (dragY.current > 120) {
+      // Snap off-screen then close
+      sheet.style.transform = 'translateX(-50%) translateY(100%)';
+      setTimeout(onClose, 280);
+    } else {
+      // Snap back
+      sheet.style.transform = 'translateX(-50%) translateY(0)';
+    }
+  }
   const origin = window.location.origin;
   const deepLink = shareType === 'soul-shades'
     ? `${origin}/soul-shades#track-${track.id}`
@@ -190,7 +233,14 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-[1100] bg-black/75 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
 
-        <DialogPrimitive.Content className="fixed left-1/2 bottom-0 z-[1101] w-full max-w-[400px] -translate-x-1/2 rounded-t-2xl overflow-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom duration-300 max-h-[94dvh] overflow-y-auto" style={{ background: 'linear-gradient(135deg,#1C1C1C 0%,#2E2E2E 50%,#1A1A1A 100%)' }}>
+        <DialogPrimitive.Content
+          ref={sheetRef}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          className="fixed left-1/2 bottom-0 z-[1101] w-full max-w-[400px] -translate-x-1/2 rounded-t-2xl overflow-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom duration-300 max-h-[94dvh] overflow-y-auto"
+          style={{ background: 'linear-gradient(135deg,#1C1C1C 0%,#2E2E2E 50%,#1A1A1A 100%)' }}
+        >
 
           {/* Drag handle */}
           <div style={{ display:'flex', justifyContent:'center', paddingTop:'10px', paddingBottom:'6px' }}>
