@@ -6,6 +6,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.tsx'
 import { CartProvider } from './components/CartContext.tsx'
+import { PlayerProvider } from './components/PlayerContext.tsx'
 
 // Lazy load all non-home routes — they only download when first visited
 const EPK        = lazy(() => import('./pages/EPK.tsx'))
@@ -31,7 +32,7 @@ function ScrollManager() {
         }
       }, 120)
     } else {
-      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }), 0)
     }
   }, [pathname, hash])
   return null
@@ -42,6 +43,7 @@ createRoot(document.getElementById('root')!).render(
     <HelmetProvider>
     <BrowserRouter>
       <CartProvider>
+        <PlayerProvider>
         <ScrollManager />
         <Suspense fallback={null}>
           <Routes>
@@ -56,6 +58,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/pricing"    element={<Pricing />} />
           </Routes>
         </Suspense>
+        </PlayerProvider>
       </CartProvider>
     </BrowserRouter>
     </HelmetProvider>

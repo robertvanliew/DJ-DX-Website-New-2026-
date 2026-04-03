@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import type { Track } from '../catalog';
 import { useCart, CartPanel, CartFab } from './CartContext';
+import { usePlayer } from './PlayerContext';
 
 const ShareIcon = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -36,11 +37,10 @@ interface MusicStoreProps {
 }
 
 export default function MusicStore({ catalog, title = "Music Store", subTitle = "Music", shareType = 'store' }: MusicStoreProps) {
-  const [playingId, setPlayingId] = useState<number | null>(null);
   const [toastTrackId, setToastTrackId] = useState<number | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
   const { cart, addToCart } = useCart();
+  const { play, playingTrack, isPlaying } = usePlayer();
+  const playingId = playingTrack?.id ?? null;
 
   async function handleShare(e: React.MouseEvent, track: Track) {
     e.stopPropagation();
@@ -78,24 +78,7 @@ export default function MusicStore({ catalog, title = "Music Store", subTitle = 
     e.preventDefault();
     e.stopPropagation();
     if (!track.preview) return;
-    if (playingId === track.id) {
-      audioRef.current?.pause();
-      setPlayingId(null);
-      return;
-    }
-    if (audioRef.current) audioRef.current.pause();
-    const audio = new Audio(track.preview);
-    audio.volume = 0.8;
-    audio.play();
-    audio.onended = () => setPlayingId(null);
-    audio.ontimeupdate = () => {
-      if (audio.currentTime >= 40) {
-        audio.pause();
-        setPlayingId(null);
-      }
-    };
-    audioRef.current = audio;
-    setPlayingId(track.id);
+    play(track);
   };
 
   return (
@@ -132,7 +115,7 @@ export default function MusicStore({ catalog, title = "Music Store", subTitle = 
                 >
                   <div className="bb-col-rank">
                     <span className="bb-play-circle" aria-hidden="true">
-                      {playingId === track.id ? (
+                      {playingId === track.id && isPlaying ? (
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
                       ) : (
                         <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="4,2 13,8 4,14" /></svg>

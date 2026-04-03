@@ -4,6 +4,7 @@ import { Check } from 'lucide-react';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import { useCart, CartFab, CartPanel } from '../components/CartContext';
+import { usePlayer } from '../components/PlayerContext';
 import type { Track } from '../catalog';
 
 /* ── Types ── */
@@ -119,10 +120,10 @@ const ShareIcon = () => (
 
 /* ── Component ── */
 export default function Music() {
-  const [playingPreview, setPlayingPreview] = useState<string | null>(null);
   const [toastKey, setToastKey] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const { cart, addToCart } = useCart();
+  const { play, playingTrack, isPlaying } = usePlayer();
+  const playingPreview = playingTrack?.preview ?? null;
 
   async function handleShare(
     e: React.MouseEvent,
@@ -181,26 +182,9 @@ export default function Music() {
     return singleTrackObjects.current.get(track.preview)!;
   }
 
-  function playPreview(e: React.MouseEvent, preview: string) {
+  function playPreview(e: React.MouseEvent, trackObj: Track) {
     e.stopPropagation();
-    if (playingPreview === preview) {
-      audioRef.current?.pause();
-      setPlayingPreview(null);
-      return;
-    }
-    audioRef.current?.pause();
-    const audio = new Audio(preview);
-    audio.volume = 0.8;
-    audio.play().catch(() => {});
-    audio.onended = () => setPlayingPreview(null);
-    audio.ontimeupdate = () => {
-      if (audio.currentTime >= 40) {
-        audio.pause();
-        setPlayingPreview(null);
-      }
-    };
-    audioRef.current = audio;
-    setPlayingPreview(preview);
+    play(trackObj);
   }
 
   function scrollTo(id: string) {
@@ -311,10 +295,10 @@ export default function Music() {
                     <div key={ti} className={`rl-track${playingPreview === track.preview ? ' rl-track--playing' : ''}`}>
                       <button
                         className="rl-track-play"
-                        onClick={e => playPreview(e, track.preview)}
-                        aria-label={playingPreview === track.preview ? 'Pause' : 'Play preview'}
+                        onClick={e => playPreview(e, cartTrack)}
+                        aria-label={playingPreview === track.preview && isPlaying ? 'Pause' : 'Play preview'}
                       >
-                        {playingPreview === track.preview ? <PauseIcon /> : <PlayIcon />}
+                        {playingPreview === track.preview && isPlaying ? <PauseIcon /> : <PlayIcon />}
                       </button>
                       <span className="rl-track-num">{String(ti + 1).padStart(2, '0')}</span>
                       <div className="rl-track-info">
@@ -369,10 +353,10 @@ export default function Music() {
               <div key={i} className={`rl-single-row${playingPreview === track.preview ? ' rl-single-row--playing' : ''}`}>
                 <button
                   className="rl-track-play"
-                  onClick={e => playPreview(e, track.preview)}
-                  aria-label={playingPreview === track.preview ? 'Pause' : 'Play preview'}
+                  onClick={e => playPreview(e, cartTrack)}
+                  aria-label={playingPreview === track.preview && isPlaying ? 'Pause' : 'Play preview'}
                 >
-                  {playingPreview === track.preview ? <PauseIcon /> : <PlayIcon />}
+                  {playingPreview === track.preview && isPlaying ? <PauseIcon /> : <PlayIcon />}
                 </button>
                 <span className="rl-track-num">{String(i + 1).padStart(2, '0')}</span>
                 <div className="rl-track-info">
