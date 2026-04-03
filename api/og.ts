@@ -21,7 +21,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     process.env.SITE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://djdxmusic.com')
 
-  const { type = 'store', track = '', album = '' } = req.query as Record<string, string>
+  const { type = 'store', track = '', album = '', format = 'og', trackId = '' } = req.query as Record<string, string>
+  const isStory = format === 'story'
 
   // ── Determine background image ────────────────────────────────────────────
   let bgUrl: string
@@ -275,6 +276,144 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }, 'djdxmusic.com · music store'),
       ),
     )
+  }
+
+  // ── Story card (9:16 — 1080×1920 for Instagram Stories) ───────────────────
+  if (isStory) {
+    const artistLine = type === 'soul-shades' ? 'Soul Shades · DJ DX' : 'DJ DX'
+    const collectionLine = type === 'soul-shades' ? 'SOUL SHADES' : type === 'album' ? album.toUpperCase() : 'MUSIC STORE'
+    const trackLabel = label
+    const deepLinkPath = type === 'soul-shades'
+      ? `/soul-shades${trackId ? `#track-${trackId}` : ''}`
+      : `/${trackId ? `#track-${trackId}` : ''}`
+    const displayLink = `djdxmusic.com${deepLinkPath}`
+
+    const storyCard = h('div', {
+      style: {
+        width: '1080px', height: '1920px',
+        display: 'flex', flexDirection: 'column',
+        position: 'relative',
+        background: '#0a0805',
+        fontFamily: 'Arial Black, sans-serif',
+        overflow: 'hidden',
+      }
+    },
+      // Full-bleed background image (top 65%)
+      h('img', {
+        src: bgUrl,
+        style: {
+          position: 'absolute', top: 0, left: 0,
+          width: '1080px', height: '1248px',
+          objectFit: 'cover', objectPosition: 'center top',
+        },
+      }),
+      // Gradient fade from photo into dark bottom
+      h('div', {
+        style: {
+          position: 'absolute', top: '800px', left: 0, right: 0, height: '600px',
+          background: 'linear-gradient(to bottom, transparent, #0a0805)',
+        }
+      }),
+      // Dark bottom panel
+      h('div', {
+        style: {
+          position: 'absolute', top: '1248px', left: 0, right: 0, bottom: 0,
+          background: '#0a0805',
+        }
+      }),
+
+      // Gold top bar
+      h('div', {
+        style: {
+          position: 'absolute', top: 0, left: 0, right: 0, height: '6px',
+          background: 'linear-gradient(to right, #C9A84C, #E2C97E, #C9A84C)',
+        }
+      }),
+
+      // Content overlay
+      h('div', {
+        style: {
+          position: 'absolute', inset: 0,
+          display: 'flex', flexDirection: 'column',
+          justifyContent: 'flex-end',
+          padding: '0 72px 100px',
+        }
+      },
+        // Collection tag
+        h('div', {
+          style: {
+            fontSize: '22px', letterSpacing: '6px', fontWeight: '700',
+            color: '#C9A84C', textTransform: 'uppercase',
+            marginBottom: '24px', fontFamily: 'Arial, sans-serif',
+          }
+        }, collectionLine),
+
+        // Track title — big
+        h('div', {
+          style: {
+            fontSize: trackLabel.length > 20 ? '88px' : '108px',
+            fontWeight: '900', color: '#ffffff',
+            lineHeight: '1.0', marginBottom: '24px',
+            textShadow: '0 4px 40px rgba(0,0,0,0.8)',
+            letterSpacing: '-1px',
+          }
+        }, trackLabel),
+
+        // Artist
+        h('div', {
+          style: {
+            fontSize: '34px', fontWeight: '600',
+            color: 'rgba(242,242,242,0.75)',
+            marginBottom: '60px', fontFamily: 'Arial, sans-serif',
+          }
+        }, artistLine),
+
+        // Divider
+        h('div', {
+          style: {
+            width: '80px', height: '3px',
+            background: 'linear-gradient(to right, #C9A84C, #E2C97E)',
+            borderRadius: '2px', marginBottom: '48px',
+          }
+        }),
+
+        // Bottom row — logo + link
+        h('div', {
+          style: {
+            display: 'flex', alignItems: 'center',
+            justifyContent: 'space-between',
+          }
+        },
+          // DJ DX wordmark
+          h('div', {
+            style: {
+              fontSize: '72px', fontWeight: '900', letterSpacing: '6px',
+              color: '#C9A84C',
+            }
+          }, 'DJ DX'),
+
+          // Listen link pill
+          h('div', {
+            style: {
+              padding: '18px 40px',
+              border: '2px solid rgba(201,168,76,0.6)',
+              borderRadius: '50px',
+              fontSize: '24px', fontWeight: '700', letterSpacing: '2px',
+              color: 'rgba(242,242,242,0.8)',
+              fontFamily: 'Arial, sans-serif',
+            }
+          }, displayLink),
+        ),
+      ),
+    )
+
+    const storyResponse = new ImageResponse(storyCard, { width: 1080, height: 1920 })
+    res.setHeader('Cache-Control', 'public, s-maxage=604800, stale-while-revalidate=86400')
+    res.setHeader('Content-Type', 'image/png')
+    res.setHeader('Content-Disposition', `attachment; filename="djdx-${encodeURIComponent(trackLabel)}.png"`)
+    const buf = Buffer.from(await storyResponse.arrayBuffer())
+    res.send(buf)
+    return
   }
 
   const imageResponse = new ImageResponse(card, {

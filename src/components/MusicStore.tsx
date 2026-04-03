@@ -5,6 +5,7 @@ import { Separator } from './ui/separator';
 import type { Track } from '../catalog';
 import { useCart, CartPanel, CartFab } from './CartContext';
 import { usePlayer } from './PlayerContext';
+import ShareModal from './ShareModal';
 
 const ShareIcon = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -37,41 +38,14 @@ interface MusicStoreProps {
 }
 
 export default function MusicStore({ catalog, title = "Music Store", subTitle = "Music", shareType = 'store' }: MusicStoreProps) {
-  const [toastTrackId, setToastTrackId] = useState<number | null>(null);
+  const [shareTrack, setShareTrack] = useState<Track | null>(null);
   const { cart, addToCart } = useCart();
   const { play, playingTrack, isPlaying } = usePlayer();
   const playingId = playingTrack?.id ?? null;
 
-  async function handleShare(e: React.MouseEvent, track: Track) {
+  function handleShare(e: React.MouseEvent, track: Track) {
     e.stopPropagation();
-    const origin = window.location.origin;
-    const pageUrl = shareType === 'soul-shades'
-      ? `${origin}/soul-shades`
-      : origin;
-    const shareData = {
-      title: `${track.title} · DJ DX`,
-      text: `🎵 ${track.title} by DJ DX — stream & buy at djdxmusic.com`,
-      url: pageUrl,
-    };
-    if (navigator.share && navigator.canShare) {
-      try {
-        const ogUrl = `${origin}/api/og?type=${shareType}&track=${encodeURIComponent(track.title)}`;
-        const imgRes = await fetch(ogUrl);
-        const blob   = await imgRes.blob();
-        const file   = new File([blob], 'djdx-track.png', { type: 'image/png' });
-        if (navigator.canShare({ files: [file] })) {
-          await navigator.share({ ...shareData, files: [file] });
-          return;
-        }
-      } catch { /* fall through */ }
-      try { await navigator.share(shareData); } catch { /* cancelled */ }
-    } else if (navigator.share) {
-      try { await navigator.share(shareData); } catch { /* cancelled */ }
-    } else {
-      await navigator.clipboard.writeText(pageUrl);
-      setToastTrackId(track.id);
-      setTimeout(() => setToastTrackId(null), 2500);
-    }
+    setShareTrack(track);
   }
 
   const handlePreviewPlay = (e: React.MouseEvent, track: Track) => {
@@ -103,7 +77,7 @@ export default function MusicStore({ catalog, title = "Music Store", subTitle = 
             <Separator className="bb-sep" />
 
             {catalog.map((track, idx) => (
-              <div key={track.id} className="sr" data-sr-delay={`${idx * 0.03}s`}>
+              <div key={track.id} id={`track-${track.id}`} className="sr" data-sr-delay={`${idx * 0.03}s`}>
                 <div
                   className={`bb-row group${playingId === track.id ? ' bb-row--playing' : ''}`}
                   role="button"
@@ -146,9 +120,6 @@ export default function MusicStore({ catalog, title = "Music Store", subTitle = 
                     >
                       <ShareIcon />
                       <span>Share</span>
-                      {toastTrackId === track.id && (
-                        <span className="bb-share-toast">Link Copied!</span>
-                      )}
                     </button>
                     <button
                       className={`bb-buy-btn${cart.some(t => t.id === track.id) ? ' bb-buy-btn--added' : ''}`}
@@ -175,6 +146,13 @@ export default function MusicStore({ catalog, title = "Music Store", subTitle = 
 
       <CartFab />
       <CartPanel />
+      {shareTrack && (
+        <ShareModal
+          track={shareTrack}
+          shareType={shareType}
+          onClose={() => setShareTrack(null)}
+        />
+      )}
     </>
   );
 }
