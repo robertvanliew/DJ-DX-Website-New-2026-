@@ -193,6 +193,12 @@ export default function Music() {
     audio.volume = 0.8;
     audio.play().catch(() => {});
     audio.onended = () => setPlayingPreview(null);
+    audio.ontimeupdate = () => {
+      if (audio.currentTime >= 40) {
+        audio.pause();
+        setPlayingPreview(null);
+      }
+    };
     audioRef.current = audio;
     setPlayingPreview(preview);
   }

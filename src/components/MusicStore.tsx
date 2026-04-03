@@ -88,6 +88,12 @@ export default function MusicStore({ catalog, title = "Music Store", subTitle = 
     audio.volume = 0.8;
     audio.play();
     audio.onended = () => setPlayingId(null);
+    audio.ontimeupdate = () => {
+      if (audio.currentTime >= 40) {
+        audio.pause();
+        setPlayingId(null);
+      }
+    };
     audioRef.current = audio;
     setPlayingId(track.id);
   };
