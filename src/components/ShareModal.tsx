@@ -129,34 +129,26 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
     setTimeout(() => setCopied(false), 2000);
   }
 
-  // ── Share to Story — same behaviour for all platforms (Spotify-style) ──────
-  // On mobile: fetch story card image → Web Share API with file attached
-  //   → phone's native share sheet opens, user picks the app (Instagram/TikTok/etc.)
-  // On desktop: download the image + copy the link so they can post manually
+  // ── Share to Story — fires native OS share sheet immediately ───────────────
+  // Same pattern Spotify uses: navigator.share() with title + text + url.
+  // The phone's share sheet opens instantly — user picks the app themselves.
+  // Fallback: copy link to clipboard and show "Copied!" confirmation.
   async function shareStory() {
-    try {
-      const res = await fetch(storyUrl);
-      if (res.ok) {
-        const blob = await res.blob();
-        const file = new File([blob], `djdx-${track.title.replace(/[^a-z0-9]/gi,'-').toLowerCase()}.png`, { type: 'image/png' });
-        if (navigator.canShare?.({ files: [file] })) {
-          await navigator.share({
-            title: `${track.title} · DJ DX`,
-            text: shareText,
-            url: pageUrl,
-            files: [file],
-          });
-          onClose();
-          return;
-        }
-      }
-    } catch { /* user cancelled or API unavailable — fall through */ }
-
-    // Desktop / unsupported browser: download image + copy link
-    await downloadStory();
-    await navigator.clipboard.writeText(pageUrl).catch(() => {});
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${track.title} · DJ DX`,
+          text: `Listen to "${track.title}" by DJ DX 🎵`,
+          url: pageUrl,
+        });
+        onClose();
+      } catch { /* user cancelled — do nothing */ }
+    } else {
+      // Browser doesn't support Web Share API (desktop) — copy link instead
+      await navigator.clipboard.writeText(pageUrl).catch(() => {});
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   async function shareToSocial(platformId: string) {
