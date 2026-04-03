@@ -138,6 +138,14 @@
     </image:image>
   </url>
 
+  <!-- ── Pricing page ─────────────────────────────────────────────────────── -->
+  <url>
+    <loc>https://djdxmusic.com/pricing</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- ── Legal pages ───────────────────────────────────────────────────────── -->
   <url>
     <loc>https://djdxmusic.com/privacy</loc>
