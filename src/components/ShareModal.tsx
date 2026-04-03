@@ -54,7 +54,6 @@ const MoreIcon = () => (
 export default function ShareModal({ track, shareType, onClose }: ShareModalProps) {
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [copiedTikTok, setCopiedTikTok] = useState(false);
 
   // ── Swipe-to-dismiss ─────────────────────────────────────────────────────
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -130,14 +129,16 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
     setTimeout(() => setCopied(false), 2000);
   }
 
-  // Try native share sheet with the story image (works on mobile Safari/Chrome)
-  async function nativeShareWithImage(platform: string) {
-    // On mobile, use Web Share API with the story card image file
+  // ── Share to Story — same behaviour for all platforms (Spotify-style) ──────
+  // On mobile: fetch story card image → Web Share API with file attached
+  //   → phone's native share sheet opens, user picks the app (Instagram/TikTok/etc.)
+  // On desktop: download the image + copy the link so they can post manually
+  async function shareStory() {
     try {
       const res = await fetch(storyUrl);
       if (res.ok) {
         const blob = await res.blob();
-        const file = new File([blob], `djdx-${track.title}.png`, { type: 'image/png' });
+        const file = new File([blob], `djdx-${track.title.replace(/[^a-z0-9]/gi,'-').toLowerCase()}.png`, { type: 'image/png' });
         if (navigator.canShare?.({ files: [file] })) {
           await navigator.share({
             title: `${track.title} · DJ DX`,
@@ -146,63 +147,21 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
             files: [file],
           });
           onClose();
-          return true;
+          return;
         }
       }
-    } catch { /* fall through */ }
+    } catch { /* user cancelled or API unavailable — fall through */ }
 
-    // Desktop fallback: download the image so they can upload manually
+    // Desktop / unsupported browser: download image + copy link
     await downloadStory();
-    alert(`Save the downloaded image then open ${platform} and post it as a Story.`);
-    return false;
+    await navigator.clipboard.writeText(pageUrl).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   async function shareToSocial(platformId: string) {
     const encodedUrl = encodeURIComponent(pageUrl);
     const encodedText = encodeURIComponent(shareText);
-
-    if (platformId === 'instagram') {
-      // Instagram has no web intent — must use native share or manual upload
-      await nativeShareWithImage('Instagram');
-      return;
-    }
-
-    if (platformId === 'tiktok') {
-      // TikTok Stories: try native share, fallback copy link
-      try {
-        const res = await fetch(storyUrl);
-        if (res.ok) {
-          const blob = await res.blob();
-          const file = new File([blob], `djdx-${track.title}.png`, { type: 'image/png' });
-          if (navigator.canShare?.({ files: [file] })) {
-            await navigator.share({ title: `${track.title} · DJ DX`, text: shareText, url: pageUrl, files: [file] });
-            onClose();
-            return;
-          }
-        }
-      } catch { /* fall through */ }
-      // Fallback: copy link + open TikTok
-      await navigator.clipboard.writeText(pageUrl);
-      setCopiedTikTok(true);
-      setTimeout(() => setCopiedTikTok(false), 2000);
-      window.open('https://www.tiktok.com/', '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    if (platformId === 'facebook') {
-      // Facebook Stories: no public web URL — use native share on mobile, feed share on desktop
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        await nativeShareWithImage('Facebook');
-      } else {
-        // Desktop: open Facebook feed sharer (Stories require the mobile app)
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-          '_blank', 'noopener,noreferrer,width=600,height=450'
-        );
-      }
-      return;
-    }
 
     if (platformId === 'sms') {
       // sms: works on iPhone (iMessage) and Android (Messages)
@@ -293,21 +252,19 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           <div style={{ fontSize:'10px', fontWeight:600, color:'rgba(255,255,255,0.25)', letterSpacing:'2px', textTransform:'uppercase', padding:'16px 20px 4px' }}>Share to Stories</div>
           <div className="share-stories-row">
 
-            <button className="share-story-btn" onClick={() => shareToSocial('instagram')} aria-label="Share to Instagram Story">
+            <button className="share-story-btn" onClick={shareStory} aria-label="Share to Instagram Story">
               <div className="share-story-ring share-story-ring--ig"><IgIcon /></div>
               <span className="share-story-name">Instagram</span>
               <span className="share-story-sub">Story</span>
             </button>
 
-            <button className="share-story-btn" onClick={() => shareToSocial('tiktok')} aria-label="Share to TikTok Story">
-              <div className="share-story-ring share-story-ring--tk">
-                {copiedTikTok ? <Check size={24} color="#fff" /> : <TkIcon />}
-              </div>
-              <span className="share-story-name">{copiedTikTok ? 'Copied!' : 'TikTok'}</span>
+            <button className="share-story-btn" onClick={shareStory} aria-label="Share to TikTok Story">
+              <div className="share-story-ring share-story-ring--tk"><TkIcon /></div>
+              <span className="share-story-name">TikTok</span>
               <span className="share-story-sub">Story</span>
             </button>
 
-            <button className="share-story-btn" onClick={() => shareToSocial('facebook')} aria-label="Share to Facebook Story">
+            <button className="share-story-btn" onClick={shareStory} aria-label="Share to Facebook Story">
               <div className="share-story-ring share-story-ring--fb"><FbIcon /></div>
               <span className="share-story-name">Facebook</span>
               <span className="share-story-sub">Story</span>
