@@ -281,130 +281,136 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // ── Story card (9:16 — 1080×1920 for Instagram Stories) ───────────────────
   if (isStory) {
     const artistLine = type === 'soul-shades' ? 'Soul Shades · DJ DX' : 'DJ DX'
-    const collectionLine = type === 'soul-shades' ? 'SOUL SHADES' : type === 'album' ? album.toUpperCase() : 'MUSIC STORE'
     const trackLabel = label
     const deepLinkPath = type === 'soul-shades'
       ? `/soul-shades${trackId ? `#track-${trackId}` : ''}`
       : `/${trackId ? `#track-${trackId}` : ''}`
     const displayLink = `djdxmusic.com${deepLinkPath}`
 
+    // Spotify-style: gold background + centered dark card with art + info
     const storyCard = h('div', {
       style: {
         width: '1080px', height: '1920px',
         display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
         position: 'relative',
-        background: '#0a0805',
+        // Rich gold/amber gradient background
+        background: 'linear-gradient(160deg, #E8C547 0%, #C9A84C 40%, #A07830 70%, #C9A84C 100%)',
         fontFamily: 'Arial Black, sans-serif',
         overflow: 'hidden',
       }
     },
-      // Full-bleed background image (top 65%)
-      h('img', {
-        src: bgUrl,
-        style: {
-          position: 'absolute', top: 0, left: 0,
-          width: '1080px', height: '1248px',
-          objectFit: 'cover', objectPosition: 'center top',
-        },
-      }),
-      // Gradient fade from photo into dark bottom
-      h('div', {
-        style: {
-          position: 'absolute', top: '800px', left: 0, right: 0, height: '600px',
-          background: 'linear-gradient(to bottom, transparent, #0a0805)',
-        }
-      }),
-      // Dark bottom panel
-      h('div', {
-        style: {
-          position: 'absolute', top: '1248px', left: 0, right: 0, bottom: 0,
-          background: '#0a0805',
-        }
-      }),
-
-      // Gold top bar
-      h('div', {
-        style: {
-          position: 'absolute', top: 0, left: 0, right: 0, height: '6px',
-          background: 'linear-gradient(to right, #C9A84C, #E2C97E, #C9A84C)',
-        }
-      }),
-
-      // Content overlay
+      // Subtle texture overlay — noise-like dots at low opacity
       h('div', {
         style: {
           position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.2) 0%, transparent 50%)',
+        }
+      }),
+
+      // ── Centered dark card (Spotify style) ──
+      h('div', {
+        style: {
+          position: 'relative',
+          width: '900px',
+          background: '#111009',
+          borderRadius: '32px',
+          overflow: 'hidden',
           display: 'flex', flexDirection: 'column',
-          justifyContent: 'flex-end',
-          padding: '0 72px 100px',
+          // subtle shadow for depth
+          boxShadow: '0 40px 120px rgba(0,0,0,0.55)',
         }
       },
-        // Collection tag
+        // Album art — square, fills card width
         h('div', {
           style: {
-            fontSize: '22px', letterSpacing: '6px', fontWeight: '700',
-            color: '#C9A84C', textTransform: 'uppercase',
-            marginBottom: '24px', fontFamily: 'Arial, sans-serif',
-          }
-        }, collectionLine),
-
-        // Track title — big
-        h('div', {
-          style: {
-            fontSize: trackLabel.length > 20 ? '88px' : '108px',
-            fontWeight: '900', color: '#ffffff',
-            lineHeight: '1.0', marginBottom: '24px',
-            textShadow: '0 4px 40px rgba(0,0,0,0.8)',
-            letterSpacing: '-1px',
-          }
-        }, trackLabel),
-
-        // Artist
-        h('div', {
-          style: {
-            fontSize: '34px', fontWeight: '600',
-            color: 'rgba(242,242,242,0.75)',
-            marginBottom: '60px', fontFamily: 'Arial, sans-serif',
-          }
-        }, artistLine),
-
-        // Divider
-        h('div', {
-          style: {
-            width: '80px', height: '3px',
-            background: 'linear-gradient(to right, #C9A84C, #E2C97E)',
-            borderRadius: '2px', marginBottom: '48px',
-          }
-        }),
-
-        // Bottom row — logo + link
-        h('div', {
-          style: {
-            display: 'flex', alignItems: 'center',
-            justifyContent: 'space-between',
+            width: '900px', height: '900px',
+            position: 'relative', flexShrink: '0',
           }
         },
-          // DJ DX wordmark
+          h('img', {
+            src: bgUrl,
+            style: {
+              width: '900px', height: '900px',
+              objectFit: 'cover', display: 'block',
+            },
+          }),
+          // Bottom gradient bleed into dark card body
           h('div', {
             style: {
-              fontSize: '72px', fontWeight: '900', letterSpacing: '6px',
-              color: '#C9A84C',
+              position: 'absolute', bottom: 0, left: 0, right: 0, height: '200px',
+              background: 'linear-gradient(to bottom, transparent, #111009)',
             }
-          }, 'DJ DX'),
+          }),
+        ),
 
-          // Listen link pill
+        // Card body — track info
+        h('div', {
+          style: {
+            padding: '48px 64px 64px',
+            display: 'flex', flexDirection: 'column',
+          }
+        },
+          // Track title
           h('div', {
             style: {
-              padding: '18px 40px',
-              border: '2px solid rgba(201,168,76,0.6)',
-              borderRadius: '50px',
-              fontSize: '24px', fontWeight: '700', letterSpacing: '2px',
-              color: 'rgba(242,242,242,0.8)',
-              fontFamily: 'Arial, sans-serif',
+              fontSize: trackLabel.length > 18 ? '72px' : '88px',
+              fontWeight: '900', color: '#f2f2f2',
+              lineHeight: '1.05', marginBottom: '20px',
+              letterSpacing: '-1px',
             }
-          }, displayLink),
+          }, trackLabel),
+
+          // Artist
+          h('div', {
+            style: {
+              fontSize: '36px', fontWeight: '400',
+              color: 'rgba(242,242,242,0.55)',
+              marginBottom: '56px', fontFamily: 'Arial, sans-serif',
+              letterSpacing: '0.5px',
+            }
+          }, artistLine),
+
+          // Bottom row: DJ DX logo (left) + listen link (right)
+          h('div', {
+            style: {
+              display: 'flex', alignItems: 'center',
+              justifyContent: 'space-between',
+            }
+          },
+            // DJ DX wordmark — matches nav logo style
+            h('div', {
+              style: {
+                fontSize: '56px', fontWeight: '900', letterSpacing: '8px',
+                color: '#C9A84C',
+              }
+            }, 'DJ DX'),
+
+            // Listen link pill
+            h('div', {
+              style: {
+                padding: '16px 36px',
+                background: 'rgba(201,168,76,0.15)',
+                border: '1.5px solid rgba(201,168,76,0.5)',
+                borderRadius: '50px',
+                fontSize: '22px', fontWeight: '600', letterSpacing: '1px',
+                color: 'rgba(201,168,76,0.9)',
+                fontFamily: 'Arial, sans-serif',
+              }
+            }, displayLink),
+          ),
         ),
       ),
+
+      // Bottom tagline below card
+      h('div', {
+        style: {
+          marginTop: '52px',
+          fontSize: '22px', fontWeight: '600', letterSpacing: '4px',
+          color: 'rgba(0,0,0,0.35)',
+          textTransform: 'uppercase', fontFamily: 'Arial, sans-serif',
+        }
+      }, 'LISTEN NOW  ·  DJDXMUSIC.COM'),
     )
 
     const storyResponse = new ImageResponse(storyCard, { width: 1080, height: 1920 })
