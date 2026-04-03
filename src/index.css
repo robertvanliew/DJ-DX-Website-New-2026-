@@ -69,7 +69,7 @@ body {
   min-height: 100vh;
   font-family: 'Barlow Condensed', sans-serif;
   color: var(--white);
-  /* overflow-x: hidden removed — was clipping fixed nav */
+  overflow-x: clip; /* clip prevents horizontal scroll without affecting fixed/sticky children */
   -webkit-font-smoothing: antialiased;
 }
 
