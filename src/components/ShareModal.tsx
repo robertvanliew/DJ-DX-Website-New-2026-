@@ -74,11 +74,45 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
     setTimeout(() => setCopied(false), 2000);
   }
 
+  // Try native share sheet with the story image (works on mobile Safari/Chrome)
+  async function nativeShareWithImage(platform: string) {
+    // On mobile, use Web Share API with the story card image file
+    try {
+      const res = await fetch(storyUrl);
+      if (res.ok) {
+        const blob = await res.blob();
+        const file = new File([blob], `djdx-${track.title}.png`, { type: 'image/png' });
+        if (navigator.canShare?.({ files: [file] })) {
+          await navigator.share({
+            title: `${track.title} · DJ DX`,
+            text: shareText,
+            url: pageUrl,
+            files: [file],
+          });
+          onClose();
+          return true;
+        }
+      }
+    } catch { /* fall through */ }
+
+    // Desktop fallback: download the image so they can upload manually
+    await downloadStory();
+    alert(`Save the downloaded image then open ${platform} and post it as a Story.`);
+    return false;
+  }
+
   async function shareToSocial(platformId: string) {
     const encodedUrl = encodeURIComponent(pageUrl);
     const encodedText = encodeURIComponent(shareText);
 
-    if (platformId === 'instagram' || platformId === 'tiktok') {
+    if (platformId === 'instagram') {
+      // Instagram has no web intent — must use native share or manual upload
+      await nativeShareWithImage('Instagram');
+      return;
+    }
+
+    if (platformId === 'tiktok') {
+      // TikTok Stories: try native share, fallback copy link
       try {
         const res = await fetch(storyUrl);
         if (res.ok) {
@@ -91,20 +125,32 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           }
         }
       } catch { /* fall through */ }
-      if (platformId === 'tiktok') {
-        await navigator.clipboard.writeText(pageUrl);
-        setCopiedTikTok(true);
-        setTimeout(() => setCopiedTikTok(false), 2000);
-        return;
+      // Fallback: copy link + open TikTok
+      await navigator.clipboard.writeText(pageUrl);
+      setCopiedTikTok(true);
+      setTimeout(() => setCopiedTikTok(false), 2000);
+      window.open('https://www.tiktok.com/', '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    if (platformId === 'facebook') {
+      // Facebook Stories: no public web URL — use native share on mobile, feed share on desktop
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        await nativeShareWithImage('Facebook');
+      } else {
+        // Desktop: open Facebook feed sharer (Stories require the mobile app)
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+          '_blank', 'noopener,noreferrer,width=600,height=450'
+        );
       }
-      await downloadStory();
       return;
     }
 
     const urls: Record<string, string> = {
-      twitter: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
-      whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      twitter:   `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      whatsapp:  `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
     };
     if (urls[platformId]) window.open(urls[platformId], '_blank', 'noopener,noreferrer');
   }
