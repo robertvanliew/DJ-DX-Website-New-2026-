@@ -4917,6 +4917,69 @@ section { padding: 120px 40px; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Social share grid */
+.share-modal-socials {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.share-social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  color: #f2f2f2;
+}
+.share-social-btn:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.16);
+}
+.share-social-btn:active { transform: scale(0.95); }
+.share-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.share-social-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(242,242,242,0.6);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Divider between socials and actions */
+.share-modal-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 0 0 14px;
+}
+
+/* Preview error state */
+.share-modal-preview-error {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  color: rgba(242,242,242,0.35);
+  font-size: 12px;
+}
+
 /* ── Mini Player ─────────────────────────────────────── */
 .mini-player {
   position: fixed;

@@ -288,37 +288,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const displayLink = `djdxmusic.com${deepLinkPath}`
 
     // Spotify-style: gold background + centered dark card with art + info
+    // NOTE: Only Satori-compatible CSS used here (no boxShadow, no multi-value backgrounds, no inset shorthand)
     const storyCard = h('div', {
       style: {
         width: '1080px', height: '1920px',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
-        position: 'relative',
-        // Rich gold/amber gradient background
-        background: 'linear-gradient(160deg, #E8C547 0%, #C9A84C 40%, #A07830 70%, #C9A84C 100%)',
+        background: 'linear-gradient(160deg, #E8C547 0%, #C9A84C 45%, #9A7530 100%)',
         fontFamily: 'Arial Black, sans-serif',
         overflow: 'hidden',
       }
     },
-      // Subtle texture overlay — noise-like dots at low opacity
-      h('div', {
-        style: {
-          position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.2) 0%, transparent 50%)',
-        }
-      }),
-
       // ── Centered dark card (Spotify style) ──
       h('div', {
         style: {
-          position: 'relative',
           width: '900px',
           background: '#111009',
-          borderRadius: '32px',
+          borderRadius: '28px',
           overflow: 'hidden',
-          display: 'flex', flexDirection: 'column',
-          // subtle shadow for depth
-          boxShadow: '0 40px 120px rgba(0,0,0,0.55)',
+          display: 'flex',
+          flexDirection: 'column',
         }
       },
         // Album art — square, fills card width
@@ -326,19 +315,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           style: {
             width: '900px', height: '900px',
             position: 'relative', flexShrink: '0',
+            display: 'flex',
           }
         },
           h('img', {
             src: bgUrl,
             style: {
               width: '900px', height: '900px',
-              objectFit: 'cover', display: 'block',
+              objectFit: 'cover',
             },
           }),
-          // Bottom gradient bleed into dark card body
+          // Gradient bleed from art into dark card body
           h('div', {
             style: {
-              position: 'absolute', bottom: 0, left: 0, right: 0, height: '200px',
+              position: 'absolute', bottom: '0px', left: '0px', right: '0px', height: '180px',
               background: 'linear-gradient(to bottom, transparent, #111009)',
             }
           }),
@@ -347,16 +337,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // Card body — track info
         h('div', {
           style: {
-            padding: '48px 64px 64px',
+            padding: '44px 60px 60px',
             display: 'flex', flexDirection: 'column',
           }
         },
           // Track title
           h('div', {
             style: {
-              fontSize: trackLabel.length > 18 ? '72px' : '88px',
+              fontSize: trackLabel.length > 18 ? '70px' : '86px',
               fontWeight: '900', color: '#f2f2f2',
-              lineHeight: '1.05', marginBottom: '20px',
+              lineHeight: '1.05', marginBottom: '18px',
               letterSpacing: '-1px',
             }
           }, trackLabel),
@@ -364,10 +354,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           // Artist
           h('div', {
             style: {
-              fontSize: '36px', fontWeight: '400',
-              color: 'rgba(242,242,242,0.55)',
-              marginBottom: '56px', fontFamily: 'Arial, sans-serif',
-              letterSpacing: '0.5px',
+              fontSize: '34px', fontWeight: '400',
+              color: 'rgba(242,242,242,0.5)',
+              marginBottom: '52px', fontFamily: 'Arial, sans-serif',
             }
           }, artistLine),
 
@@ -381,7 +370,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             // DJ DX wordmark — matches nav logo style
             h('div', {
               style: {
-                fontSize: '56px', fontWeight: '900', letterSpacing: '8px',
+                fontSize: '54px', fontWeight: '900', letterSpacing: '8px',
                 color: '#C9A84C',
               }
             }, 'DJ DX'),
@@ -389,12 +378,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             // Listen link pill
             h('div', {
               style: {
-                padding: '16px 36px',
-                background: 'rgba(201,168,76,0.15)',
-                border: '1.5px solid rgba(201,168,76,0.5)',
+                padding: '14px 32px',
+                background: 'rgba(201,168,76,0.12)',
+                border: '2px solid rgba(201,168,76,0.45)',
                 borderRadius: '50px',
-                fontSize: '22px', fontWeight: '600', letterSpacing: '1px',
-                color: 'rgba(201,168,76,0.9)',
+                fontSize: '20px', fontWeight: '700', letterSpacing: '1px',
+                color: 'rgba(201,168,76,0.85)',
                 fontFamily: 'Arial, sans-serif',
               }
             }, displayLink),
@@ -405,9 +394,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // Bottom tagline below card
       h('div', {
         style: {
-          marginTop: '52px',
-          fontSize: '22px', fontWeight: '600', letterSpacing: '4px',
-          color: 'rgba(0,0,0,0.35)',
+          marginTop: '48px',
+          fontSize: '20px', fontWeight: '700', letterSpacing: '5px',
+          color: 'rgba(0,0,0,0.3)',
           textTransform: 'uppercase', fontFamily: 'Arial, sans-serif',
         }
       }, 'LISTEN NOW  ·  DJDXMUSIC.COM'),
