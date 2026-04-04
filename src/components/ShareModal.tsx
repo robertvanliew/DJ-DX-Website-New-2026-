@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { Download, Link2, Check } from 'lucide-react';
+import { Download, Link2 } from 'lucide-react';
 import type { Track } from '../catalog';
 
 interface ShareModalProps {
@@ -53,7 +53,12 @@ const MoreIcon = () => (
 
 export default function ShareModal({ track, shareType, onClose }: ShareModalProps) {
   const [downloading, setDownloading] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [toast, setToast] = useState('');
+
+  function showToast(msg: string) {
+    setToast(msg);
+    setTimeout(() => setToast(''), 2500);
+  }
 
   // ── Swipe-to-dismiss ─────────────────────────────────────────────────────
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -124,9 +129,18 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
   }
 
   async function copyLink() {
-    await navigator.clipboard.writeText(pageUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+    } catch {
+      // Older browser fallback
+      const el = document.createElement('textarea');
+      el.value = pageUrl;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+    showToast('Link copied!');
   }
 
   // ── Share to Story — fires native OS share sheet immediately ───────────────
@@ -145,9 +159,7 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
       } catch { /* user cancelled — do nothing */ }
     } else {
       // Browser doesn't support Web Share API (desktop) — copy link instead
-      await navigator.clipboard.writeText(pageUrl).catch(() => {});
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await copyLink();
     }
   }
 
@@ -270,12 +282,12 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           <div style={{ fontSize:'10px', fontWeight:600, color:'rgba(255,255,255,0.25)', letterSpacing:'2px', textTransform:'uppercase', padding:'16px 20px 4px' }}>Share to Feed & More</div>
           <div style={{ padding:'4px 12px 16px' }}>
 
-            <button className="share-feed-btn" onClick={() => shareToSocial('instagram')}>
+            <button className="share-feed-btn" onClick={shareStory}>
               <div className="share-feed-icon" style={{ background:'linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}><IgIcon /></div>
               <div className="share-feed-meta"><span>Instagram</span><span className="share-feed-sub">Post to feed</span></div>
             </button>
 
-            <button className="share-feed-btn" onClick={() => shareToSocial('tiktok')}>
+            <button className="share-feed-btn" onClick={shareStory}>
               <div className="share-feed-icon" style={{ background:'#010101', border:'1px solid rgba(255,255,255,.1)' }}><TkIcon /></div>
               <div className="share-feed-meta"><span>TikTok</span><span className="share-feed-sub">Post to your profile</span></div>
             </button>
@@ -310,8 +322,8 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           {/* ── COPY + DOWNLOAD ── */}
           <div style={{ display:'flex', gap:'8px', padding:'0 12px 8px' }}>
             <button className="share-bottom-btn" onClick={copyLink}>
-              {copied ? <Check size={15} style={{ opacity:.6 }} /> : <Link2 size={15} style={{ opacity:.6 }} />}
-              {copied ? 'Copied!' : 'Copy Link'}
+              <Link2 size={15} style={{ opacity:.6 }} />
+              Copy Link
             </button>
             <button className="share-bottom-btn" onClick={downloadStory} disabled={downloading}>
               {downloading
@@ -323,6 +335,21 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           </div>
 
           <div style={{ textAlign:'center', padding:'10px 0 18px', fontSize:'12px', color:'rgba(255,255,255,0.2)' }}>djdxmusic.com</div>
+
+          {/* ── Toast notification ── */}
+          {toast && (
+            <div style={{
+              position:'fixed', bottom:'32px', left:'50%', transform:'translateX(-50%)',
+              background:'#fff', color:'#111',
+              fontSize:'13px', fontWeight:600,
+              padding:'10px 20px', borderRadius:'20px',
+              boxShadow:'0 4px 20px rgba(0,0,0,0.4)',
+              whiteSpace:'nowrap', zIndex:1200,
+              animation:'share-toast-in 0.3s ease',
+            }}>
+              {toast}
+            </div>
+          )}
 
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
