@@ -49,51 +49,45 @@
     <priority>0.85</priority>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/sqIUE0M54VE/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX — Official Music Video</video:title>
-      <video:description>Official music video by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:title>DJ DX - So Simple (Official Video)</video:title>
+      <video:description>Official music video for "So Simple" by DJ DX — New York/New Jersey DJ, producer, and recording artist. Stream and download at djdxmusic.com.</video:description>
       <video:player_loc>https://www.youtube.com/embed/sqIUE0M54VE</video:player_loc>
-      <video:content_loc>https://www.youtube.com/watch?v=sqIUE0M54VE</video:content_loc>
-      <video:publication_date>2023-01-01</video:publication_date>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/aG1KR7wPTBk/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX — Official Music Video</video:title>
-      <video:description>Official music video by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:title>Finally Moving | DJ DX | TEDxYouth@RVA</video:title>
+      <video:description>DJ DX performs "Finally Moving" at TEDxYouth@RVA — a live performance by New York/New Jersey DJ, producer, and recording artist DJ DX.</video:description>
       <video:player_loc>https://www.youtube.com/embed/aG1KR7wPTBk</video:player_loc>
-      <video:content_loc>https://www.youtube.com/watch?v=aG1KR7wPTBk</video:content_loc>
-      <video:publication_date>2023-01-01</video:publication_date>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/LyopmsT-fiM/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX — Official Music Video</video:title>
-      <video:description>Official music video by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:title>DJ DX - So Simple (VEVO)</video:title>
+      <video:description>Official VEVO release of "So Simple" by DJ DX — New York/New Jersey DJ, producer, and recording artist. Stream and download at djdxmusic.com.</video:description>
       <video:player_loc>https://www.youtube.com/embed/LyopmsT-fiM</video:player_loc>
-      <video:content_loc>https://www.youtube.com/watch?v=LyopmsT-fiM</video:content_loc>
-      <video:publication_date>2023-01-01</video:publication_date>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/00V8Q92N5Ig/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX — Official Music Video</video:title>
-      <video:description>Official music video by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:title>DJ DX - Shining Stars ft. DJ Madden (Official Video)</video:title>
+      <video:description>Official music video for "Shining Stars" featuring DJ Madden by DJ DX — New York/New Jersey DJ, producer, and recording artist. Stream at djdxmusic.com.</video:description>
       <video:player_loc>https://www.youtube.com/embed/00V8Q92N5Ig</video:player_loc>
-      <video:content_loc>https://www.youtube.com/watch?v=00V8Q92N5Ig</video:content_loc>
-      <video:publication_date>2023-01-01</video:publication_date>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/ut5ukF-SL60/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX — Official Music Video</video:title>
-      <video:description>Official music video by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:title>DJ DX - Many Dreams ft. DJ Madden (Official Music Video)</video:title>
+      <video:description>Official music video for "Many Dreams" featuring DJ Madden by DJ DX — New York/New Jersey DJ, producer, and recording artist. Stream at djdxmusic.com.</video:description>
       <video:player_loc>https://www.youtube.com/embed/ut5ukF-SL60</video:player_loc>
-      <video:content_loc>https://www.youtube.com/watch?v=ut5ukF-SL60</video:content_loc>
-      <video:publication_date>2023-01-01</video:publication_date>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/bdNVGEpmTuc/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX — Official Music Video</video:title>
-      <video:description>Official music video by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:title>DJ DX - Run Bro ft. Nadia Gold (Official Video)</video:title>
+      <video:description>Official music video for "Run Bro" featuring Nadia Gold by DJ DX — New York/New Jersey DJ, producer, and recording artist. Stream at djdxmusic.com.</video:description>
       <video:player_loc>https://www.youtube.com/embed/bdNVGEpmTuc</video:player_loc>
-      <video:content_loc>https://www.youtube.com/watch?v=bdNVGEpmTuc</video:content_loc>
-      <video:publication_date>2023-01-01</video:publication_date>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
     </video:video>
   </url>
 

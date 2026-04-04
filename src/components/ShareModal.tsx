@@ -92,14 +92,18 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
     if (!isDragging.current || !sheetRef.current) return;
     isDragging.current = false;
     const sheet = sheetRef.current;
-    sheet.style.transition = 'transform 0.3s cubic-bezier(0.22,1,0.36,1)';
+    
     if (dragY.current > 120) {
       // Snap off-screen then close
-      sheet.style.transform = 'translateX(-50%) translateY(100%)';
+      sheet.style.transition = 'transform 0.3s cubic-bezier(0.22,1,0.36,1)';
+      sheet.style.transform = 'translate(-50%, 100%)';
       setTimeout(onClose, 280);
     } else {
       // Snap back
-      sheet.style.transform = 'translateX(-50%) translateY(0)';
+      sheet.style.transition = 'transform 0.3s cubic-bezier(0.22,1,0.36,1)';
+      sheet.style.transform = 'translate(-50%, 0px)';
+      // Clear inline transform after animation completes to restore tailwind class layout
+      setTimeout(() => { if (sheetRef.current) { sheetRef.current.style.transform = ''; sheetRef.current.style.transition = ''; } }, 300);
     }
   }
   const origin = window.location.origin;
@@ -143,12 +147,38 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
     showToast('Link copied!');
   }
 
-  // ── Share to Story — fires native OS share sheet immediately ───────────────
-  // Same pattern Spotify uses: navigator.share() with title + text + url.
-  // The phone's share sheet opens instantly — user picks the app themselves.
-  // Fallback: copy link to clipboard and show "Copied!" confirmation.
-  async function shareStory() {
-    if (navigator.share) {
+  // ── Share to Story / Apps ──────────────────────────────────────────────────
+  async function handleStoryShare(platform: string) {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const filename = `djdx-${track.title.replace(/[^a-z0-9]/gi, '-').toLowerCase()}-${platform.toLowerCase()}.png`;
+
+    // Mobile: trigger navigator.share() IMMEDIATELY (must be synchronous with user gesture)
+    // then pass a Promise<File[]> so the fetch happens in parallel — this is how Spotify does it
+    if (isMobile && navigator.share) {
+      // Check if the browser supports file sharing at all (test with empty array)
+      const supportsFiles = typeof navigator.canShare === 'function' && navigator.canShare({ files: [new File([], 'test.png', { type: 'image/png' })] });
+
+      if (supportsFiles) {
+        // Build the file fetch as a promise — we pass it into share() before awaiting
+        const filePromise = fetch(storyUrl)
+          .then(r => r.ok ? r.blob() : Promise.reject())
+          .then(blob => [new File([blob], filename, { type: 'image/png' })]);
+
+        try {
+          await navigator.share({
+            files: await filePromise,
+            title: `${track.title} · DJ DX`,
+            text: `Listen to "${track.title}" by DJ DX 🎵`,
+          });
+          onClose();
+          return;
+        } catch (e: any) {
+          if (e.name === 'AbortError') return;
+          // Fall through to URL-only share if file share failed
+        }
+      }
+
+      // URL-only fallback (also called synchronously in the same gesture)
       try {
         await navigator.share({
           title: `${track.title} · DJ DX`,
@@ -156,11 +186,31 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           url: pageUrl,
         });
         onClose();
-      } catch { /* user cancelled — do nothing */ }
-    } else {
-      // Browser doesn't support Web Share API (desktop) — copy link instead
-      await copyLink();
+        return;
+      } catch { return; }
     }
+
+    // Desktop fallback: download artwork + copy link
+    setDownloading(true);
+    try {
+      const res = await fetch(storyUrl);
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }
+    } catch { /* ignore */ }
+    setDownloading(false);
+
+    try { await navigator.clipboard.writeText(pageUrl); } catch { /* fallback */ }
+    showToast(`Artwork saved & Link copied! Open ${platform} to share.`);
+    setTimeout(() => onClose(), 4000);
   }
 
   async function shareToSocial(platformId: string) {
@@ -176,17 +226,22 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
     }
 
     if (platformId === 'more') {
-      // Generic OS share sheet — no file, just text + URL
-      try {
-        await navigator.share({ title: `${track.title} · DJ DX`, text: shareText, url: pageUrl });
-        onClose();
-      } catch { /* user cancelled or not supported */ }
+      // Generic OS share sheet
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: `${track.title} · DJ DX`, text: shareText, url: pageUrl });
+          onClose();
+        } catch { /* user cancelled */ }
+      } else {
+        copyLink();
+      }
       return;
     }
 
     const urls: Record<string, string> = {
       twitter:  `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
       whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     };
     if (urls[platformId]) window.open(urls[platformId], '_blank', 'noopener,noreferrer');
   }
@@ -256,19 +311,19 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           <div style={{ fontSize:'10px', fontWeight:600, color:'rgba(255,255,255,0.25)', letterSpacing:'2px', textTransform:'uppercase', padding:'16px 20px 4px' }}>Share to Stories</div>
           <div className="share-stories-row">
 
-            <button className="share-story-btn" onClick={shareStory} aria-label="Share to Instagram Story">
+            <button className="share-story-btn" onClick={() => handleStoryShare('Instagram')} aria-label="Share to Instagram Story">
               <div className="share-story-ring share-story-ring--ig"><IgIcon /></div>
               <span className="share-story-name">Instagram</span>
               <span className="share-story-sub">Story</span>
             </button>
 
-            <button className="share-story-btn" onClick={shareStory} aria-label="Share to TikTok Story">
+            <button className="share-story-btn" onClick={() => handleStoryShare('TikTok')} aria-label="Share to TikTok Story">
               <div className="share-story-ring share-story-ring--tk"><TkIcon /></div>
               <span className="share-story-name">TikTok</span>
               <span className="share-story-sub">Story</span>
             </button>
 
-            <button className="share-story-btn" onClick={shareStory} aria-label="Share to Facebook Story">
+            <button className="share-story-btn" onClick={() => handleStoryShare('Facebook')} aria-label="Share to Facebook Story">
               <div className="share-story-ring share-story-ring--fb"><FbIcon /></div>
               <span className="share-story-name">Facebook</span>
               <span className="share-story-sub">Story</span>
@@ -282,12 +337,12 @@ export default function ShareModal({ track, shareType, onClose }: ShareModalProp
           <div style={{ fontSize:'10px', fontWeight:600, color:'rgba(255,255,255,0.25)', letterSpacing:'2px', textTransform:'uppercase', padding:'16px 20px 4px' }}>Share to Feed & More</div>
           <div style={{ padding:'4px 12px 16px' }}>
 
-            <button className="share-feed-btn" onClick={shareStory}>
+            <button className="share-feed-btn" onClick={() => handleStoryShare('Instagram')}>
               <div className="share-feed-icon" style={{ background:'linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)' }}><IgIcon /></div>
               <div className="share-feed-meta"><span>Instagram</span><span className="share-feed-sub">Post to feed</span></div>
             </button>
 
-            <button className="share-feed-btn" onClick={shareStory}>
+            <button className="share-feed-btn" onClick={() => handleStoryShare('TikTok')}>
               <div className="share-feed-icon" style={{ background:'#010101', border:'1px solid rgba(255,255,255,.1)' }}><TkIcon /></div>
               <div className="share-feed-meta"><span>TikTok</span><span className="share-feed-sub">Post to your profile</span></div>
             </button>

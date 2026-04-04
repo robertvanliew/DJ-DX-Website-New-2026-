@@ -94,12 +94,30 @@
       ],
       "event": [
         {
-          "@type": "Event",
+          "@type": "MusicEvent",
           "name": "TEDxYouth@RVA — PAUSE",
-          "startDate": "2022-11-12",
+          "description": "DJ DX performed as a featured artist at TEDxYouth@RVA 2022, a youth-led TEDx event themed 'PAUSE' held in Richmond, Virginia.",
+          "startDate": "2022-11-12T09:00:00-05:00",
+          "endDate": "2022-11-12T17:00:00-05:00",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "image": "https://djdxmusic.com/show-2.jpg",
           "location": {
             "@type": "Place",
-            "name": "Richmond, Virginia"
+            "name": "Richmond, Virginia",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Richmond",
+              "addressRegion": "VA",
+              "addressCountry": "US"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.ted.com/tedx/events/52176",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/SoldOut"
           },
           "url": "https://www.ted.com/tedx/events/52176",
           "performer": { "@id": "https://djdxmusic.com/#djdx" }
