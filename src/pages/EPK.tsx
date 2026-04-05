@@ -359,6 +359,93 @@ export default function EPK() {
               </div>
             ))}
           </div>
+
+          {/* ── Live Add-On: Julie Schatz Violin & Keyboard ── */}
+          <div className="epkr-addon-rider">
+            <div className="epkr-addon-badge">Live Add-On</div>
+            <h3 className="epkr-addon-title">Julie Schatz — Violin &amp; Keyboard / Ableton</h3>
+            <p className="epkr-addon-sub">Additional requirements when booking DJ DX with live violin and keyboard/Ableton production.</p>
+
+            <div className="epkr-addon-grid">
+
+              {/* Violin + Keyboard / Ableton Rider */}
+              <div className="epkr-addon-col">
+                <div className="epkr-addon-col-label">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Violin &amp; Keyboard / Ableton Setup
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Audio Outputs</div>
+                  <div className="epkr-addon-spec">2× 1/4″ TRS Line Outputs (Stereo L/R) from Apollo Twin — provided by Julie Schatz.</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Staging</div>
+                  <div className="epkr-addon-spec">1× Small table or equipment riser (min. 24″ × 24″) at performer's station to hold laptop, Apollo Twin, wireless receiver, and effects pedal.</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Power</div>
+                  <div className="epkr-addon-spec">1× Power strip with min. 4 outlets at performer's station (Laptop, Apollo Twin, BLX4 Receiver, Zoom Pedal).</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Monitoring</div>
+                  <div className="epkr-addon-spec">1× Floor wedge monitor. Preferred: "Main Mix" send so performer hears a blended balance of violin and Ableton tracks.</div>
+                </div>
+              </div>
+
+              {/* Violin-Only Rider */}
+              <div className="epkr-addon-col">
+                <div className="epkr-addon-col-label">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Violin Only Setup
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Audio Output</div>
+                  <div className="epkr-addon-spec">1× 1/4″ Mono Instrument Output from Zoom effects pedal.</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">DI Requirements</div>
+                  <div className="epkr-addon-spec">Venue provides 1× Mono DI Box and XLR cable to front-of-house console.</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Staging</div>
+                  <div className="epkr-addon-spec">1× Small table or riser (min. 24″ × 24″) at performer's station to hold wireless receiver and effects pedal.</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Power</div>
+                  <div className="epkr-addon-spec">1× Power strip with min. 2 outlets (BLX4 wireless receiver and Zoom pedal).</div>
+                </div>
+                <div className="epkr-addon-row">
+                  <div className="epkr-addon-item">Monitoring</div>
+                  <div className="epkr-addon-spec">1× Floor wedge monitor.</div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Engineer Notes */}
+            <div className="epkr-addon-note">
+              <div className="epkr-addon-note-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Note to Engineer
+              </div>
+              <div className="epkr-addon-note-rows">
+                <div className="epkr-addon-note-row">
+                  <span className="epkr-addon-note-key">Processing</span>
+                  <span>Apply standard EQ and compression at the console to smooth electric violin transients. High-pass filter at ~180 Hz is appreciated.</span>
+                </div>
+                <div className="epkr-addon-note-row">
+                  <span className="epkr-addon-note-key">Effects</span>
+                  <span>Performer uses a Zoom pedal for core tone. Please add a tasteful Hall Reverb to the house mix to suit room acoustics.</span>
+                </div>
+                <div className="epkr-addon-note-row">
+                  <span className="epkr-addon-note-key">Monitoring</span>
+                  <span>Provide a "clear" monitor mix. If house reverb makes intonation difficult to hear, keep monitor mix dry (no reverb) while keeping the house mix wet.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </section>
 
         {/* ── 05 · ASSETS ── */}

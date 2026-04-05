@@ -4431,6 +4431,121 @@ section { padding: 120px 40px; }
   color: var(--dim);
 }
 
+/* ── Live Add-On Rider (Julie Schatz) ── */
+.epkr-addon-rider {
+  margin-top: 48px;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 36px;
+  background: rgba(201,168,76,0.03);
+}
+.epkr-addon-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #C9A84C;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+}
+.epkr-addon-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0 0 6px;
+}
+.epkr-addon-sub {
+  font-size: 13px;
+  color: var(--dim);
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+.epkr-addon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.epkr-addon-col {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 20px;
+}
+.epkr-addon-col-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.7);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.epkr-addon-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.epkr-addon-row:last-child { border-bottom: none; }
+.epkr-addon-item {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.55);
+}
+.epkr-addon-spec {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.55;
+}
+.epkr-addon-note {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid rgba(201,168,76,0.4);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 20px;
+}
+.epkr-addon-note-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.65);
+  margin-bottom: 14px;
+}
+.epkr-addon-note-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.epkr-addon-note-row {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.55;
+}
+.epkr-addon-note-key {
+  flex-shrink: 0;
+  width: 90px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+
 /* ── Assets ── */
 .epkr-assets-grid {
   display: grid;
@@ -4548,6 +4663,8 @@ section { padding: 120px 40px; }
   .epkr-press-tile--hero .epkr-press-tile-outlet { font-size: 2rem; }
   .epkr-socials-grid { grid-template-columns: 1fr 1fr; }
   .epkr-rider-grid { grid-template-columns: 1fr; }
+  .epkr-addon-grid { grid-template-columns: 1fr; }
+  .epkr-addon-rider { padding: 24px 18px; }
   .epkr-assets-grid { grid-template-columns: 1fr; }
   .epkr-cta { padding: 80px 0; }
 }
