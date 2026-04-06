@@ -602,7 +602,7 @@ function App() {
               </div>
               <div className="about-body sr" data-sr-delay="0.12s">
                 <p>
-                  DJ DX (Robert Van Liew) brings over two decades of experience to the turntables,
+                  DJ DX brings over two decades of experience to the turntables,
                   the studio, and the stage. More than a selector — he is a complete artist: DJ,
                   producer, rapper, and engineer. His live sets blend R&amp;B, hip-hop, house, and
                   Afrobeats with the kind of crowd-reading instinct that only comes from 25+ years
