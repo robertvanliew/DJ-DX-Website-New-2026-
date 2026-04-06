@@ -13,7 +13,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Hash the submitted password and compare server-side — nothing sensitive sent back
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password))
   const submitted = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
-  const expected = process.env.ADMIN_HASH ?? ''
+  const expected = (process.env.ADMIN_HASH ?? '').trim().toLowerCase()
 
   if (!expected) return res.status(500).json({ error: 'Admin not configured' })
   if (submitted !== expected) return res.status(401).json({ error: 'Incorrect password' })
