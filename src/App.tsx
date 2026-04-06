@@ -602,21 +602,29 @@ function App() {
               </div>
               <div className="about-body sr" data-sr-delay="0.12s">
                 <p>
-                  DJ DX is a New York / New Jersey-based DJ, producer, and recording artist with over
-                  20 years behind the decks. Known for seamless blends that pull from
-                  classic R&amp;B, hip-hop, house, and Afrobeats — built for the room, not the playlist.
+                  DJ DX (Robert Van Liew) brings over two decades of experience to the turntables,
+                  the studio, and the stage. More than a selector — he is a complete artist: DJ,
+                  producer, rapper, and engineer. His live sets blend R&amp;B, hip-hop, house, and
+                  Afrobeats with the kind of crowd-reading instinct that only comes from 25+ years
+                  of real gigs.
                 </p>
                 <p>
-                  TEDx stages. Corporate rooms. Private events. The vibe changes, the
-                  standard doesn't. Every set is researched, sequenced, and delivered
-                  with full professionalism. First-time clients become regulars.
+                  Known throughout Latin America as <em>"El Negro,"</em> his Hood Reggaeton series
+                  drove millions of mixtape downloads and earned collaborations with genre heavyweights.
+                  His underground tapes and original productions have built a cult following across
+                  the UK, Ukraine, Belarus, and Russia.
+                </p>
+                <p>
+                  TEDx stages. Corporate rooms. Private events. One rule: <strong>build the
+                  experience for the room, not the playlist.</strong> The vibe changes — the
+                  standard doesn't. First-time clients become lifelong regulars.
                 </p>
               </div>
             </div>
 
             <div className="about-aside">
               {[
-                { num: "20+", label: "Years in the Game", sub: "Consistent. Reliable. Professional.", delay: "0.05s" },
+                { num: "25+", label: "Years in the Game", sub: "Consistent. Reliable. Professional.", delay: "0.05s" },
                 { num: "500+", label: "Events Performed", sub: "From lounges to major venues.", delay: "0.15s" },
                 { num: "100+", label: "Original Blends Released", sub: "Music you won't hear anywhere else.", delay: "0.25s" },
               ].map(s => (
