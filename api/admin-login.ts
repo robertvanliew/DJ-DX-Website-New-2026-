@@ -16,7 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const expected = (process.env.ADMIN_HASH ?? '').trim().toLowerCase()
 
   if (!expected) return res.status(500).json({ error: 'Admin not configured' })
-  if (submitted !== expected) return res.status(401).json({ error: 'Incorrect password', debug_submitted: submitted, debug_expected_len: expected.length, debug_submitted_len: submitted.length })
+  if (submitted !== expected) return res.status(401).json({ error: 'Incorrect password' })
 
   // Issue a short-lived session token the client uses for catalog API calls
   // Token = HMAC(ADMIN_SECRET, timestamp_bucket) — valid for the current 30-min window
