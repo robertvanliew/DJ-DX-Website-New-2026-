@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Music2, Mic2, Shuffle, Club, Globe, Clock, Piano, Radio, Star } from 'lucide-react';
 import SiteNav from './components/SiteNav';
 import SiteFooter from './components/SiteFooter';
 import './index.css';
@@ -10,15 +11,15 @@ import BookingForm from './components/BookingForm';
 // Catalog is managed via /admin — loaded from catalog.ts + localStorage
 
 const services = [
-  { name: "R&B / Soul", desc: "Classic and contemporary R&B blends that move the room and connect every generation.", icon: "♪" },
-  { name: "Hip-Hop", desc: "Golden era to modern — curated for energy, flow, and crowd response.", icon: "◈" },
-  { name: "Blends & Remixes", desc: "Original edits crafted exclusively by DJ DX — music you won't hear anywhere else.", icon: "⊕" },
-  { name: "House / Jersey Club", desc: "High-energy club edits and Jersey Club cuts that keep the floor locked in all night.", icon: "◉" },
-  { name: "Afrobeats", desc: "Vibrant rhythms and global grooves woven seamlessly into every set.", icon: "◎" },
-  { name: "Old School", desc: "Nostalgic cuts that unlock the floor and bring the whole crowd together.", icon: "⋈" },
-  { name: "Live Violinist / DJ", desc: "A one-of-a-kind fusion — live violin over DJ sets for a truly unforgettable atmosphere.", icon: "♯" },
-  { name: "Reggaeton", desc: "From classic dembow to modern Latin trap — crowd-pleasing energy from start to finish.", icon: "◆" },
-  { name: "Private Events", desc: "Weddings, corporate nights, private parties — handled with full professionalism.", icon: "★" },
+  { name: "R&B / Soul", desc: "Classic and contemporary R&B blends that move the room and connect every generation.", icon: Music2 },
+  { name: "Hip-Hop", desc: "Golden era to modern — curated for energy, flow, and crowd response.", icon: Mic2 },
+  { name: "Blends & Remixes", desc: "Original edits crafted exclusively by DJ DX — music you won't hear anywhere else.", icon: Shuffle },
+  { name: "House / Jersey Club", desc: "High-energy club edits and Jersey Club cuts that keep the floor locked in all night.", icon: Club },
+  { name: "Afrobeats", desc: "Vibrant rhythms and global grooves woven seamlessly into every set.", icon: Globe },
+  { name: "Old School", desc: "Nostalgic cuts that unlock the floor and bring the whole crowd together.", icon: Clock },
+  { name: "Live Violinist / DJ", desc: "A one-of-a-kind fusion — live violin over DJ sets for a truly unforgettable atmosphere.", icon: Piano },
+  { name: "Reggaeton", desc: "From classic dembow to modern Latin trap — crowd-pleasing energy from start to finish.", icon: Radio },
+  { name: "Private Events", desc: "Weddings, corporate nights, private parties — handled with full professionalism.", icon: Star },
 ];
 
 const marqueePhotos = [
@@ -336,6 +337,7 @@ function GenreCarousel() {
               {/* Album sleeve — sits in front, clips left portion of vinyl */}
               <div className="genre-sleeve-face">
                 <div className="genre-sleeve-top">
+                  {React.createElement(s.icon, { size: 20, strokeWidth: 1.5, className: 'genre-sleeve-icon', 'aria-hidden': true, style: { color: genreColors[s.name] ?? '#C9A84C' } })}
                 </div>
                 <div className="genre-card-name">
                   {(() => {
@@ -353,7 +355,12 @@ function GenreCarousel() {
                 </div>
                 <div className="genre-card-desc">{s.desc}</div>
                 {pos === 'center' && (
-                  <a className="genre-sleeve-cta" href="#catalog">Explore →</a>
+                  <a className="genre-sleeve-cta" href="#catalog">
+                    Explore
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </a>
                 )}
               </div>
             </div>

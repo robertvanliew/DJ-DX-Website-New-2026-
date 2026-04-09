@@ -82,21 +82,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           email: buyerEmail,
           name: buyerName,
           trackIds: cart.map(t => t.id.toString()),
+          r2FileNames: cart.map(t => t.r2FileName || `${t.id}.mp3`),
         }),
       });
-      const data = await res.json() as { transactionId?: string; checkoutUrl?: string; error?: string };
-      if (!res.ok || !data.transactionId) {
+      const data = await res.json() as { sessionId?: string; checkoutUrl?: string; error?: string };
+      if (!res.ok || !data.checkoutUrl) {
         setCheckoutError(data.error ?? 'Something went wrong. Please try again.');
         return;
       }
-      const Paddle = (window as unknown as { Paddle?: { Checkout: { open: (opts: Record<string, unknown>) => void } } }).Paddle;
-      if (Paddle) {
-        Paddle.Checkout.open({ transactionId: data.transactionId });
-      } else if (data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-      } else {
-        setCheckoutError('Checkout could not be opened. Please try again.');
-      }
+      
+      window.location.href = data.checkoutUrl;
+
     } catch {
       setCheckoutError('Network error. Please try again.');
     } finally {
@@ -194,7 +190,7 @@ export function CartPanel() {
           {checkoutLoading ? 'Redirecting…' : `Pay $${price || '0'} — Get the Music`}
         </button>
 
-        <p className="cart-secure-note">Secure checkout via Paddle · Download link delivered by email</p>
+        <p className="cart-secure-note">Secure checkout via Stripe · Download link delivered by email</p>
       </div>
     </div>
   );

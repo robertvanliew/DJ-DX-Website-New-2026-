@@ -1,66 +1,21 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import Stripe from 'stripe';
 
-// Cache the product ID in memory so we don't re-create it on every request
-let cachedProductId: string | null = null
-
-async function paddleFetch(baseUrl: string, path: string, apiKey: string, body: unknown) {
-  const resp = await fetch(`${baseUrl}${path}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify(body),
-  })
-  const data = await resp.json()
-  return { ok: resp.ok, data }
-}
-
-async function getOrCreateProduct(baseUrl: string, apiKey: string): Promise<string> {
-  if (cachedProductId) return cachedProductId
-
-  // Try to list existing products first
-  const listResp = await fetch(`${baseUrl}/products`, {
-    headers: { Authorization: `Bearer ${apiKey}` },
-  })
-  if (listResp.ok) {
-    const listData = (await listResp.json()) as { data: Array<{ id: string; name: string }> }
-    const existing = listData.data?.find((p) => p.name === 'DJ DX Music Download')
-    if (existing) {
-      cachedProductId = existing.id
-      return cachedProductId
-    }
-  }
-
-  // Create a new product
-  const result = await paddleFetch(baseUrl, '/products', apiKey, {
-    name: 'DJ DX Music Download',
-    tax_category: 'digital-goods',
-  })
-
-  if (!result.ok) {
-    console.error('Failed to create product:', JSON.stringify(result.data, null, 2))
-    throw new Error('Failed to create Paddle product')
-  }
-
-  cachedProductId = (result.data as { data: { id: string } }).data.id
-  return cachedProductId!
-}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: '2025-02-24.acacia', // You can use standard api versions
+});
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const apiKey = process.env.PADDLE_API_KEY ?? ''
-  const isSandbox = apiKey.includes('sdbx')
-  const BASE = isSandbox ? 'https://sandbox-api.paddle.com' : 'https://api.paddle.com'
-
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { amount, email, name, trackIds } = req.body as {
+  const { amount, email, name, trackIds, r2FileNames } = req.body as {
     amount: number
     email: string
     name: string
     trackIds: string[]
+    r2FileNames?: string[]
   }
 
   if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -80,50 +35,50 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    // Step 1: Get or create the product
-    const productId = await getOrCreateProduct(BASE, apiKey)
+    const siteUrl = process.env.SITE_URL || 'https://djdxmusic.com';
 
-    // Step 2: Create a one-time price for this transaction
-    const priceResult = await paddleFetch(BASE, '/prices', apiKey, {
-      description: `DJ DX Music – ${trackIds.length} track${trackIds.length > 1 ? 's' : ''}`,
-      product_id: productId,
-      unit_price: {
-        amount: String(Math.round(amount * 100)),
-        currency_code: 'USD',
-      },
-      billing_cycle: null,
-      tax_mode: 'account_setting',
-    })
-
-    if (!priceResult.ok) {
-      console.error('Paddle price error:', JSON.stringify(priceResult.data, null, 2))
-      const detail = (priceResult.data as { error?: { detail?: string } })?.error?.detail
-      return res.status(500).json({ error: detail ?? 'Failed to create price' })
+    // Store r2FileNames array or strings in metadata. Metadata values are max 500 chars.
+    let r2FileNamesString = '';
+    if (r2FileNames && Array.isArray(r2FileNames)) {
+      r2FileNamesString = r2FileNames.join(',');
+      // Strip out any characters over 500 if we hit the limit, though ideally it should fit.
+      if (r2FileNamesString.length > 500) {
+        console.warn('r2FileNames exceeded 500 characters in metadata');
+        r2FileNamesString = r2FileNamesString.substring(0, 500);
+      }
+    } else {
+      r2FileNamesString = trackIds.map((id: string) => `${id}.mp3`).join(',');
     }
 
-    const priceId = (priceResult.data as { data: { id: string } }).data.id
-
-    // Step 3: Create the transaction with the real price ID
-    const txResult = await paddleFetch(BASE, '/transactions', apiKey, {
-      items: [{ price_id: priceId, quantity: 1 }],
-      custom_data: {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      customer_email: email,
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: `DJ DX Music – ${trackIds.length} track${trackIds.length > 1 ? 's' : ''}`,
+            },
+            unit_amount: Math.round(amount * 100), // convert to cents
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${siteUrl}/?success=true`,
+      cancel_url: `${siteUrl}/`,
+      metadata: {
         trackIds: trackIds.join(','),
         customerEmail: email,
         customerName: name || '',
+        r2FileNames: r2FileNamesString,
       },
-    })
-
-    if (!txResult.ok) {
-      console.error('Paddle tx error:', JSON.stringify(txResult.data, null, 2))
-      const detail = (txResult.data as { error?: { detail?: string } })?.error?.detail
-      return res.status(500).json({ error: detail ?? 'Failed to create checkout' })
-    }
-
-    const txData = (txResult.data as { data: { id: string; checkout?: { url?: string } } }).data
+    });
 
     return res.status(200).json({
-      transactionId: txData.id,
-      checkoutUrl: txData.checkout?.url || null,
+      sessionId: session.id,
+      checkoutUrl: session.url,
     })
   } catch (error) {
     console.error('Checkout error:', error)

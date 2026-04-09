@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { Resend } from 'resend'
-import { timingSafeEqual } from 'crypto'
+import Stripe from 'stripe'
 
 const r2 = new S3Client({
   region: 'auto',
@@ -15,6 +15,10 @@ const r2 = new S3Client({
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: '2025-02-24.acacia',
+});
+
 const BUCKET = process.env.R2_BUCKET_NAME || 'djdx-masters'
 // Signed URLs expire in 24 hours
 const EXPIRY_SECONDS = 60 * 60 * 24
@@ -26,73 +30,65 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const rawBody = await new Promise<string>((resolve, reject) => {
-    let data = '';
-    req.on('data', chunk => { data += chunk; });
-    req.on('end', () => resolve(data));
+  const rawBody = await new Promise<Buffer>((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    req.on('data', chunk => { chunks.push(Buffer.from(chunk)); });
+    req.on('end', () => resolve(Buffer.concat(chunks)));
     req.on('error', reject);
   });
 
-  // Verify Paddle webhook signature
-  const signature = req.headers['paddle-signature'] as string
+  const signature = req.headers['stripe-signature'] as string
   if (!signature) {
     return res.status(401).json({ error: 'Missing signature' })
   }
 
-  // Simple signature check — Paddle uses h1= HMAC-SHA256
-  const isValid = await verifyPaddleSignature(
-    signature,
-    rawBody,
-    process.env.PADDLE_WEBHOOK_SECRET!
-  )
-  if (!isValid) {
-    return res.status(401).json({ error: 'Invalid signature' })
-  }
+  let event: Stripe.Event;
 
-  let event: PaddleWebhookEvent;
   try {
-    event = JSON.parse(rawBody) as PaddleWebhookEvent;
-  } catch {
-    return res.status(400).json({ error: 'Invalid JSON payload' });
+    event = stripe.webhooks.constructEvent(
+      rawBody,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    );
+  } catch (err: any) {
+    console.error(`⚠️ Webhook signature verification failed.`, err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // Only process completed transactions
-  if (event.event_type !== 'transaction.completed') {
+  if (event.type !== 'checkout.session.completed') {
     return res.status(200).json({ received: true })
   }
 
-  const customData = event.data?.custom_data as {
-    trackIds?: string
-    customerEmail?: string
-  } | null
+  const session = event.data.object as Stripe.Checkout.Session;
 
-  if (!customData?.trackIds || !customData?.customerEmail) {
-    console.error('Missing custom_data on transaction', event.data?.id)
+  const trackIdsStr = session.metadata?.trackIds
+  const customerEmailRaw = session.metadata?.customerEmail || session.customer_details?.email
+  const customerNameRaw = session.metadata?.customerName || session.customer_details?.name || 'Music Fan'
+  const r2FileNamesStr = session.metadata?.r2FileNames
+
+  if (!trackIdsStr || !customerEmailRaw || !r2FileNamesStr) {
+    console.error('Missing necessary metadata on session', session.id)
     return res.status(200).json({ received: true })
   }
 
-  // Only process numeric IDs — prevents arbitrary R2 key access
-  const trackIds = customData.trackIds
-    .split(',')
-    .map((t) => t.trim())
-    .filter((t) => /^\d+$/.test(t))
+  const trackIds = trackIdsStr.split(',').map(t => t.trim())
+  const r2FileNames = r2FileNamesStr.split(',').map(t => t.trim())
 
-  if (trackIds.length === 0) {
-    console.error('No valid track IDs after filtering', event.data?.id)
+  if (trackIds.length === 0 || r2FileNames.length === 0 || trackIds.length !== r2FileNames.length) {
+    console.error('Invalid track or file names array', session.id)
     return res.status(200).json({ received: true })
   }
 
-  // Use Paddle-verified email, not client-supplied custom_data
-  const customerEmail = event.data?.customer?.email || customData.customerEmail
-  const customerName = event.data?.customer?.name || 'Music Fan'
-  const amount = ((event.data?.details?.totals?.total ?? 0) / 100).toFixed(2)
+  const customerEmail = escapeHtml(customerEmailRaw ?? '')
+  const customerName = escapeHtml(customerNameRaw ?? '')
+  const amount = session.amount_total ? (session.amount_total / 100).toFixed(2) : '0';
 
   try {
     // Generate a signed R2 URL for each track (24-hour expiry)
     const downloadLinks = await Promise.all(
-      trackIds.map(async (trackId) => {
-        const key = `${trackId}.mp3` // adjust if your R2 keys differ
-        const command = new GetObjectCommand({ Bucket: BUCKET, Key: key })
+      r2FileNames.map(async (fileName, index) => {
+        const trackId = trackIds[index];
+        const command = new GetObjectCommand({ Bucket: BUCKET, Key: fileName })
         const url = await getSignedUrl(r2, command, { expiresIn: EXPIRY_SECONDS })
         return { trackId, url }
       })
@@ -184,63 +180,12 @@ function formatTrackName(slug: string): string {
     .replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
-async function verifyPaddleSignature(
-  signatureHeader: string,
-  body: string,
-  secret: string
-): Promise<boolean> {
-  try {
-    // Parse Paddle signature header: ts=...:h1=...
-    const parts = Object.fromEntries(
-      signatureHeader.split(';').map((p) => {
-        const [k, v] = p.split('=', 2)
-        return [k.trim(), v.trim()]
-      })
-    )
-    const ts = parts['ts']
-    const h1 = parts['h1']
-    if (!ts || !h1) return false
-
-    // Replay protection: reject webhooks older than 5 minutes
-    const tsSeconds = parseInt(ts, 10)
-    if (isNaN(tsSeconds) || Math.abs(Date.now() / 1000 - tsSeconds) > 300) return false
-
-    const payload = `${ts}:${body}`
-    const encoder = new TextEncoder()
-    const keyData = encoder.encode(secret)
-    const msgData = encoder.encode(payload)
-
-    const cryptoKey = await crypto.subtle.importKey(
-      'raw',
-      keyData,
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['sign']
-    )
-    const sigBuffer = await crypto.subtle.sign('HMAC', cryptoKey, msgData)
-    const computed = Array.from(new Uint8Array(sigBuffer))
-      .map((b) => b.toString(16).padStart(2, '0'))
-      .join('')
-
-    // Timing-safe comparison to prevent timing attacks
-    if (computed.length !== h1.length) return false
-    const computedBuf = Buffer.from(computed, 'hex')
-    const h1Buf = Buffer.from(h1, 'hex')
-    if (computedBuf.length !== h1Buf.length) return false
-    return timingSafeEqual(computedBuf, h1Buf)
-  } catch {
-    return false
-  }
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
-// ── types ─────────────────────────────────────────────────────────────────────
-
-interface PaddleWebhookEvent {
-  event_type: string
-  data: {
-    id: string
-    custom_data: unknown
-    customer?: { name?: string; email?: string }
-    details?: { totals?: { total?: number } }
-  }
-}

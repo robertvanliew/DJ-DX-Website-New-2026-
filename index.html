@@ -55,8 +55,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://i.ytimg.com" />
-    <link rel="preconnect" href="https://cdn.paddle.com" />
-
 
     <!-- JSON-LD — Person + MusicGroup -->
     <script type="application/ld+json">
@@ -492,16 +490,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-    <script>
-      // Initialize Paddle.js — sandbox for dev, live for prod
-      if (window.Paddle) {
-        Paddle.Environment.set('sandbox');
-        Paddle.Initialize({
-          token: 'test_c7b83a58253b7ae0834a3fe0a78', // DJ DX Website sandbox token
-        });
-      }
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -11,6 +11,7 @@ export interface Track {
   album?: string;
   year?: string;
   storePage?: 'main' | 'soulshades' | 'all';
+  r2FileName?: string;
 }
 
 // Source of truth — edit order/visible here or via the Admin panel

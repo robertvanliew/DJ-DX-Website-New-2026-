@@ -77,7 +77,7 @@ export default function BookingForm() {
         <label htmlFor="bf-message">Tell me about your event</label>
         <textarea id="bf-message" placeholder="Location, guest count, vibe you're going for, any special requests…" required value={fields.message} onChange={e => set('message', e.target.value)} />
       </div>
-      {status === 'error' && <p style={{ color: '#e55', fontSize: '13px', margin: '0 0 12px' }}>Something went wrong. Please try again or email djdxbusiness@gmail.com directly.</p>}
+      {status === 'error' && <p className="form-error">Something went wrong. Please try again or email djdxbusiness@gmail.com directly.</p>}
       <button type="submit" className="form-submit" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending…' : <><span>Send Inquiry</span> <Send /></>}
       </button>
