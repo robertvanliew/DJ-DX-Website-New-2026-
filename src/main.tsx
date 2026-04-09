@@ -7,6 +7,7 @@ import './index.css'
 import App from './App.tsx'
 import { CartProvider } from './components/CartContext.tsx'
 import { PlayerProvider } from './components/PlayerContext.tsx'
+import { ToastProvider } from './components/Toast.tsx'
 
 // Lazy load all non-home routes — they only download when first visited
 const EPK        = lazy(() => import('./pages/EPK.tsx'))
@@ -43,6 +44,7 @@ createRoot(document.getElementById('root')!).render(
     <HelmetProvider>
     <BrowserRouter>
       <CartProvider>
+        <ToastProvider>
         <PlayerProvider>
         <ScrollManager />
         <Suspense fallback={null}>
@@ -59,6 +61,7 @@ createRoot(document.getElementById('root')!).render(
           </Routes>
         </Suspense>
         </PlayerProvider>
+        </ToastProvider>
       </CartProvider>
     </BrowserRouter>
     </HelmetProvider>

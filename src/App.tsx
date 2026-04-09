@@ -7,6 +7,7 @@ import './index.css';
 
 import { fetchCatalog, defaultCatalog, type Track } from './catalog';
 import BookingForm from './components/BookingForm';
+import { useToast } from './components/Toast';
 
 // Catalog is managed via /admin — loaded from catalog.ts + localStorage
 
@@ -400,14 +401,23 @@ function GenreCarousel() {
 }
 
 function App() {
+  const { showToast } = useToast();
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
   const [allTracks, setAllTracks] = useState<Track[]>(defaultCatalog);
 
   useEffect(() => {
+    // Check for Stripe success
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('success') === 'true') {
+      showToast('Payment successful! Your download link is on the way.', 'success');
+      // Clean up the URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     fetchCatalog().then(tracks => setAllTracks(tracks));
-  }, []);
+  }, [showToast]);
 
   const catalog = allTracks.filter(t => t.visible && t.storePage !== 'soulshades');
 

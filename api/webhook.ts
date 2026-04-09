@@ -16,7 +16,7 @@ const r2 = new S3Client({
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2025-02-24.acacia',
+  apiVersion: '2025-02-24.acacia' as any,
 });
 
 const BUCKET = process.env.R2_BUCKET_NAME || 'djdx-masters'
