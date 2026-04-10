@@ -192,10 +192,22 @@ export default function SoulShades() {
                 "https://open.spotify.com/artist/2GES5fSFNcx25lv9RFcQjP",
                 "https://music.apple.com/us/artist/soul-shades/1783698611",
                 "https://www.youtube.com/@soulshadesmusic",
-                "https://soundcloud.com/soulshadesmusic"
+                "https://soundcloud.com/soulshadesmusic",
+                "https://soulshadesmusic.bandcamp.com/",
+                "https://soulshadesmusic.com"
+              ],
+              "numberOfEmployees": 2,
+              "foundingDate": "2024"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
+                {"@type": "ListItem", "position": 2, "name": "Soul Shades", "item": "https://djdxmusic.com/soul-shades"}
               ]
             }
-          `}
+          ]`}
         </script>
       </Helmet>
 

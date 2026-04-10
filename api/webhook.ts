@@ -21,8 +21,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 });
 
 const BUCKET = process.env.R2_BUCKET_NAME || 'djdx-masters'
-// Signed URLs expire in 24 hours
-const EXPIRY_SECONDS = 60 * 60 * 24
+// Signed URLs expire in 2 hours to prevent excessive sharing
+const EXPIRY_SECONDS = 60 * 60 * 2
 
 export const config = { api: { bodyParser: false } };
 
@@ -87,12 +87,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const amount = session.amount_total ? (session.amount_total / 100).toFixed(2) : '0';
 
   try {
-    // Generate a signed R2 URL for each track (24-hour expiry)
+    // Generate a signed R2 URL for each track 
     console.log(`Generating R2 signed URLs for bucket="${BUCKET}" files=[${r2FileNames.join(', ')}]`);
     const downloadLinks = await Promise.all(
       r2FileNames.map(async (fileName, index) => {
         const title = trackTitles[index] || formatTrackName(trackIds[index]);
-        const command = new GetObjectCommand({ Bucket: BUCKET, Key: fileName })
+        // Extract the raw filename for the download attachment
+        const attachmentName = fileName.split('/').pop()?.replace(/"/g, '') || 'djdx-track.wav';
+        
+        const command = new GetObjectCommand({ 
+          Bucket: BUCKET, 
+          Key: fileName,
+          // Force the resulting URL to trigger a 'Save As...' download dialog
+          ResponseContentDisposition: `attachment; filename="${attachmentName}"`
+        })
         const url = await getSignedUrl(r2, command, { expiresIn: EXPIRY_SECONDS })
         return { title, url }
       })
@@ -106,7 +114,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <a href="${url}" style="color:#C9A84C;font-weight:600;text-decoration:none;">
               ⬇ ${escapeHtml(title)}
             </a>
-            <span style="color:#888;font-size:12px;"> (expires in 24 hours)</span>
+            <span style="color:#888;font-size:12px;"> (expires in 2 hours)</span>
           </li>`
       )
       .join('')
@@ -150,7 +158,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               </ul>
 
               <p style="margin:0;color:#666;font-size:13px;">
-                Links expire in 24 hours. Having trouble? Reply to this email.
+                Links expire in 2 hours. Having trouble? Reply to this email.
               </p>
             </td>
           </tr>

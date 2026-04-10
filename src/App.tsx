@@ -280,122 +280,18 @@ const genreColors: Record<string, string> = {
   "Live Violinist / DJ":"#14B8A6",
 };
 
-function GenreCarousel() {
-  const [active, setActive] = useState(0);
-  const total = services.length;
-  const prev = () => setActive(i => (i - 1 + total) % total);
-  const next = () => setActive(i => (i + 1) % total);
-
-  const getPos = (i: number) => {
-    const diff = ((i - active + total) % total);
-    if (diff === 0) return 'center';
-    if (diff === 1) return 'right';
-    if (diff === total - 1) return 'left';
-    return 'hidden';
-  };
-
-  const cur = services[active];
-
+function SkillsGrid() {
   return (
-    <div className="genre-carousel-wrap">
-
-      {/* Ambient glow behind stage — shifts per card */}
-      <div
-        className="genre-ambient"
-        aria-hidden="true"
-        style={{ opacity: 1 }}
-      />
-
-      {/* Counter + name strip */}
-      <div className="genre-meta-strip">
-        <span className="genre-meta-count">
-          <span className="genre-meta-cur">{String(active + 1).padStart(2, '0')}</span>
-          <span className="genre-meta-sep">/</span>
-          <span className="genre-meta-tot">{String(total).padStart(2, '0')}</span>
-        </span>
-        <span className="genre-meta-name">{cur.name}</span>
-        <span className="genre-meta-line" aria-hidden="true" />
-      </div>
-
-      {/* Stage */}
-      <div className="genre-carousel-stage">
-        {services.map((s, i) => {
-          const pos = getPos(i);
-          return (
-            <div
-              key={s.name}
-              className={`genre-card genre-card--${pos}`}
-              style={{ '--vinyl-color': genreColors[s.name] ?? '#C9A84C' } as React.CSSProperties}
-              onClick={() => pos === 'left' ? prev() : pos === 'right' ? next() : undefined}
-              aria-hidden={pos === 'hidden'}
-            >
-              {/* Vinyl disc — behind sleeve, peeks from right */}
-              <div className="genre-vinyl-disc">
-                <div className="genre-vinyl-label">
-                </div>
-              </div>
-
-              {/* Album sleeve — sits in front, clips left portion of vinyl */}
-              <div className="genre-sleeve-face">
-                <div className="genre-sleeve-top">
-                  {React.createElement(s.icon, { size: 20, strokeWidth: 1.5, className: 'genre-sleeve-icon', 'aria-hidden': true, style: { color: genreColors[s.name] ?? '#C9A84C' } })}
-                </div>
-                <div className="genre-card-name">
-                  {(() => {
-                    const words = s.name.split(' ');
-                    const last = words.pop();
-                    return (
-                      <>
-                        {words.length > 0 && words.join(' ') + ' '}
-                        <span style={{ whiteSpace: 'nowrap' }}>
-                          {last}<span className="genre-sleeve-dot" style={{ background: genreColors[s.name] ?? '#C9A84C' }} />
-                        </span>
-                      </>
-                    );
-                  })()}
-                </div>
-                <div className="genre-card-desc">{s.desc}</div>
-                {pos === 'center' && (
-                  <a className="genre-sleeve-cta" href="#catalog">
-                    Explore
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <polyline points="9 18 15 12 9 6" />
-                    </svg>
-                  </a>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Arrow Controls */}
-      <div className="genre-carousel-arrows">
-        <button className="genre-arrow" onClick={prev} aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
-        </button>
-
-        {/* Dot indicators inline between arrows */}
-        <div className="genre-dots">
-          {services.map((_, i) => (
-            <button
-              key={i}
-              className={`genre-dot${i === active ? ' genre-dot--active' : ''}`}
-              onClick={() => setActive(i)}
-              aria-label={`Go to ${services[i].name}`}
-            />
-          ))}
+    <div className="services-grid">
+      {services.map((s, i) => (
+        <div key={s.name} className="service-cell sr" data-sr-delay={`${i * 0.05}s`}>
+          <div style={{ color: genreColors[s.name] ?? 'var(--gold)', marginBottom: '16px' }}>
+            {React.createElement(s.icon, { size: 36, strokeWidth: 1.5 })}
+          </div>
+          <h3 className="service-name">{s.name}</h3>
+          <p className="service-desc">{s.desc}</p>
         </div>
-
-        <button className="genre-arrow" onClick={next} aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </button>
-      </div>
-
+      ))}
     </div>
   );
 }
@@ -491,29 +387,125 @@ function App() {
         <link rel="canonical" href="https://djdxmusic.com/" />
         <meta property="og:url" content="https://djdxmusic.com/" />
         <script type="application/ld+json">
-          {`
+          {`[
             {
               "@context": "https://schema.org",
-              "@type": ["MusicGroup", "EntertainmentBusiness"],
+              "@type": ["MusicGroup", "EntertainmentBusiness", "LocalBusiness"],
               "name": "DJ DX",
               "url": "https://djdxmusic.com/",
-              "description": "DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with 20+ years of experience. Featured on TED.",
+              "description": "DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with 20+ years of experience and 500+ events performed. Featured on TED, TEDxYouth@RVA, Disrupt Magazine, and NJ.com. Available for weddings, corporate events, nightclubs, and private parties.",
               "image": "https://djdxmusic.com/epk-hero.jpg",
-              "genre": ["R&B", "Hip-Hop", "Afrobeats", "House", "Jersey Club", "Reggaeton"],
+              "email": "djdxbusiness@gmail.com",
+              "priceRange": "$$-$$$",
+              "genre": ["R&B", "Hip-Hop", "Afrobeats", "House", "Jersey Club", "Reggaeton", "Old School", "Blends & Remixes"],
+              "knowsAbout": ["DJing", "Music Production", "R&B", "Hip-Hop", "Afrobeats", "House Music", "Jersey Club", "Live Performance", "Wedding DJ", "Corporate Event DJ", "Club DJ", "Music Blending"],
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "New York",
                 "addressRegion": "NY",
                 "addressCountry": "US"
               },
-              "areaServed": ["New York", "New Jersey", "Tri-State Area"],
+              "areaServed": [
+                {"@type": "City", "name": "New York City"},
+                {"@type": "State", "name": "New Jersey"},
+                {"@type": "AdministrativeArea", "name": "Tri-State Area"}
+              ],
               "sameAs": [
                 "https://instagram.com/djdx",
                 "https://www.youtube.com/c/djdxmusic",
-                "https://facebook.com/djdxmusic"
+                "https://www.youtube.com/@djdxmusic",
+                "https://facebook.com/djdxmusic",
+                "https://twitter.com/djdxmusic",
+                "https://open.spotify.com/artist/4gGFdpDwEe8zIY1XSE3dGe",
+                "https://music.apple.com/us/artist/dj-dx/",
+                "https://www.tiktok.com/@djdxmusic",
+                "https://www.wikidata.org/wiki/Q110672065",
+                "https://musicbrainz.org/artist/e18da2c6-dbad-4c6b-9bfd-a77e0ef77d5f",
+                "https://www.ted.com/talks/dj_dx_finally_moving",
+                "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/"
+              ],
+              "award": "Featured performer at TEDxYouth@RVA 2022",
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "DJ Services",
+                "itemListElement": [
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wedding DJ", "description": "Professional wedding DJ services in New York and New Jersey"}},
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Event DJ", "description": "Corporate event DJ in New York City and New Jersey"}},
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Club & Venue DJ", "description": "Nightclub and live venue DJ sets in the NYC/NJ area"}},
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Live Violinist & DJ Package", "description": "Unique fusion of live violin over DJ sets for upscale events"}}
+                ]
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How do I book DJ DX for a wedding or private event in New York or New Jersey?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use the booking form at djdxmusic.com or email djdxbusiness@gmail.com. DJ DX is a professional wedding DJ and private event DJ serving New York City, New Jersey, Connecticut, and the tri-state area. Response within 24 hours."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What music genres does DJ DX specialize in?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "DJ DX specializes in R&B, Hip-Hop, Afrobeats, House, Jersey Club, Reggaeton, and Old School. Every set is custom-tailored for the event — from soulful R&B for weddings to high-energy Hip-Hop and Afrobeats for corporate events, nightclubs, and private parties in NYC and NJ."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is DJ DX available for corporate events and brand activations in NYC?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. DJ DX is an experienced corporate event DJ in New York City and New Jersey, available for brand activations, product launches, office parties, galas, and conference entertainment. With 20+ years of professional experience and 500+ events, DJ DX delivers polished, on-brand performances."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What makes DJ DX different from other DJs in New York and New Jersey?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "DJ DX is a TED-featured artist (TEDxYouth@RVA 2022), an original music producer with 100+ releases on Spotify and Apple Music, and a DJ with over 20 years of experience. DJ DX has been covered by Disrupt Magazine, NJ.com, and RVA Magazine — bringing credibility and artistry beyond standard DJ services in the NYC/NJ market."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does DJ DX offer a live DJ and live musician performance package?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes — DJ DX offers a unique live DJ and live violinist performance package. This fusion of live violin over DJ sets creates an unforgettable atmosphere perfect for upscale weddings, corporate galas, and VIP events in the tri-state area."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Where can I buy or stream DJ DX music?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "DJ DX originals, blends, and remixes are available on Spotify and Apple Music. Exclusive productions including unreleased tracks and limited edition packs can be purchased directly in the Music Store at djdxmusic.com."
+                  }
+                }
               ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Event",
+              "name": "DJ DX — Finally Moving at TEDxYouth@RVA",
+              "startDate": "2022-11-01",
+              "location": {
+                "@type": "Place",
+                "name": "TEDxYouth@RVA",
+                "address": {"@type": "PostalAddress", "addressLocality": "Richmond", "addressRegion": "VA", "addressCountry": "US"}
+              },
+              "performer": {"@type": "MusicGroup", "name": "DJ DX", "url": "https://djdxmusic.com/"},
+              "url": "https://www.ted.com/talks/dj_dx_finally_moving",
+              "description": "DJ DX performed 'Finally Moving' as a featured artist at TEDxYouth@RVA 2022 in Richmond, Virginia.",
+              "recordedIn": {"@type": "VideoObject", "name": "DJ DX: Finally Moving", "url": "https://www.ted.com/talks/dj_dx_finally_moving", "embedUrl": "https://www.youtube.com/embed/aG1KR7wPTBk"}
             }
-          `}
+          ]`}
         </script>
       </Helmet>
 
@@ -695,7 +687,7 @@ function App() {
             <h2 className="sec-title">Genres &amp; <span>Services</span></h2>
           </div>
 
-          <GenreCarousel />
+          <SkillsGrid />
         </div>
       </section>
 

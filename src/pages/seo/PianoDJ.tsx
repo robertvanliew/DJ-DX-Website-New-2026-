@@ -4,7 +4,7 @@ import SiteNav from '../../components/SiteNav';
 import SiteFooter from '../../components/SiteFooter';
 import BookingForm from '../../components/BookingForm';
 
-export default function Corporate() {
+export default function PianoDJ() {
   // Always start at top on load
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -13,47 +13,41 @@ export default function Corporate() {
   return (
     <>
       <Helmet>
-        <title>Corporate Event DJ NYC, NJ, CT | Luxury & Brand Activations | DJ DX</title>
-        <meta name="description" content="Looking for a professional corporate event DJ in NYC, NJ, or CT? DJ DX provides premium, brand-safe entertainment for corporate galas, holiday parties, and luxury activations." />
-        <link rel="canonical" href="https://djdxmusic.com/corporate-event-dj-nyc-nj-ct" />
+        <title>Piano & DJ Duo NYC | Luxury Live Entertainment | DJ DX</title>
+        <meta name="description" content="Looking for a Piano and DJ Duo for your NYC, NJ, or CT event? DJ DX provides a premium live keys and DJ experience for luxury weddings and corporate galas." />
+        <link rel="canonical" href="https://djdxmusic.com/piano-dj-duo-nyc-nj" />
         <script type="application/ld+json">
           {`[
             {
               "@context": "https://schema.org",
               "@type": "Service",
-              "name": "Corporate Event DJ NYC, NJ & CT",
-              "serviceType": "Corporate Event DJ",
-              "url": "https://djdxmusic.com/corporate-event-dj-nyc-nj-ct",
-              "description": "Professional DJ entertainment for Fortune 500 companies, corporate galas, holiday parties, product launches, and luxury brand activations across New York City, New Jersey, and Connecticut. DJ DX brings 20+ years of experience and 500+ events performed.",
+              "name": "Live Piano and DJ Duo NYC & NJ",
+              "serviceType": "Live Music Entertainment",
+              "url": "https://djdxmusic.com/piano-dj-duo-nyc-nj",
+              "description": "Premium live piano and DJ duo based in New York City — available for luxury weddings, cocktail hours, rooftop parties, and corporate galas across NYC, NJ, and CT. A unique fusion of live keys and DJ production.",
               "provider": {
                 "@type": ["EntertainmentBusiness", "LocalBusiness"],
                 "name": "DJ DX",
                 "url": "https://djdxmusic.com/",
                 "image": "https://djdxmusic.com/epk-hero.jpg",
                 "email": "djdxbusiness@gmail.com",
-                "priceRange": "$$$",
-                "sameAs": ["https://djdxmusic.com/", "https://www.ted.com/talks/dj_dx_finally_moving"]
+                "priceRange": "$$$-$$$$"
               },
               "areaServed": [
                 {"@type": "City", "name": "New York City"},
-                {"@type": "State", "name": "New York"},
+                {"@type": "City", "name": "Manhattan"},
                 {"@type": "State", "name": "New Jersey"},
                 {"@type": "State", "name": "Connecticut"},
-                {"@type": "AdministrativeArea", "name": "Tri-State Area"},
-                {"@type": "City", "name": "Manhattan"},
-                {"@type": "City", "name": "Brooklyn"},
-                {"@type": "City", "name": "Jersey City"},
-                {"@type": "City", "name": "Newark"}
+                {"@type": "AdministrativeArea", "name": "Tri-State Area"}
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "Corporate DJ Packages",
+                "name": "Piano DJ Packages",
                 "itemListElement": [
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Gala DJ"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Holiday Party DJ NYC"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Brand Activation DJ"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Product Launch Entertainment"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Live Violin and DJ Duo for Corporate Events"}}
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wedding Cocktail Hour Piano DJ NYC"}},
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Gala Piano and DJ"}},
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Luxury Event Live Keys DJ"}},
+                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Rooftop Party Piano DJ New York"}}
                 ]
               }
             },
@@ -62,7 +56,7 @@ export default function Corporate() {
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
-                {"@type": "ListItem", "position": 2, "name": "Corporate Event DJ NYC NJ CT", "item": "https://djdxmusic.com/corporate-event-dj-nyc-nj-ct"}
+                {"@type": "ListItem", "position": 2, "name": "Piano DJ Duo NYC NJ", "item": "https://djdxmusic.com/piano-dj-duo-nyc-nj"}
               ]
             }
           ]`}
@@ -74,7 +68,7 @@ export default function Corporate() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/latest-corporate-hero.jpg" alt="Corporate Event DJ New York City" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/piano-dj-hero.jpg" alt="Piano and DJ Duo New York City" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
@@ -83,17 +77,17 @@ export default function Corporate() {
         
         <div className="section-inner" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
           <div className="sec-overline" style={{ justifyContent: 'center' }}>
-            <span className="sec-label">Corporate Entertainment</span>
+            <span className="sec-label">Live Instrument & DJ</span>
           </div>
           <h1 className="epk-title" style={{ fontSize: 'var(--text-6xl)', marginBottom: '1rem' }}>
-            Elevate Your Corporate Event
+            Live Piano & DJ Duo
           </h1>
           <p className="epk-lead" style={{ maxWidth: '600px', margin: '0 auto', fontSize: 'var(--text-lg)' }}>
-            Premium, brand-safe DJ and Producer entertainment for Fortune 500 holiday parties, 
-            galas, and luxury activations across New York, New Jersey, and Connecticut.
+            The ultimate hybrid of timeless live keys and high-energy DJ sets. 
+            Elevate your luxury wedding or corporate gala in NYC, NJ, and CT.
           </p>
           <div style={{ marginTop: '2rem' }}>
-            <a href="#booking" className="btn-gold">Request Quote</a>
+            <a href="#booking" className="btn-gold">Check Availability</a>
           </div>
         </div>
       </section>
@@ -107,18 +101,17 @@ export default function Corporate() {
                 <div className="sec-overline">
                   <span className="sec-label">Why DJ DX / Soul Shades?</span>
                 </div>
-                <h2 className="sec-title">The Corporate <span>Standard</span></h2>
+                <h2 className="sec-title">The Best of <span>Both Worlds</span></h2>
               </div>
               <div className="about-body sr" data-sr-delay="0.12s">
                 <p>
-                  Finding the right entertainment for a corporate event in the NY, NJ, or CT area is entirely different from booking a nightclub or a wedding. 
-                  You need absolute professionalism, perfect volume control for networking, and talent who genuinely understands the flow of an executive "run of show."
+                  Why choose between a live band and a DJ when you can have both? The Piano & DJ duo is the perfect option for luxury events that want to start with elegance and end with a massive dance party.
                 </p>
                 <p>
-                  <strong>No cheesy gimmicks, no inappropriate playlists.</strong> Whether you book DJ DX individually or the high-energy live DJ/Producer duo Soul Shades, expect seamless, sophisticated music curation that matches the prestige of your brand. We specialize in curating the perfect vibe—from tasteful background music during dinner & cocktails to packed dance floors to close out the night.
+                  <strong>Seamless flow from cocktails to the dance floor.</strong> Imagine your guests arriving to gorgeous, soulful live piano versions of classic R&B, jazz, and modern hits during cocktail hour. Then, as dinner transitions into the reception, the heavy bass and dynamic drums of the DJ setup take over seamlessly. In between, experience jaw-dropping live piano solos played directly over deep house and top 40 anthems.
                 </p>
                 <p>
-                  With over 20 years of experience, TEDx features, and countless high-end performances across the NYC/NJ/CT tri-state area, DJ DX and Soul Shades represent the trusted choice for discerning corporate event planners.
+                  This hybrid approach gives you the organic, emotional feel of live instrumentation combined with the limitless song choices, heavy bass, and perfect mixing of a professional nightclub DJ.
                 </p>
               </div>
             </div>
@@ -126,14 +119,14 @@ export default function Corporate() {
             <div className="about-aside">
               <div className="stat-row sr" data-sr-delay="0.05s">
                 <div className="stat-meta">
-                  <div className="stat-label" style={{ color: 'var(--gold)' }}>Clean Corporate Playlists</div>
-                  <div className="stat-sub">Radio-edited, HR-approved music that keeps the dance floor packed while staying appropriate for the workplace.</div>
+                  <div className="stat-label" style={{ color: 'var(--gold)' }}>Elegant Ceremonies & Cocktails</div>
+                  <div className="stat-sub">Beautiful live piano renditions of your favorite songs for walking down the aisle, first dances, or sophisticated networking hours.</div>
                 </div>
               </div>
               <div className="stat-row sr" data-sr-delay="0.15s">
                 <div className="stat-meta">
-                  <div className="stat-label" style={{ color: 'var(--gold)' }}>MC Duties & Announcements</div>
-                  <div className="stat-sub">Need someone to announce awards or introduce the CEO? We handle all MC duties with a clear, professional voice.</div>
+                  <div className="stat-label" style={{ color: 'var(--gold)' }}>High-Energy "Live" Dance Floors</div>
+                  <div className="stat-sub">Live piano solos layered on top of bumping house music and club edits that look and sound incredible to your guests.</div>
                 </div>
               </div>
               <div className="stat-row sr" data-sr-delay="0.25s">
@@ -159,7 +152,7 @@ export default function Corporate() {
                 Secure Your Date<br />in the <span>Tri-State</span>
               </h2>
               <p className="booking-blurb">
-                Whether you're planning a massive product launch in Manhattan, an executive retreat in Connecticut, or a holiday gala in New Jersey, fill out the form and I will respond within 24–48 hours to discuss availability, packages, and pricing.
+                Because this requires coordination between two elite musicians, dates for the Piano and DJ duo book up 6–12 months in advance. Fill out the form below to confirm availability and discuss packages for your NYC, NJ, or CT event.
               </p>
             </div>
 

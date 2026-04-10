@@ -157,6 +157,52 @@ export default function EPK() {
         <meta name="twitter:title" content="DJ DX — Electronic Press Kit" />
         <meta name="twitter:description" content="Official EPK for DJ DX — TED-featured DJ, producer, and recording artist. 25+ years, 500+ events." />
         <meta name="twitter:image" content="https://djdxmusic.com/epk-hero.jpg" />
+        <script type="application/ld+json">
+          {`[
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfilePage",
+              "name": "DJ DX — Electronic Press Kit",
+              "url": "https://djdxmusic.com/epk",
+              "description": "Official press kit for DJ DX — New York/New Jersey DJ, producer, and recording artist with 25+ years of experience and 500+ events performed.",
+              "mainEntity": {
+                "@type": ["Person", "MusicGroup"],
+                "name": "DJ DX",
+                "url": "https://djdxmusic.com/",
+                "image": "https://djdxmusic.com/epk-hero.jpg",
+                "description": "DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with over 25 years behind the decks. TED-featured artist with 500+ events performed and 100+ original productions on Spotify and Apple Music.",
+                "jobTitle": "DJ, Producer, and Recording Artist",
+                "knowsAbout": ["DJing", "Music Production", "R&B", "Hip-Hop", "Afrobeats", "House Music", "Jersey Club", "Live Performance"],
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "New York",
+                  "addressRegion": "NY",
+                  "addressCountry": "US"
+                },
+                "sameAs": [
+                  "https://djdxmusic.com/",
+                  "https://instagram.com/djdx",
+                  "https://www.youtube.com/c/djdxmusic",
+                  "https://facebook.com/djdxmusic",
+                  "https://twitter.com/djdxmusic",
+                  "https://open.spotify.com/artist/4gGFdpDwEe8zIY1XSE3dGe",
+                  "https://www.tiktok.com/@djdxmusic",
+                  "https://www.wikidata.org/wiki/Q110672065",
+                  "https://musicbrainz.org/artist/e18da2c6-dbad-4c6b-9bfd-a77e0ef77d5f",
+                  "https://www.ted.com/talks/dj_dx_finally_moving"
+                ]
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
+                {"@type": "ListItem", "position": 2, "name": "Electronic Press Kit", "item": "https://djdxmusic.com/epk"}
+              ]
+            }
+          ]`}
+        </script>
       </Helmet>
 
       {/* ── NAV ── */}

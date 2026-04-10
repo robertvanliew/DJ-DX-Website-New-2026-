@@ -1,5 +1,5 @@
 # robots.txt — djdxmusic.com
-# Updated: 2026-03-31
+# Updated: 2026-04-10
 
 # ── Allow all crawlers ───────────────────────────────────────────────────────
 User-agent: *
@@ -49,6 +49,29 @@ Allow: /
 
 User-agent: anthropic-ai
 Allow: /
+
+# Google Gemini + AI Overviews
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Yandex (international traffic — Russia/Eastern Europe)
+User-agent: Yandex
+Allow: /
+Disallow: /api/
+
+# Block Common Crawl training scraper (prevents AI training without citation)
+User-agent: CCBot
+Disallow: /
 
 # ── Sitemap ──────────────────────────────────────────────────────────────────
 Sitemap: https://djdxmusic.com/sitemap.xml

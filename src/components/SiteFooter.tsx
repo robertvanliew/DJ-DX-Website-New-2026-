@@ -25,7 +25,13 @@ export default function SiteFooter({ email = 'djdxbusiness@gmail.com', bookLabel
 
           <div className="footer-nav-col">
             <span className="footer-nav-heading">Services</span>
-            <Link to="/corporate-event-dj-nyc-nj-ct" className="footer-nav-link">Corporate Event DJ (NYC, NJ, CT)</Link>
+            <Link to="/corporate-event-dj-nyc-nj-ct" className="footer-nav-link">Corporate Event DJ NYC</Link>
+            <Link to="/violin-dj-duo-nyc-nj" className="footer-nav-link">Violin + DJ Duo NYC</Link>
+            <Link to="/piano-dj-duo-nyc-nj" className="footer-nav-link">Piano + DJ Duo NYC</Link>
+            <Link to="/hamptons-luxury-dj" className="footer-nav-link">The Hamptons Luxury DJ</Link>
+            <Link to="/destination-wedding-dj" className="footer-nav-link">Destination Wedding DJ</Link>
+            <Link to="/wedding-dj-nyc-nj" className="footer-nav-link">Wedding DJ NYC & NJ</Link>
+            <Link to="/afrobeats-amapiano-dj-nyc-nj" className="footer-nav-link">Afrobeats DJ NYC & NJ</Link>
           </div>
 
           <div className="footer-nav-col">
