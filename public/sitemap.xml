@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — djdxmusic.com
+  Updated: 2026-04-10
+
+  NOTES:
+  - <changefreq> and <priority> are kept for non-Google crawlers (Bing, Yandex).
+    Google has officially stated it ignores both fields; they have zero ranking impact.
+  - Fragment URLs (e.g. /#videos) are INVALID in sitemaps per the sitemap protocol.
+    Google strips hash fragments entirely. The /#videos URL has been removed.
+  - Video entries have been moved to the homepage URL (canonical page where
+    the videos are embedded). Ideally these should live in a separate
+    sitemap-videos.xml — do so if the video count grows beyond 10.
+  - All URLs are HTTPS and canonical (no trailing slash variants).
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
@@ -24,6 +38,42 @@
       <image:title>DJ DX — Professional DJ and Music Producer Press Photo</image:title>
       <image:caption>DJ DX — TED-featured DJ, Producer &amp; Recording Artist based in New York and New Jersey</image:caption>
     </image:image>
+    <!-- Video entries live here (canonical page) rather than on the removed /#videos fragment -->
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/sqIUE0M54VE/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>DJ DX - So Simple (Official Video)</video:title>
+      <video:description>Official music video for "So Simple" by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/sqIUE0M54VE</video:player_loc>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/aG1KR7wPTBk/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Finally Moving | DJ DX | TEDxYouth@RVA</video:title>
+      <video:description>DJ DX performs "Finally Moving" at TEDxYouth@RVA 2022 — live performance by New York/New Jersey DJ and recording artist DJ DX.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/aG1KR7wPTBk</video:player_loc>
+      <video:publication_date>2022-11-01T00:00:00+00:00</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/00V8Q92N5Ig/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>DJ DX - Shining Stars ft. DJ Madden (Official Video)</video:title>
+      <video:description>Official music video for "Shining Stars" featuring DJ Madden by DJ DX.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/00V8Q92N5Ig</video:player_loc>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/ut5ukF-SL60/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>DJ DX - Many Dreams ft. DJ Madden (Official Music Video)</video:title>
+      <video:description>Official music video for "Many Dreams" featuring DJ Madden by DJ DX.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ut5ukF-SL60</video:player_loc>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/bdNVGEpmTuc/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>DJ DX - Run Bro ft. Nadia Gold (Official Video)</video:title>
+      <video:description>Official music video for "Run Bro" featuring Nadia Gold by DJ DX.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/bdNVGEpmTuc</video:player_loc>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
+    </video:video>
   </url>
 
   <!-- ── Music Store ───────────────────────────────────────────────────────── -->
@@ -34,7 +84,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- ── EPK page ───────────────────────────────────────────────────────────── -->
+  <!-- ── EPK ───────────────────────────────────────────────────────────────── -->
   <url>
     <loc>https://djdxmusic.com/epk</loc>
     <lastmod>2026-04-10</lastmod>
@@ -47,7 +97,7 @@
     </image:image>
   </url>
 
-  <!-- ── Soul Shades page ──────────────────────────────────────────────────── -->
+  <!-- ── Soul Shades ───────────────────────────────────────────────────────── -->
   <url>
     <loc>https://djdxmusic.com/soul-shades</loc>
     <lastmod>2026-04-10</lastmod>
@@ -60,7 +110,7 @@
     </image:image>
   </url>
 
-  <!-- ── Pricing page ─────────────────────────────────────────────────────── -->
+  <!-- ── Pricing ───────────────────────────────────────────────────────────── -->
   <url>
     <loc>https://djdxmusic.com/pricing</loc>
     <lastmod>2026-04-10</lastmod>
@@ -99,6 +149,11 @@
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/piano-dj-hero.jpg</image:loc>
+      <image:title>Live Piano and DJ Duo New York City — DJ DX</image:title>
+      <image:caption>Premium live piano and DJ duo for luxury weddings and corporate galas in NYC, NJ, and CT</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -106,6 +161,11 @@
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/hero-1.jpg</image:loc>
+      <image:title>Luxury DJ in The Hamptons New York — DJ DX</image:title>
+      <image:caption>DJ DX — Exclusive DJ for private estates, summer galas, and luxury events from Southampton to Montauk</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -113,6 +173,11 @@
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/destination-hero.jpg</image:loc>
+      <image:title>Destination Wedding DJ — International Luxury Events | DJ DX</image:title>
+      <image:caption>DJ DX — Internationally available destination wedding DJ based in New York City</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -137,49 +202,6 @@
       <image:title>Afrobeats DJ New York City — DJ DX</image:title>
       <image:caption>DJ DX — Afrobeats, Amapiano, Dancehall, and Soca DJ serving NYC and NJ</image:caption>
     </image:image>
-  </url>
-
-  <!-- ── Videos section ────────────────────────────────────────────────────── -->
-  <url>
-    <loc>https://djdxmusic.com/#videos</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <video:video>
-      <video:thumbnail_loc>https://i.ytimg.com/vi/sqIUE0M54VE/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX - So Simple (Official Video)</video:title>
-      <video:description>Official music video for "So Simple" by DJ DX — New York/New Jersey DJ, producer, and recording artist.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/sqIUE0M54VE</video:player_loc>
-      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
-    </video:video>
-    <video:video>
-      <video:thumbnail_loc>https://i.ytimg.com/vi/aG1KR7wPTBk/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>Finally Moving | DJ DX | TEDxYouth@RVA</video:title>
-      <video:description>DJ DX performs "Finally Moving" at TEDxYouth@RVA 2022 — live performance by New York/New Jersey DJ and recording artist DJ DX.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/aG1KR7wPTBk</video:player_loc>
-      <video:publication_date>2022-11-01T00:00:00+00:00</video:publication_date>
-    </video:video>
-    <video:video>
-      <video:thumbnail_loc>https://i.ytimg.com/vi/00V8Q92N5Ig/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX - Shining Stars ft. DJ Madden (Official Video)</video:title>
-      <video:description>Official music video for "Shining Stars" featuring DJ Madden by DJ DX.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/00V8Q92N5Ig</video:player_loc>
-      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
-    </video:video>
-    <video:video>
-      <video:thumbnail_loc>https://i.ytimg.com/vi/ut5ukF-SL60/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX - Many Dreams ft. DJ Madden (Official Music Video)</video:title>
-      <video:description>Official music video for "Many Dreams" featuring DJ Madden by DJ DX.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/ut5ukF-SL60</video:player_loc>
-      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
-    </video:video>
-    <video:video>
-      <video:thumbnail_loc>https://i.ytimg.com/vi/bdNVGEpmTuc/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>DJ DX - Run Bro ft. Nadia Gold (Official Video)</video:title>
-      <video:description>Official music video for "Run Bro" featuring Nadia Gold by DJ DX.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/bdNVGEpmTuc</video:player_loc>
-      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
-    </video:video>
   </url>
 
   <!-- ── Legal pages ───────────────────────────────────────────────────────── -->

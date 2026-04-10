@@ -16,6 +16,16 @@ export default function Hamptons() {
         <title>Luxury DJ in The Hamptons | Private Estates & Summer Events | DJ DX</title>
         <meta name="description" content="Looking for an exclusive DJ for your Hamptons estate party, summer event, or luxury wedding? DJ DX provides premium entertainment from Southampton to Montauk." />
         <link rel="canonical" href="https://djdxmusic.com/hamptons-luxury-dj" />
+        <meta property="og:title" content="Luxury DJ in The Hamptons — DJ DX" />
+        <meta property="og:description" content="Exclusive DJ services for Hamptons estate parties, private summer galas, and luxury events from Southampton to Montauk. DJ DX — the NYC standard, delivered in the Hamptons." />
+        <meta property="og:url" content="https://djdxmusic.com/hamptons-luxury-dj" />
+        <meta property="og:image" content="https://djdxmusic.com/hero-1.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Luxury DJ in The Hamptons — DJ DX" />
+        <meta name="twitter:description" content="Exclusive DJ services for Hamptons estate parties, private summer galas, and luxury events from Southampton to Montauk." />
+        <meta name="twitter:image" content="https://djdxmusic.com/hero-1.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -71,7 +81,7 @@ export default function Hamptons() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/hero-1.jpg" alt="Luxury DJ in the Hamptons" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/hero-1.jpg" alt="Luxury DJ in the Hamptons New York — DJ DX private estate party performance" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

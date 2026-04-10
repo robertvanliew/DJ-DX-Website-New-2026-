@@ -19,6 +19,12 @@ export default function AfrobeatsDJ() {
         <meta property="og:description" content="Professional Afrobeats DJ in New York and New Jersey specializing in Amapiano, Afropop, Dancehall, and Soca. Book DJ DX for your wedding, cultural celebration, or private party." />
         <meta property="og:url" content="https://djdxmusic.com/afrobeats-amapiano-dj-nyc-nj" />
         <meta property="og:image" content="https://djdxmusic.com/epk-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Afrobeats DJ NYC & NJ — DJ DX" />
+        <meta name="twitter:description" content="Professional Afrobeats DJ in New York and New Jersey specializing in Amapiano, Afropop, Dancehall, and Soca. Book DJ DX for your next event." />
+        <meta name="twitter:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -127,7 +133,7 @@ export default function AfrobeatsDJ() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/latest-corporate-hero.jpg" alt="Afrobeats and Amapiano DJ New York City" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
+          <img src="/epk-hero.jpg" alt="Afrobeats and Amapiano DJ New York — DJ DX live performance" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

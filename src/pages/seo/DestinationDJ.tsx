@@ -16,6 +16,16 @@ export default function DestinationDJ() {
         <title>Destination Wedding DJ | International Luxury Events | DJ DX</title>
         <meta name="description" content="Looking for a Destination Wedding DJ? DJ DX brings the premium, high-energy NYC nightclub standard to luxury weddings and international events worldwide." />
         <link rel="canonical" href="https://djdxmusic.com/destination-wedding-dj" />
+        <meta property="og:title" content="Destination Wedding DJ — International Luxury Events | DJ DX" />
+        <meta property="og:description" content="Bring NYC's premier DJ to your destination wedding. DJ DX travels internationally for luxury weddings in Italy, Mexico, the Caribbean, Europe, and beyond." />
+        <meta property="og:url" content="https://djdxmusic.com/destination-wedding-dj" />
+        <meta property="og:image" content="https://djdxmusic.com/destination-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Destination Wedding DJ — DJ DX" />
+        <meta name="twitter:description" content="Bring NYC's premier DJ to your destination wedding. DJ DX travels internationally for luxury weddings in Italy, Mexico, the Caribbean, and beyond." />
+        <meta name="twitter:image" content="https://djdxmusic.com/destination-hero.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -78,7 +88,7 @@ export default function DestinationDJ() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/destination-hero.jpg" alt="Destination Wedding DJ flying from NYC" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/destination-hero.jpg" alt="Destination Wedding DJ from New York City — DJ DX performing at international luxury wedding" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

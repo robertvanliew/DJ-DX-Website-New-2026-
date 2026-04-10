@@ -16,6 +16,16 @@ export default function Corporate() {
         <title>Corporate Event DJ NYC, NJ, CT | Luxury & Brand Activations | DJ DX</title>
         <meta name="description" content="Looking for a professional corporate event DJ in NYC, NJ, or CT? DJ DX provides premium, brand-safe entertainment for corporate galas, holiday parties, and luxury activations." />
         <link rel="canonical" href="https://djdxmusic.com/corporate-event-dj-nyc-nj-ct" />
+        <meta property="og:title" content="Corporate Event DJ NYC, NJ, CT — DJ DX" />
+        <meta property="og:description" content="Professional corporate event DJ for Fortune 500 galas, holiday parties, and luxury brand activations. DJ DX — NYC's premium corporate entertainment. TED-featured, 500+ events." />
+        <meta property="og:url" content="https://djdxmusic.com/corporate-event-dj-nyc-nj-ct" />
+        <meta property="og:image" content="https://djdxmusic.com/latest-corporate-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Corporate Event DJ NYC, NJ, CT — DJ DX" />
+        <meta name="twitter:description" content="Professional corporate event DJ for Fortune 500 galas, holiday parties, and luxury brand activations in NYC and the tri-state area." />
+        <meta name="twitter:image" content="https://djdxmusic.com/latest-corporate-hero.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -74,7 +84,7 @@ export default function Corporate() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/latest-corporate-hero.jpg" alt="Corporate Event DJ New York City" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/latest-corporate-hero.jpg" alt="Corporate Event DJ New York City — DJ DX performing at gala" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

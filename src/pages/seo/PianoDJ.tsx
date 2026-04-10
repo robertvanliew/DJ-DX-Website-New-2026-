@@ -16,6 +16,16 @@ export default function PianoDJ() {
         <title>Piano & DJ Duo NYC | Luxury Live Entertainment | DJ DX</title>
         <meta name="description" content="Looking for a Piano and DJ Duo for your NYC, NJ, or CT event? DJ DX provides a premium live keys and DJ experience for luxury weddings and corporate galas." />
         <link rel="canonical" href="https://djdxmusic.com/piano-dj-duo-nyc-nj" />
+        <meta property="og:title" content="Piano & DJ Duo NYC — DJ DX" />
+        <meta property="og:description" content="Live piano and DJ duo for luxury weddings and corporate galas in NYC, NJ, and CT. The ultimate hybrid of live keys and club DJ energy." />
+        <meta property="og:url" content="https://djdxmusic.com/piano-dj-duo-nyc-nj" />
+        <meta property="og:image" content="https://djdxmusic.com/piano-dj-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Piano & DJ Duo NYC — DJ DX" />
+        <meta name="twitter:description" content="Live piano and DJ duo for luxury weddings and corporate galas in NYC, NJ, and CT. The ultimate hybrid of live keys and club DJ energy." />
+        <meta name="twitter:image" content="https://djdxmusic.com/piano-dj-hero.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -68,7 +78,7 @@ export default function PianoDJ() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/piano-dj-hero.jpg" alt="Piano and DJ Duo New York City" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/piano-dj-hero.jpg" alt="Live Piano and DJ Duo New York City — DJ DX luxury event entertainment" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

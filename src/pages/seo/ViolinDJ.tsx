@@ -16,6 +16,16 @@ export default function ViolinDJ() {
         <title>Violin and DJ Duo NYC & NJ | Soul Shades Entertainment</title>
         <meta name="description" content="Looking for a live Violin and DJ duo? Soul Shades provides premium live strings and DJ entertainment for luxury weddings, corporate events, and parties in NYC, NJ, and CT." />
         <link rel="canonical" href="https://djdxmusic.com/violin-dj-duo-nyc-nj" />
+        <meta property="og:title" content="Violin and DJ Duo NYC & NJ — Soul Shades" />
+        <meta property="og:description" content="Live violin over DJ sets — Soul Shades is NYC's premier violin and DJ duo for luxury weddings and corporate events. Featuring DJ DX and Julie Schatz." />
+        <meta property="og:url" content="https://djdxmusic.com/violin-dj-duo-nyc-nj" />
+        <meta property="og:image" content="https://djdxmusic.com/violin-dj-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Violin and DJ Duo NYC & NJ — Soul Shades" />
+        <meta name="twitter:description" content="Live violin over DJ sets — Soul Shades is NYC's premier violin and DJ duo for luxury weddings and corporate events." />
+        <meta name="twitter:image" content="https://djdxmusic.com/violin-dj-hero.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -74,7 +84,7 @@ export default function ViolinDJ() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/violin-dj-hero.jpg" alt="Violin and DJ Duo New York City" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/violin-dj-hero.jpg" alt="Live Violin and DJ Duo New York City — Soul Shades featuring DJ DX" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

@@ -17,6 +17,12 @@ export default function WeddingDJ() {
         <meta property="og:description" content="Professional wedding DJ in New York and New Jersey specializing in R&B, Hip-Hop, Afrobeats, and Old School. Book DJ DX for your wedding reception, cocktail hour, and after-party." />
         <meta property="og:url" content="https://djdxmusic.com/wedding-dj-nyc-nj" />
         <meta property="og:image" content="https://djdxmusic.com/epk-hero.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@djdxmusic" />
+        <meta name="twitter:title" content="Wedding DJ NYC & NJ — DJ DX" />
+        <meta name="twitter:description" content="Professional wedding DJ in New York and New Jersey specializing in R&B, Hip-Hop, Afrobeats, and Old School. TED-featured, 500+ events." />
+        <meta name="twitter:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <script type="application/ld+json">
           {`[
             {
@@ -126,7 +132,7 @@ export default function WeddingDJ() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '65vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/epk-hero.jpg" alt="Wedding DJ New York City — DJ DX" loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <img src="/epk-hero.jpg" alt="Professional Wedding DJ in New York City — DJ DX performing at reception" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', filter: 'contrast(1.05) saturate(1.1)' }} />
         </div>
         <div className="epk-hero-overlay" style={{
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
