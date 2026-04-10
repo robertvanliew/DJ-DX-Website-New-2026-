@@ -107,9 +107,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       )
       .join('')
 
-    await resend.emails.send({
-      from: process.env.FROM_EMAIL || 'DJ DX <noreply@djdxmusic.com>',
-      to: customerEmail,
+    const fromEmail = process.env.FROM_EMAIL || 'DJ DX <noreply@djdxmusic.com>';
+    console.log(`Attempting to send email from="${fromEmail}" to="${customerEmailRaw}" tracks=${trackIds.join(',')}`);
+
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: customerEmailRaw,
       subject: `Your DJ DX download is ready 🎵`,
       html: `
 <!DOCTYPE html>
@@ -164,7 +167,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `,
     })
 
-    console.log(`Email sent to ${customerEmail} for tracks: ${trackIds.join(', ')}`)
+    if (error) {
+      console.error(`Resend API error:`, JSON.stringify(error));
+      return res.status(500).json({ error: 'Failed to send email', details: error });
+    }
+
+    console.log(`Email delivered successfully id=${data?.id} to=${customerEmailRaw} tracks=${trackIds.join(', ')}`)
     return res.status(200).json({ success: true })
   } catch (error) {
     console.error('Webhook handler error:', error)
