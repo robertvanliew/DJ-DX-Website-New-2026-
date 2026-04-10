@@ -74,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const trackIds = trackIdsStr.split(',').map(t => t.trim())
-  const r2FileNames = r2FileNamesStr.split(',').map(t => t.trim())
+  const r2FileNames = r2FileNamesStr.split('||').map(t => t.trim())
   const trackTitles = trackTitlesStr ? trackTitlesStr.split('||').map(t => t.trim()) : []
 
   if (trackIds.length === 0 || r2FileNames.length === 0 || trackIds.length !== r2FileNames.length) {

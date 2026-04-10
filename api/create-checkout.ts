@@ -41,14 +41,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Store r2FileNames array or strings in metadata. Metadata values are max 500 chars.
     let r2FileNamesString = '';
     if (r2FileNames && Array.isArray(r2FileNames)) {
-      r2FileNamesString = r2FileNames.join(',');
+      r2FileNamesString = r2FileNames.join('||');
       // Strip out any characters over 500 if we hit the limit, though ideally it should fit.
       if (r2FileNamesString.length > 500) {
         console.warn('r2FileNames exceeded 500 characters in metadata');
         r2FileNamesString = r2FileNamesString.substring(0, 500);
       }
     } else {
-      r2FileNamesString = trackIds.map((id: string) => `${id}.mp3`).join(',');
+      r2FileNamesString = trackIds.map((id: string) => `${id}.mp3`).join('||');
     }
 
     const session = await stripe.checkout.sessions.create({
