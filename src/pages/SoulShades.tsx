@@ -160,6 +160,43 @@ export default function SoulShades() {
         <meta name="twitter:title" content="Soul Shades — New York Duo | DJ DX & Julie Schatz" />
         <meta name="twitter:description" content="Soul Shades is a New York-based duo blending deep house, jazz, Afro house, R&B, and hip-hop. 4.5M TikTok views." />
         <meta name="twitter:image" content="https://djdxmusic.com/ss-hero.jpg" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": ["MusicGroup", "EntertainmentBusiness"],
+              "name": "Soul Shades",
+              "url": "https://djdxmusic.com/soul-shades",
+              "description": "Soul Shades is a New York-based duo formed by DJ DX and vocalist/instrumentalist Julie Schatz. Blends deep house, jazz, Afro house, and R&B.",
+              "image": "https://djdxmusic.com/ss-hero.jpg",
+              "member": [
+                {
+                  "@type": "Person",
+                  "name": "DJ DX"
+                },
+                {
+                  "@type": "Person",
+                  "name": "Julie Schatz"
+                }
+              ],
+              "genre": ["Deep House", "Jazz", "Afro House", "R&B", "Hip-Hop"],
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "New York",
+                "addressRegion": "NY",
+                "addressCountry": "US"
+              },
+              "areaServed": ["New York", "New Jersey", "Tri-State Area"],
+              "sameAs": [
+                "https://www.instagram.com/soulshadesmusic/",
+                "https://open.spotify.com/artist/2GES5fSFNcx25lv9RFcQjP",
+                "https://music.apple.com/us/artist/soul-shades/1783698611",
+                "https://www.youtube.com/@soulshadesmusic",
+                "https://soundcloud.com/soulshadesmusic"
+              ]
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* ── NAV ── */}

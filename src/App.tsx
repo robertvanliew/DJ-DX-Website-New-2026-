@@ -490,6 +490,31 @@ function App() {
         <meta name="description" content="DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with 20+ years of experience. Featured on TED, TEDxYouth@RVA, Disrupt Magazine, and NJ.com. Book for weddings, corporate events, clubs, and private parties." />
         <link rel="canonical" href="https://djdxmusic.com/" />
         <meta property="og:url" content="https://djdxmusic.com/" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": ["MusicGroup", "EntertainmentBusiness"],
+              "name": "DJ DX",
+              "url": "https://djdxmusic.com/",
+              "description": "DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with 20+ years of experience. Featured on TED.",
+              "image": "https://djdxmusic.com/epk-hero.jpg",
+              "genre": ["R&B", "Hip-Hop", "Afrobeats", "House", "Jersey Club", "Reggaeton"],
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "New York",
+                "addressRegion": "NY",
+                "addressCountry": "US"
+              },
+              "areaServed": ["New York", "New Jersey", "Tri-State Area"],
+              "sameAs": [
+                "https://instagram.com/djdx",
+                "https://www.youtube.com/c/djdxmusic",
+                "https://facebook.com/djdxmusic"
+              ]
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* ── NAV ── */}
