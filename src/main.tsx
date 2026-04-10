@@ -18,6 +18,7 @@ const Refunds    = lazy(() => import('./pages/Refunds.tsx'))
 const SoulShades = lazy(() => import('./pages/SoulShades.tsx'))
 const Music      = lazy(() => import('./pages/Music.tsx'))
 const Pricing    = lazy(() => import('./pages/Pricing.tsx'))
+const Corporate  = lazy(() => import('./pages/seo/Corporate.tsx'))
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -58,6 +59,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/soul-shades" element={<SoulShades />} />
             <Route path="/music"      element={<Music />} />
             <Route path="/pricing"    element={<Pricing />} />
+            <Route path="/corporate-event-dj-nyc-nj-ct" element={<Corporate />} />
           </Routes>
         </Suspense>
         </PlayerProvider>

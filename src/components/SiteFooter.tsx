@@ -24,6 +24,11 @@ export default function SiteFooter({ email = 'djdxbusiness@gmail.com', bookLabel
           </div>
 
           <div className="footer-nav-col">
+            <span className="footer-nav-heading">Services</span>
+            <Link to="/corporate-event-dj-nyc-nj-ct" className="footer-nav-link">Corporate Event DJ (NYC, NJ, CT)</Link>
+          </div>
+
+          <div className="footer-nav-col">
             <span className="footer-nav-heading">Connect</span>
             <a href="https://Instagram.com/djdx" target="_blank" rel="noopener noreferrer" className="footer-nav-link">Instagram</a>
             <a href="https://www.tiktok.com/@djdxmusic" target="_blank" rel="noopener noreferrer" className="footer-nav-link">TikTok</a>
