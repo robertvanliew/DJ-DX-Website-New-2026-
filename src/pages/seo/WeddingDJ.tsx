@@ -182,7 +182,7 @@ export default function WeddingDJ() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section style={{ background: 'var(--panel)', padding: '80px 40px' }}>
+      <section className="services">
         <div className="section-inner">
           <div className="sec-header center sr">
             <div className="sec-overline" style={{ justifyContent: 'center' }}>
@@ -190,7 +190,7 @@ export default function WeddingDJ() {
             </div>
             <h2 className="sec-title">Wedding DJ <span>Services</span></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginTop: '48px' }}>
+          <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', marginTop: '48px' }}>
             {[
               { title: 'Ceremony Music', desc: 'Processional, recessional, and prelude music curated to your style and vibe.' },
               { title: 'Cocktail Hour', desc: 'Smooth, soulful background music — jazz, R&B, and chill house to set the mood.' },
@@ -199,9 +199,9 @@ export default function WeddingDJ() {
               { title: 'Custom Playlists', desc: 'Every set is researched and built around your music preferences and guest profile.' },
               { title: 'Emcee Services', desc: 'Smooth introductions, toasts coordination, and seamless event flow management.' },
             ].map(s => (
-              <div key={s.title} className="service-cell sr" style={{ padding: '28px', borderRadius: '4px' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--gold)', marginBottom: '10px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{s.title}</h3>
-                <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.6)', lineHeight: 1.7 }}>{s.desc}</p>
+              <div key={s.title} className="service-cell sr">
+                <div className="service-name">{s.title}</div>
+                <p className="service-desc">{s.desc}</p>
               </div>
             ))}
           </div>
