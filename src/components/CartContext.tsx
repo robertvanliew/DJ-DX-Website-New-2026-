@@ -83,6 +83,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           name: buyerName,
           trackIds: cart.map(t => t.id.toString()),
           r2FileNames: cart.map(t => t.r2FileName || `${t.id}.mp3`),
+          trackTitles: cart.map(t => t.title),
         }),
       });
       const data = await res.json() as { sessionId?: string; checkoutUrl?: string; error?: string };

@@ -65,6 +65,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const customerEmailRaw = session.metadata?.customerEmail || session.customer_details?.email
   const customerNameRaw = session.metadata?.customerName || session.customer_details?.name || 'Music Fan'
   const r2FileNamesStr = session.metadata?.r2FileNames
+  const trackTitlesStr = session.metadata?.trackTitles
 
   if (!trackIdsStr || !customerEmailRaw || !r2FileNamesStr) {
     console.error('Missing necessary metadata on session', session.id)
@@ -73,6 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const trackIds = trackIdsStr.split(',').map(t => t.trim())
   const r2FileNames = r2FileNamesStr.split(',').map(t => t.trim())
+  const trackTitles = trackTitlesStr ? trackTitlesStr.split('||').map(t => t.trim()) : []
 
   if (trackIds.length === 0 || r2FileNames.length === 0 || trackIds.length !== r2FileNames.length) {
     console.error('Invalid track or file names array', session.id)
@@ -85,22 +87,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // Generate a signed R2 URL for each track (24-hour expiry)
+    console.log(`Generating R2 signed URLs for bucket="${BUCKET}" files=[${r2FileNames.join(', ')}]`);
     const downloadLinks = await Promise.all(
       r2FileNames.map(async (fileName, index) => {
-        const trackId = trackIds[index];
+        const title = trackTitles[index] || formatTrackName(trackIds[index]);
         const command = new GetObjectCommand({ Bucket: BUCKET, Key: fileName })
         const url = await getSignedUrl(r2, command, { expiresIn: EXPIRY_SECONDS })
-        return { trackId, url }
+        return { title, url }
       })
     )
 
     // Build email HTML
     const linksHtml = downloadLinks
       .map(
-        ({ trackId, url }) =>
+        ({ title, url }) =>
           `<li style="margin-bottom:12px;">
             <a href="${url}" style="color:#C9A84C;font-weight:600;text-decoration:none;">
-              ⬇ ${formatTrackName(trackId)}
+              ⬇ ${escapeHtml(title)}
             </a>
             <span style="color:#888;font-size:12px;"> (expires in 24 hours)</span>
           </li>`

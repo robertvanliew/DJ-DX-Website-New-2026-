@@ -10,12 +10,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { amount, email, name, trackIds, r2FileNames } = req.body as {
+  const { amount, email, name, trackIds, r2FileNames, trackTitles } = req.body as {
     amount: number
     email: string
     name: string
     trackIds: string[]
     r2FileNames?: string[]
+    trackTitles?: string[]
   }
 
   if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -73,6 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         customerEmail: email,
         customerName: name || '',
         r2FileNames: r2FileNamesString,
+        trackTitles: (trackTitles || []).join('||').substring(0, 500),
       },
     });
 
