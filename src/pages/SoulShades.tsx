@@ -256,7 +256,7 @@ export default function SoulShades() {
                   <div className="ss-member-dot" />
                   <div>
                     <div className="ss-member-name">Julie Schatz</div>
-                    <div className="ss-member-role">Vocalist · Multi-Instrumentalist</div>
+                    <div className="ss-member-role">Vocalist · Multi-Instrumentalist · Producer</div>
                   </div>
                 </div>
                 <div className="ss-member">
