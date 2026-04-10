@@ -57,7 +57,11 @@
 
 /* ─── RESET ────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { color-scheme: dark; }
+html {
+  color-scheme: dark;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -69,7 +73,8 @@ body {
   min-height: 100vh;
   font-family: 'Barlow Condensed', sans-serif;
   color: var(--white);
-  overflow-x: clip; /* clip prevents horizontal scroll without affecting fixed/sticky children */
+  overflow-x: clip;
+  overscroll-behavior-x: none;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -5887,6 +5892,25 @@ section { padding: 120px 40px; }
 .ss-footer-back { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.2s; }
 .ss-footer-back:hover { color: var(--gold2); }
 
+/* ── Soul Shades: MusicStore inside ss-page fixes ── */
+/* The catalog section has its own padding + section-inner max-width.
+   Inside ss-page, ss-main already handles horizontal padding,
+   so we strip the double-padding and let the store fill full width. */
+.ss-page .catalog {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent;
+}
+.ss-page .catalog .section-inner {
+  max-width: 100%;
+  padding: 0;
+}
+.ss-page .sec-header {
+  margin-bottom: 40px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .ss-bio-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -5913,6 +5937,13 @@ section { padding: 120px 40px; }
   .ss-release-art { width: 56px; height: 56px; }
   .ss-release-actions { display: flex; }
   .ss-footer-inner { flex-direction: column; text-align: center; }
+
+  /* MusicStore inside ss-page: rows use full width, no double-padding */
+  .ss-page .bb-header,
+  .ss-page .bb-row {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* ── Video Slider ── */
@@ -6771,13 +6802,15 @@ body { padding-bottom: env(safe-area-inset-bottom); }
   .video-play-btn svg { width: 22px; height: 22px; }
 
   /* Billboard: drop tag column, keep share+buy in auto column */
-  .bb-header,
+  .bb-header { display: none !important; }
+  .billboard-wrap { gap: 8px; }
   .bb-row {
     grid-template-columns: 44px 1fr auto;
     padding: 14px 16px;
     gap: 10px;
   }
   .bb-col-tag { display: none; }
+  section.catalog { padding-bottom: 140px !important; }
 
   /* Discography page — hero/subnav handled by 768px block */
 
@@ -6792,9 +6825,7 @@ body { padding-bottom: env(safe-area-inset-bottom); }
   /* Hero counts — handled by 768px block */
 
   /* Billboard rows tighter */
-  .bb-header,
-  .bb-row { grid-template-columns: 44px 1fr auto; padding: 12px 12px; gap: 8px; }
-  .bb-row { padding: 16px 12px; }
+  .bb-row { grid-template-columns: 44px 1fr auto; padding: 16px 12px; gap: 8px; }
   .bb-play-circle { width: 28px; height: 28px; }
   .bb-track-title { font-size: 0.92rem; }
 
@@ -6823,7 +6854,6 @@ body { padding-bottom: env(safe-area-inset-bottom); }
 
 /* ── ≤400px: iPhone SE / smallest phones ── */
 @media (max-width: 400px) {
-  .bb-header,
   .bb-row { grid-template-columns: 44px 1fr auto; gap: 6px; padding: 12px 10px; }
   .bb-buy-btn { font-size: 10px; padding: 0 10px; }
 }
