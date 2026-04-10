@@ -2211,8 +2211,8 @@ section { padding: 120px 40px; }
 
 .footer-main {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 2fr 1fr 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
   padding-bottom: 64px;
 }
 
@@ -2347,6 +2347,9 @@ section { padding: 120px 40px; }
 }
 .footer-book-cta:hover { opacity: 1; }
 
+@media (max-width: 1100px) {
+  .footer-main { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+}
 @media (max-width: 900px) {
   .footer-main { grid-template-columns: 1fr 1fr; gap: 48px; }
   .footer-brand-col { grid-column: 1 / -1; }
