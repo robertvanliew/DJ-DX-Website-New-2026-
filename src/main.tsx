@@ -26,6 +26,14 @@ const DestinationDJ = lazy(() => import('./pages/seo/DestinationDJ.tsx'))
 const WeddingDJ  = lazy(() => import('./pages/seo/WeddingDJ.tsx'))
 const AfrobeatsDJ = lazy(() => import('./pages/seo/AfrobeatsDJ.tsx'))
 const RBHipHopDJ  = lazy(() => import('./pages/seo/RBHipHopDJ.tsx'))
+const DJForHireNYC = lazy(() => import('./pages/seo/DJForHireNYC.tsx'))
+const NewYearsEveDJ = lazy(() => import('./pages/seo/NewYearsEveDJ.tsx'))
+const PrivatePartyDJ = lazy(() => import('./pages/seo/PrivatePartyDJ.tsx'))
+const HipHopDJ    = lazy(() => import('./pages/seo/HipHopDJ.tsx'))
+const Sweet16DJ   = lazy(() => import('./pages/seo/Sweet16DJ.tsx'))
+const RooftopDJ   = lazy(() => import('./pages/seo/RooftopDJ.tsx'))
+const RnBDJ       = lazy(() => import('./pages/seo/RnBDJ.tsx'))
+const HouseJerseyClubDJ = lazy(() => import('./pages/seo/HouseJerseyClubDJ.tsx'))
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -74,6 +82,14 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/wedding-dj-nyc-nj" element={<WeddingDJ />} />
             <Route path="/afrobeats-amapiano-dj-nyc-nj" element={<AfrobeatsDJ />} />
             <Route path="/rb-hip-hop-dj-nyc-nj" element={<RBHipHopDJ />} />
+            <Route path="/dj-for-hire-nyc" element={<DJForHireNYC />} />
+            <Route path="/new-years-eve-dj-nyc" element={<NewYearsEveDJ />} />
+            <Route path="/private-party-dj-nyc-nj" element={<PrivatePartyDJ />} />
+            <Route path="/hip-hop-dj-nyc-nj" element={<HipHopDJ />} />
+            <Route path="/sweet-16-dj-nyc-nj" element={<Sweet16DJ />} />
+            <Route path="/rooftop-party-dj-nyc" element={<RooftopDJ />} />
+            <Route path="/rb-dj-nyc-nj" element={<RnBDJ />} />
+            <Route path="/house-jersey-club-dj-nyc-nj" element={<HouseJerseyClubDJ />} />
           </Routes>
         </Suspense>
         </PlayerProvider>

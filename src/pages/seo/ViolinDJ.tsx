@@ -69,6 +69,44 @@ export default function ViolinDJ() {
             },
             {
               "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What is a violin and DJ duo?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A violin and DJ duo combines live acoustic or electric violin performance with a professional DJ set. Soul Shades — featuring violinist Julie Schatz and DJ DX — layers live violin over DJ beats in real time, creating an experience that blends the sophistication of live music with the energy of a club DJ set. The result is something guests at luxury weddings and corporate events consistently describe as the highlight of the evening."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How much does a live violin and DJ duo cost in NYC?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Live violin and DJ duo pricing in New York City typically ranges from $3,500 to $10,000+ depending on event duration, venue, and performance scope. Soul Shades — DJ DX and violinist Julie Schatz — provides custom quotes for every inquiry. Contact djdxbusiness@gmail.com with your event date, venue, and estimated guest count for transparent pricing within 24–48 hours."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What events are violin and DJ duos best suited for?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Violin and DJ duos are ideal for luxury weddings, corporate galas, brand activations, rooftop events, and upscale private parties where hosts want entertainment that feels truly unique. Soul Shades is particularly popular for wedding cocktail hours (live violin ambiance) transitioning into a high-energy reception DJ set — all delivered by the same duo without any changeover."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Who are Soul Shades?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Soul Shades is a New York-based live violin and DJ duo consisting of violinist Julie Schatz and TED-featured DJ, producer, and recording artist DJ DX. Together they perform a seamless blend of live strings and DJ sets for luxury events across NYC, NJ, CT, and the Hamptons. Soul Shades has performed at 100+ luxury events and is available for destination bookings internationally."
+                  }
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
@@ -151,6 +189,28 @@ export default function ViolinDJ() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section style={{ padding: '80px 40px' }}>
+        <div className="section-inner" style={{ maxWidth: '760px' }}>
+          <div className="sec-header center sr">
+            <h2 className="sec-title">Violin &amp; DJ Duo <span>FAQ</span></h2>
+          </div>
+          <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {[
+              { q: 'What is a violin and DJ duo?', a: 'A violin and DJ duo combines live acoustic or electric violin performance with a professional DJ set. Soul Shades — featuring violinist Julie Schatz and DJ DX — layers live violin over DJ beats in real time, creating an experience that blends the sophistication of live music with the energy of a club DJ set. Guests at luxury weddings and corporate events consistently describe it as the highlight of the evening.' },
+              { q: 'How much does a live violin and DJ duo cost in NYC?', a: 'Live violin and DJ duo pricing in New York City typically ranges from $3,500 to $10,000+ depending on event duration, venue, and performance scope. Soul Shades provides custom quotes for every inquiry — contact djdxbusiness@gmail.com with your event date, venue, and guest count for transparent pricing within 24–48 hours.' },
+              { q: 'What events are violin and DJ duos best suited for?', a: 'Violin and DJ duos are ideal for luxury weddings, corporate galas, brand activations, rooftop events, and upscale private parties. Soul Shades is particularly popular for wedding cocktail hours (live violin ambiance) transitioning into a high-energy reception DJ set — all delivered by the same duo without any changeover.' },
+              { q: 'Who are Soul Shades?', a: 'Soul Shades is a New York-based live violin and DJ duo consisting of violinist Julie Schatz and TED-featured DJ, producer, and recording artist DJ DX. They perform a seamless blend of live strings and DJ sets for luxury events across NYC, NJ, CT, and the Hamptons. Available for destination bookings internationally.' },
+            ].map(({ q, a }) => (
+              <div key={q} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '20px' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '8px' }}>{q}</h3>
+                <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.58)', lineHeight: 1.7 }}>{a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

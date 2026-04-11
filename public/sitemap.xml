@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   sitemap.xml — djdxmusic.com
-  Updated: 2026-04-10
+  Updated: 2026-04-11
 
   NOTES:
   - <changefreq> and <priority> are kept for non-Google crawlers (Bing, Yandex).
@@ -201,6 +201,114 @@
       <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
       <image:title>Afrobeats DJ New York City — DJ DX</image:title>
       <image:caption>DJ DX — Afrobeats, Amapiano, Dancehall, and Soca DJ serving NYC and NJ</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/rb-hip-hop-dj-nyc-nj</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>R&amp;B and Hip-Hop DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — R&amp;B and Hip-Hop DJ for parties, weddings, and events in NYC and NJ</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/dj-for-hire-nyc</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>DJ for Hire New York City — DJ DX</image:title>
+      <image:caption>DJ DX — Professional DJ for hire in NYC for weddings, corporate events, private parties, and more</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/new-years-eve-dj-nyc</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>New Year's Eve DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — NYC's NYE DJ for private parties, corporate galas, and rooftop countdowns</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/private-party-dj-nyc-nj</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>Private Party DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — Private party DJ in NYC and NJ for birthdays, anniversaries, and milestone events</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/hip-hop-dj-nyc-nj</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>Hip-Hop DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — Hip-Hop DJ in NYC and NJ for parties, corporate events, and club nights</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/sweet-16-dj-nyc-nj</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>Sweet 16 DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — Sweet 16 DJ in NYC and NJ with hip-hop, pop, and Afrobeats for teen milestone events</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/rooftop-party-dj-nyc</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>Rooftop Party DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — Rooftop DJ for outdoor summer events in Manhattan, Brooklyn, and the Hamptons</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/rb-dj-nyc-nj</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>R&amp;B DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — R&amp;B DJ in NYC and NJ specializing in classic soul, 90s R&amp;B, and neo-soul</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://djdxmusic.com/house-jersey-club-dj-nyc-nj</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/epk-hero.jpg</image:loc>
+      <image:title>House and Jersey Club DJ New York City — DJ DX</image:title>
+      <image:caption>DJ DX — House and Jersey Club DJ for clubs, lounges, and events across NYC and NJ</image:caption>
     </image:image>
   </url>
 
