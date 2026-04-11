@@ -32,6 +32,7 @@ export default function SiteFooter({ email = 'djdxbusiness@gmail.com', bookLabel
             <Link to="/destination-wedding-dj" className="footer-nav-link">Destination Wedding DJ</Link>
             <Link to="/wedding-dj-nyc-nj" className="footer-nav-link">Wedding DJ NYC</Link>
             <Link to="/afrobeats-amapiano-dj-nyc-nj" className="footer-nav-link">Afrobeats DJ NYC</Link>
+            <Link to="/rb-hip-hop-dj-nyc-nj" className="footer-nav-link">R&amp;B/Hip-Hop DJ NYC</Link>
           </div>
 
           <div className="footer-nav-col">
