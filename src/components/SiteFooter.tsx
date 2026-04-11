@@ -25,14 +25,22 @@ export default function SiteFooter({ email = 'djdxbusiness@gmail.com', bookLabel
 
           <div className="footer-nav-col">
             <span className="footer-nav-heading">Services</span>
+            <Link to="/dj-for-hire-nyc" className="footer-nav-link">DJ for Hire NYC</Link>
+            <Link to="/wedding-dj-nyc-nj" className="footer-nav-link">Wedding DJ NYC</Link>
             <Link to="/corporate-event-dj-nyc-nj-ct" className="footer-nav-link">Corporate DJ NYC</Link>
+            <Link to="/private-party-dj-nyc-nj" className="footer-nav-link">Private Party DJ</Link>
+            <Link to="/afrobeats-amapiano-dj-nyc-nj" className="footer-nav-link">Afrobeats DJ NYC</Link>
+            <Link to="/rb-hip-hop-dj-nyc-nj" className="footer-nav-link">R&amp;B / Hip-Hop DJ</Link>
+            <Link to="/hip-hop-dj-nyc-nj" className="footer-nav-link">Hip-Hop DJ NYC</Link>
+            <Link to="/rb-dj-nyc-nj" className="footer-nav-link">R&amp;B DJ NYC</Link>
+            <Link to="/sweet-16-dj-nyc-nj" className="footer-nav-link">Sweet 16 DJ NYC</Link>
+            <Link to="/rooftop-party-dj-nyc" className="footer-nav-link">Rooftop DJ NYC</Link>
+            <Link to="/new-years-eve-dj-nyc" className="footer-nav-link">NYE DJ NYC</Link>
+            <Link to="/house-jersey-club-dj-nyc-nj" className="footer-nav-link">House &amp; Jersey Club DJ</Link>
             <Link to="/violin-dj-duo-nyc-nj" className="footer-nav-link">Violin + DJ Duo</Link>
             <Link to="/piano-dj-duo-nyc-nj" className="footer-nav-link">Piano + DJ Duo</Link>
             <Link to="/hamptons-luxury-dj" className="footer-nav-link">Hamptons Luxury DJ</Link>
             <Link to="/destination-wedding-dj" className="footer-nav-link">Destination Wedding DJ</Link>
-            <Link to="/wedding-dj-nyc-nj" className="footer-nav-link">Wedding DJ NYC</Link>
-            <Link to="/afrobeats-amapiano-dj-nyc-nj" className="footer-nav-link">Afrobeats DJ NYC</Link>
-            <Link to="/rb-hip-hop-dj-nyc-nj" className="footer-nav-link">R&amp;B/Hip-Hop DJ NYC</Link>
           </div>
 
           <div className="footer-nav-col">
