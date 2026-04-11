@@ -422,6 +422,9 @@ function App() {
                 "https://www.wikidata.org/wiki/Q17579958",
                 "https://musicbrainz.org/artist/8a6ee50a-8713-4828-a42f-8aa8f9579d6b",
                 "https://isni.org/isni/0000000466004223",
+                "https://www.freebase.com/m/0h88rm_",
+                "https://genius.com/artists/Dj-dx",
+                "https://www.imdb.com/name/nm15146879",
                 "https://www.ted.com/talks/dj_dx_finally_moving",
                 "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/"
               ],
