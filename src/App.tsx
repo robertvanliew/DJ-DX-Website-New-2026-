@@ -515,7 +515,7 @@ function App() {
               "performer": {"@type": "MusicGroup", "name": "DJ DX", "url": "https://djdxmusic.com/"},
               "url": "https://www.ted.com/talks/dj_dx_finally_moving",
               "description": "DJ DX performed 'Finally Moving' as a featured artist at TEDxYouth@RVA 2022 in Richmond, Virginia.",
-              "recordedIn": {"@type": "VideoObject", "name": "DJ DX: Finally Moving", "url": "https://www.ted.com/talks/dj_dx_finally_moving", "embedUrl": "https://www.youtube.com/embed/aG1KR7wPTBk"}
+              "recordedIn": {"@type": "VideoObject", "name": "DJ DX: Finally Moving", "url": "https://www.ted.com/talks/dj_dx_finally_moving", "embedUrl": "https://www.youtube.com/embed/aG1KR7wPTBk", "thumbnailUrl": "https://i.ytimg.com/vi/aG1KR7wPTBk/maxresdefault.jpg", "uploadDate": "2022-12-09T00:00:00+00:00", "description": "DJ DX performs 'Finally Moving' at TEDxYouth@RVA 2022 — live performance by New York/New Jersey DJ, producer, and recording artist."}
             }
           ]`}
         </script>
