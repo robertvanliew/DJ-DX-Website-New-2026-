@@ -445,7 +445,7 @@ function App() {
                   "name": "How do I book DJ DX for a wedding or private event in New York or New Jersey?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Use the booking form at djdxmusic.com or email djdxbusiness@gmail.com. DJ DX is a professional wedding DJ and private event DJ serving New York City, New Jersey, Connecticut, and the tri-state area. Response within 24 hours."
+                    "text": "Use the booking form on this page or email djdxbusiness@gmail.com. DJ DX is a professional wedding DJ and private event DJ serving New York City, New Jersey, Connecticut, and the tri-state area. Response within 24 hours."
                   }
                 },
                 {
@@ -453,7 +453,7 @@ function App() {
                   "name": "What music genres does DJ DX specialize in?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DJ DX specializes in R&B, Hip-Hop, Afrobeats, House, Jersey Club, Reggaeton, and Old School. Every set is custom-tailored for the event — from soulful R&B for weddings to high-energy Hip-Hop and Afrobeats for corporate events, nightclubs, and private parties in NYC and NJ."
+                    "text": "DJ DX specializes in R&B, Hip-Hop, Afrobeats, House, Jersey Club, Reggaeton, and Old School. Every set is custom-tailored — from soulful R&B for weddings to high-energy Hip-Hop and Afrobeats for corporate events, nightclubs, and private parties in NYC and NJ."
                   }
                 },
                 {
@@ -469,23 +469,31 @@ function App() {
                   "name": "What makes DJ DX different from other DJs in New York and New Jersey?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DJ DX is a TED-featured artist (TEDxYouth@RVA 2022), an original music producer with 100+ releases on Spotify and Apple Music, and a DJ with over 20 years of experience. DJ DX has been covered by Disrupt Magazine, NJ.com, and RVA Magazine — bringing credibility and artistry beyond standard DJ services in the NYC/NJ market."
+                    "text": "DJ DX is a TED-featured artist (TEDxYouth@RVA 2022), an original music producer with 100+ releases on Spotify and Apple Music, and a DJ with over 20 years of experience. DJ DX has been covered by Disrupt Magazine, NJ.com, and RVA Magazine — bringing a level of credibility and artistry that goes beyond standard DJ services in the NYC/NJ market."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Does DJ DX offer a live DJ and live musician performance package?",
+                  "name": "Can DJ DX perform at a nightclub or venue in New Jersey or New York City?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes — DJ DX offers a unique live DJ and live violinist performance package. This fusion of live violin over DJ sets creates an unforgettable atmosphere perfect for upscale weddings, corporate galas, and VIP events in the tri-state area."
+                    "text": "Absolutely. DJ DX is an active club and venue DJ in the New York and New Jersey area, performing regularly at nightclubs, lounges, and live music venues. Contact us to check availability for your date."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Where can I buy or stream DJ DX music?",
+                  "name": "Does DJ DX offer a live DJ + live musician performance package?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DJ DX originals, blends, and remixes are available on Spotify and Apple Music. Exclusive productions including unreleased tracks and limited edition packs can be purchased directly in the Music Store at djdxmusic.com."
+                    "text": "Yes — DJ DX offers a unique live DJ + live violinist performance package. This fusion of live violin over DJ sets creates an unforgettable atmosphere perfect for upscale weddings, corporate galas, and VIP events in the tri-state area."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Where can I buy or stream DJ DX's music?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "DJ DX originals, blends, and remixes are available on Spotify and Apple Music. Exclusive productions — including unreleased tracks and limited edition packs — can be purchased directly in the Music Store on this site."
                   }
                 }
               ]
