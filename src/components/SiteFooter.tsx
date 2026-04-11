@@ -93,7 +93,7 @@ export default function SiteFooter({ email = 'djdxbusiness@gmail.com', bookLabel
               <span>Wikidata</span>
             </a>
 
-            <a href="https://musicbrainz.org/artist/e18da2c6-dbad-4c6b-9bfd-a77e0ef77d5f" target="_blank" rel="noopener noreferrer" className="footer-partner footer-partner--icon" aria-label="MusicBrainz" role="listitem">
+            <a href="https://musicbrainz.org/artist/8a6ee50a-8713-4828-a42f-8aa8f9579d6b" target="_blank" rel="noopener noreferrer" className="footer-partner footer-partner--icon" aria-label="MusicBrainz" role="listitem">
               <img src="https://simpleicons.org/icons/musicbrainz.svg" className="footer-logo-img" alt="MusicBrainz" />
               <span>MusicBrainz</span>
             </a>

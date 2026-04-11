@@ -420,7 +420,7 @@ function App() {
                 "https://music.apple.com/us/artist/dj-dx/",
                 "https://www.tiktok.com/@djdxmusic",
                 "https://www.wikidata.org/wiki/Q17579958",
-                "https://musicbrainz.org/artist/e18da2c6-dbad-4c6b-9bfd-a77e0ef77d5f",
+                "https://musicbrainz.org/artist/8a6ee50a-8713-4828-a42f-8aa8f9579d6b",
                 "https://www.ted.com/talks/dj_dx_finally_moving",
                 "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/"
               ],
