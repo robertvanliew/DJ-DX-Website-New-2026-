@@ -212,6 +212,67 @@ export default function Music() {
         <meta name="twitter:title" content="DJ DX — Discography | Albums, Singles & Productions" />
         <meta name="twitter:description" content="Browse the full DJ DX discography — albums, singles, and original productions." />
         <meta name="twitter:image" content="https://djdxmusic.com/og-image.jpg" />
+        <script type="application/ld+json">{`[
+          {
+            "@context": "https://schema.org",
+            "@type": "MusicAlbum",
+            "name": "The Unfortunate Child",
+            "url": "https://djdxmusic.com/music",
+            "datePublished": "2024",
+            "genre": "Hip-Hop",
+            "image": "https://djdxmusic.com/covers/the-unfortunate-child.png",
+            "byArtist": {"@type": "MusicGroup", "name": "DJ DX", "url": "https://djdxmusic.com/"},
+            "track": [
+              {"@type": "MusicRecording", "name": "Deep Inside", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. Brydgs"}},
+              {"@type": "MusicRecording", "name": "In The Park", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Left Right", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Many Dreams", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Shot Down", "byArtist": {"@type": "MusicGroup", "name": "DJ DX"}},
+              {"@type": "MusicRecording", "name": "Summer Solstice", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. Brydgs & Kate Kilbourne"}},
+              {"@type": "MusicRecording", "name": "The Chorus", "byArtist": {"@type": "MusicGroup", "name": "DJ DX"}},
+              {"@type": "MusicRecording", "name": "Thug Doesn't Rest", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. Brydgs"}}
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "MusicAlbum",
+            "name": "Made From Scratch",
+            "url": "https://djdxmusic.com/music",
+            "datePublished": "2022",
+            "genre": "Hip-Hop",
+            "image": "https://djdxmusic.com/covers/made-from-scratch.jpg",
+            "byArtist": {"@type": "MusicGroup", "name": "DJ DX", "url": "https://djdxmusic.com/"},
+            "track": [
+              {"@type": "MusicRecording", "name": "You Don't Stop", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Bond", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Don't Worry", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Ninja of Rap", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Shining Stars", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Twerk It", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}},
+              {"@type": "MusicRecording", "name": "Tape Pop", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden & Beast Mode Billy"}},
+              {"@type": "MusicRecording", "name": "Riots", "byArtist": {"@type": "MusicGroup", "name": "DJ DX"}},
+              {"@type": "MusicRecording", "name": "So Simple", "byArtist": {"@type": "MusicGroup", "name": "DJ DX"}}
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "DJ DX — Singles & Productions",
+            "url": "https://djdxmusic.com/music",
+            "itemListElement": [
+              {"@type": "ListItem", "position": 1, "item": {"@type": "MusicRecording", "name": "Run Bro", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. Nadia Gold"}}},
+              {"@type": "ListItem", "position": 2, "item": {"@type": "MusicRecording", "name": "1000 Reasons", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}}},
+              {"@type": "ListItem", "position": 3, "item": {"@type": "MusicRecording", "name": "Blessings", "byArtist": {"@type": "MusicGroup", "name": "DJ DX"}}},
+              {"@type": "ListItem", "position": 4, "item": {"@type": "MusicRecording", "name": "Keep Me Going", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. Pooh Bear & DJ Madden"}}},
+              {"@type": "ListItem", "position": 5, "item": {"@type": "MusicRecording", "name": "Stop Playing", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}}},
+              {"@type": "ListItem", "position": 6, "item": {"@type": "MusicRecording", "name": "Crime Side", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}}},
+              {"@type": "ListItem", "position": 7, "item": {"@type": "MusicRecording", "name": "How Deep Is Our Bond", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}}},
+              {"@type": "ListItem", "position": 8, "item": {"@type": "MusicRecording", "name": "This Is Hip-Hop", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. DJ Madden"}}},
+              {"@type": "ListItem", "position": 9, "item": {"@type": "MusicRecording", "name": "Harmonia", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. Funkerman"}}},
+              {"@type": "ListItem", "position": 10, "item": {"@type": "MusicRecording", "name": "Boys", "byArtist": {"@type": "MusicGroup", "name": "DJ DX ft. KEMPEL & DJ Madden"}}}
+            ]
+          }
+        ]`}</script>
       </Helmet>
       <SiteNav />
 
