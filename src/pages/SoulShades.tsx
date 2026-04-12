@@ -163,6 +163,29 @@ export default function SoulShades() {
         <script type="application/ld+json">{`[
           {
             "@context": "https://schema.org",
+            "@type": "MusicRecording",
+            "name": "Buzz In London",
+            "url": "https://djdxmusic.com/soul-shades",
+            "datePublished": "2024",
+            "genre": ["Deep House", "Afro House"],
+            "description": "Buzz In London is the breakout single by Soul Shades — the New York duo of DJ DX and violinist Julie Schatz. A deep house and Afro house original blending live violin with DJ production.",
+            "byArtist": {
+              "@type": "MusicGroup",
+              "name": "Soul Shades",
+              "url": "https://djdxmusic.com/soul-shades",
+              "member": [
+                {"@type": "Person", "name": "DJ DX"},
+                {"@type": "Person", "name": "Julie Schatz"}
+              ]
+            },
+            "image": "https://djdxmusic.com/ss-hero.jpg",
+            "sameAs": [
+              "https://open.spotify.com/artist/2GES5fSFNcx25lv9RFcQjP",
+              "https://music.apple.com/us/artist/soul-shades/1783698611"
+            ]
+          },
+          {
+            "@context": "https://schema.org",
             "@type": "ItemList",
             "name": "Soul Shades — Originals, Blends & Remixes",
             "url": "https://djdxmusic.com/soul-shades",
