@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import { newsPosts } from '../news';
+import InstagramStoryShare from '../components/InstagramStoryShare';
 
 const categoryColors: Record<string, string> = {
   'Release':           'news-tag--release',
@@ -12,8 +13,8 @@ const categoryColors: Record<string, string> = {
   'Behind The Scenes': 'news-tag--bts',
 };
 
-/* ── Share helpers ── */
-function ShareBar({ url, headline }: { url: string; headline: string; image: string }) {
+/* ── Share bar ── */
+function ShareBar({ url, headline, image, category }: { url: string; headline: string; image: string; category: string }) {
   const [copied, setCopied] = useState(false);
 
   function copyLink() {
@@ -21,30 +22,6 @@ function ShareBar({ url, headline }: { url: string; headline: string; image: str
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     });
-  }
-
-  // Instagram Stories: open Instagram app on mobile with the image pre-loaded.
-  // On desktop falls back to copying the link (Instagram web has no deep-link share).
-  function shareInstagram() {
-    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      // Use navigator.share to trigger native share sheet — Instagram picks it up
-      if (navigator.share) {
-        navigator.share({
-          title: headline,
-          text: `${headline} — djdxmusic.com`,
-          url,
-        }).catch(() => {});
-      } else {
-        // Fallback: open Instagram app directly
-        window.open(`instagram://story-camera`, '_blank');
-      }
-    } else {
-      // Desktop: copy link so user can paste into Instagram
-      navigator.clipboard.writeText(url).then(() => {
-        alert('Link copied! Open Instagram on your phone, go to Stories, and paste the link as a sticker.');
-      });
-    }
   }
 
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent('"' + headline + '"')}&url=${encodeURIComponent(url)}&via=djdxmusic`;
@@ -56,13 +33,14 @@ function ShareBar({ url, headline }: { url: string; headline: string; image: str
       <span className="na-share-label">Share this story</span>
       <div className="na-share-btns">
 
-        {/* Instagram Stories */}
-        <button className="na-share-btn na-share-btn--ig" onClick={shareInstagram} aria-label="Share to Instagram Stories">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-          </svg>
-          <span>Instagram Story</span>
-        </button>
+        {/* Instagram Stories — canvas screenshot → save to camera roll */}
+        <InstagramStoryShare
+          headline={headline}
+          image={image}
+          category={category}
+          url={url}
+          variant="bar"
+        />
 
         {/* Twitter / X */}
         <a className="na-share-btn" href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
@@ -221,23 +199,13 @@ export default function NewsArticle() {
             <div className="na-sidebar-inner">
               <p className="na-sidebar-label">Share</p>
               <div className="na-sidebar-share-stack">
-                <button
-                  className="na-side-share-btn na-side-share-btn--ig"
-                  onClick={() => {
-                    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
-                    if (isMobile && navigator.share) {
-                      navigator.share({ title: post.headline, url: canonicalUrl }).catch(() => {});
-                    } else {
-                      navigator.clipboard.writeText(canonicalUrl);
-                      alert('Link copied! Paste it into your Instagram Story.');
-                    }
-                  }}
-                  aria-label="Share to Instagram"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-                  </svg>
-                </button>
+                <InstagramStoryShare
+                  headline={post.headline}
+                  image={fullImageUrl}
+                  category={post.category}
+                  url={canonicalUrl}
+                  variant="sidebar"
+                />
                 <a
                   className="na-side-share-btn"
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('"' + post.headline + '"')}&url=${encodeURIComponent(canonicalUrl)}&via=djdxmusic`}
@@ -271,7 +239,7 @@ export default function NewsArticle() {
         {/* ── BOTTOM SHARE BAR ── */}
         <div className="na-bottom-share-wrap">
           <div className="na-bottom-share-inner">
-            <ShareBar url={canonicalUrl} headline={post.headline} image={fullImageUrl} />
+            <ShareBar url={canonicalUrl} headline={post.headline} image={fullImageUrl} category={post.category} />
           </div>
         </div>
 
