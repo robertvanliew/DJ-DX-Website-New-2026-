@@ -391,8 +391,15 @@ function App() {
             {
               "@context": "https://schema.org",
               "@type": ["MusicGroup", "EntertainmentBusiness", "LocalBusiness"],
+              "@id": "https://djdxmusic.com/#djdx",
               "name": "DJ DX",
               "url": "https://djdxmusic.com/",
+              "publication": {
+                "@type": "Periodical",
+                "name": "The DX Report",
+                "url": "https://djdxmusic.com/news",
+                "description": "The official news publication of DJ DX — covering music releases, events, and culture."
+              },
               "description": "DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with 20+ years of experience and 500+ events performed. Featured on TED, TEDxYouth@RVA, Disrupt Magazine, and NJ.com. Available for weddings, corporate events, nightclubs, and private parties.",
               "image": "https://djdxmusic.com/epk-hero.jpg",
               "email": "djdxbusiness@gmail.com",

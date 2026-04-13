@@ -11,6 +11,11 @@ const categoryColors: Record<string, string> = {
   'Behind The Scenes': 'news-tag--bts',
 };
 
+function isNew(datePublished: string) {
+  const days = (Date.now() - new Date(datePublished).getTime()) / (1000 * 60 * 60 * 24);
+  return days <= 30;
+}
+
 export default function News() {
   const sorted = [...newsPosts].sort(
     (a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime()
@@ -31,16 +36,34 @@ export default function News() {
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Blog",
-          "name": "DJ DX News",
+          "@type": ["Periodical", "Blog"],
+          "name": "The DX Report",
+          "alternateName": "DJ DX News",
           "url": "https://djdxmusic.com/news",
-          "description": "News, releases, and behind-the-scenes stories from DJ DX and Soul Shades.",
+          "description": "The DX Report — official news publication of DJ DX and Soul Shades. Covers new music releases, events, and behind-the-scenes stories from New York/New Jersey.",
+          "inLanguage": "en-US",
+          "isPartOf": {
+            "@type": ["MusicGroup", "Person"],
+            "@id": "https://djdxmusic.com/#djdx",
+            "name": "DJ DX",
+            "url": "https://djdxmusic.com/"
+          },
           "publisher": {
             "@type": "Organization",
+            "@id": "https://djdxmusic.com/#organization",
             "name": "DJ DX Music",
             "url": "https://djdxmusic.com/",
-            "logo": { "@type": "ImageObject", "url": "https://djdxmusic.com/og-image.jpg" }
-          }
+            "logo": { "@type": "ImageObject", "url": "https://djdxmusic.com/og-image.jpg" },
+            "sameAs": [
+              "https://open.spotify.com/artist/4gGFdpDwEe8zIY1XSE3dGe",
+              "https://www.youtube.com/channel/UCqXcClmim62rc3Jqnzp855w"
+            ]
+          },
+          "about": [
+            { "@type": "Thing", "name": "Music" },
+            { "@type": "Thing", "name": "Events" },
+            { "@type": "Thing", "name": "Culture" }
+          ]
         })}</script>
       </Helmet>
 
@@ -54,7 +77,7 @@ export default function News() {
             <span className="news-masthead-label">Est. 1998 · New York / New Jersey</span>
           </div>
           <div className="news-masthead-center">
-            <h1 className="news-masthead-title">The DX Report</h1>
+            <h1 className="news-masthead-title">The <span>DX</span> Report</h1>
             <p className="news-masthead-sub">Music · Events · Culture</p>
           </div>
           <div className="news-masthead-right">
@@ -63,6 +86,28 @@ export default function News() {
         </div>
         <div className="news-masthead-rule" />
         <div className="news-masthead-rule news-masthead-rule--thin" />
+
+        {/* ── TICKER STRIP ── */}
+        <div className="news-ticker">
+          <div className="news-ticker-label">
+            <span className="news-ticker-dot" />
+            Breaking
+          </div>
+          <div className="news-ticker-track">
+            <div className="news-ticker-inner">
+              {/* Duplicate items for seamless loop */}
+              {[0, 1].map(i => (
+                <span key={i} style={{ display: 'contents' }}>
+                  <span className="news-ticker-item"><strong>Soul Shades</strong> debut single "Buzz In London" out now<span className="news-ticker-sep">·</span></span>
+                  <span className="news-ticker-item"><strong>DJ DX</strong> × Julie Schatz — new collaboration<span className="news-ticker-sep">·</span></span>
+                  <span className="news-ticker-item"><strong>Stream now</strong> on Spotify & Apple Music<span className="news-ticker-sep">·</span></span>
+                  <span className="news-ticker-item"><strong>The DX Report</strong> — music news from the source<span className="news-ticker-sep">·</span></span>
+                  <span className="news-ticker-item"><strong>Soul Shades</strong> — soul, jazz &amp; timeless grooves<span className="news-ticker-sep">·</span></span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </header>
 
       <main className="news-main">
@@ -91,6 +136,7 @@ export default function News() {
                   <div className="news-lead-kicker">
                     <span className="news-kicker-line" />
                     <span className="news-kicker-text">Featured Story</span>
+                    {isNew(featured.datePublished) && <span className="news-badge-new">New</span>}
                     <span className="news-kicker-line" />
                   </div>
                   <h2 className="news-lead-headline">{featured.headline}</h2>
@@ -122,7 +168,10 @@ export default function News() {
                       <div className="news-card-img-overlay" />
                     </div>
                     <div className="news-card-body">
-                      <span className={`news-tag ${categoryColors[post.category] ?? ''}`}>{post.category}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <span className={`news-tag ${categoryColors[post.category] ?? ''}`}>{post.category}</span>
+                        {isNew(post.datePublished) && <span className="news-badge-new">New</span>}
+                      </div>
                       <h3 className="news-card-headline">{post.headline}</h3>
                       <p className="news-card-excerpt">{post.excerpt}</p>
                       <div className="news-card-footer">

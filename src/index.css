@@ -108,7 +108,7 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -124,6 +124,11 @@ body {
   transition: color 0.2s;
   white-space: nowrap;
   cursor: pointer;
+}
+
+/* Hide scroll-anchor links on mid-size screens so page links stay full size */
+@media (max-width: 1180px) and (min-width: 901px) {
+  .nav-link--anchor { display: none; }
 }
 
 .nav-links a:hover { color: var(--gold); }

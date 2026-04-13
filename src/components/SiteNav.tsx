@@ -16,10 +16,10 @@ export default function SiteNav() {
 
         {/* Desktop links */}
         <ul className="nav-links">
-          <li><a href={href('#about')}>About</a></li>
-          <li><a href={href('#catalog')}>Music</a></li>
+          <li className="nav-link--anchor"><a href={href('#about')}>About</a></li>
+          <li className="nav-link--anchor"><a href={href('#catalog')}>Music</a></li>
           <li><Link to="/music" onClick={() => window.scrollTo(0, 0)}>Albums</Link></li>
-          <li><a href={href('#videos')}>Videos</a></li>
+          <li className="nav-link--anchor"><a href={href('#videos')}>Videos</a></li>
           <li><Link to="/soul-shades" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Soul Shades</Link></li>
           <li><Link to="/news" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>News</Link></li>
           <li className="nav-stream-group">
