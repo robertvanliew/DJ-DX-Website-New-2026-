@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
+import './news.css'
 import App from './App.tsx'
 import { CartProvider } from './components/CartContext.tsx'
 import { PlayerProvider } from './components/PlayerContext.tsx'
@@ -34,6 +35,8 @@ const Sweet16DJ   = lazy(() => import('./pages/seo/Sweet16DJ.tsx'))
 const RooftopDJ   = lazy(() => import('./pages/seo/RooftopDJ.tsx'))
 const RnBDJ       = lazy(() => import('./pages/seo/RnBDJ.tsx'))
 const HouseJerseyClubDJ = lazy(() => import('./pages/seo/HouseJerseyClubDJ.tsx'))
+const News              = lazy(() => import('./pages/News.tsx'))
+const NewsArticle       = lazy(() => import('./pages/NewsArticle.tsx'))
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -90,6 +93,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/rooftop-party-dj-nyc" element={<RooftopDJ />} />
             <Route path="/rb-dj-nyc-nj" element={<RnBDJ />} />
             <Route path="/house-jersey-club-dj-nyc-nj" element={<HouseJerseyClubDJ />} />
+            <Route path="/news"           element={<News />} />
+            <Route path="/news/:slug"     element={<NewsArticle />} />
           </Routes>
         </Suspense>
         </PlayerProvider>

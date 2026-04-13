@@ -54,6 +54,7 @@ export default function SiteFooter({ email = 'djdxbusiness@gmail.com', bookLabel
 
           <div className="footer-nav-col">
             <span className="footer-nav-heading">Press</span>
+            <Link to="/news" className="footer-nav-link">News</Link>
             <Link to="/epk" className="footer-nav-link">Electronic Press Kit</Link>
             <Link to="/soul-shades" className="footer-nav-link">Soul Shades</Link>
             <a href="https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/" target="_blank" rel="noopener noreferrer" className="footer-nav-link">Disrupt Magazine</a>

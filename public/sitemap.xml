@@ -331,5 +331,22 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://djdxmusic.com/news</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://djdxmusic.com/news/buzz-in-london-soul-shades</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://djdxmusic.com/covers/buzz-in-london-dj-dx-julie-schatz-soul-shades.jpg</image:loc>
+      <image:title>Soul Shades — Buzz In London Single Cover</image:title>
+      <image:caption>The making of Buzz In London by Soul Shades ft. DJ DX &amp; Julie Schatz</image:caption>
+    </image:image>
+  </url>
 
 </urlset>
