@@ -21,6 +21,7 @@ export default function SiteNav() {
           <li><Link to="/music" onClick={() => window.scrollTo(0, 0)}>Albums</Link></li>
           <li><a href={href('#videos')}>Videos</a></li>
           <li><Link to="/soul-shades" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Soul Shades</Link></li>
+          <li><Link to="/news" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>News</Link></li>
           <li className="nav-stream-group">
             <a href="https://open.spotify.com/artist/4gGFdpDwEe8zIY1XSE3dGe?autoplay_ok=1" target="_blank" rel="noopener noreferrer" className="nav-stream-btn" aria-label="Listen on Spotify">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,7 +35,6 @@ export default function SiteNav() {
             </a>
           </li>
           <li><a href="https://www.djdxllc.com/" target="_blank" rel="noopener noreferrer" className="nav-shop">Shop</a></li>
-          <li><Link to="/news" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>News</Link></li>
           <li><Link to="/epk" className="nav-epk-link">EPK</Link></li>
           <li><a href={href('#booking')} className="nav-book">Book Now</a></li>
         </ul>
