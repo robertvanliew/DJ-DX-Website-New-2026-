@@ -1518,6 +1518,21 @@ section { padding: 120px 40px; }
 }
 .press-card:hover .press-wordmark--hearrva em { opacity: 1; }
 
+/* WhoSampled — lowercase "who" + bold gold "Sampled", matches their black/yellow branding */
+.press-wordmark--whosampled {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  flex-direction: row;
+  align-items: baseline;
+}
+.press-wordmark--whosampled strong {
+  font-weight: 800;
+  color: var(--gold);
+}
+
 .press-quote {
   font-family: 'Barlow', sans-serif;
   font-size: 0.82rem;

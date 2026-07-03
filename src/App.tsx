@@ -263,6 +263,13 @@ const pressItems = [
     wordmark: <>HEAR<em>RVA</em></>,
     quote: 'Featured on HearRVA — Richmond\'s music channel',
   },
+  {
+    href: 'https://www.whosampled.com/DJ-DX/',
+    label: 'DJ DX on WhoSampled',
+    wordmarkClass: 'press-wordmark--whosampled',
+    wordmark: <>who<strong>Sampled</strong></>,
+    quote: '"Dark Paradise (Remix)" with Lana Del Rey, "Make It a Better Day" ft. 2Pac',
+  },
 ] as const;
 
 // Vinyl groove colors per genre
@@ -639,6 +646,52 @@ function App() {
                 {"@type": "ListItem", "position": 50, "item": {"@type": "MusicRecording", "name": "Nobody", "byArtist": {"@type": "MusicGroup", "name": "Nas × Ms. Lauryn Hill × DJ DX"}, "genre": "Blend", "datePublished": "2024"}},
                 {"@type": "ListItem", "position": 51, "item": {"@type": "MusicRecording", "name": "Freaks (Remix)", "byArtist": {"@type": "MusicGroup", "name": "Nicki Minaj × Patra × DJ DX"}, "genre": "Remix", "datePublished": "2024"}},
                 {"@type": "ListItem", "position": 52, "item": {"@type": "MusicRecording", "name": "Loyal", "byArtist": {"@type": "MusicGroup", "name": "Albee Al × DJ DX"}, "genre": "Blend", "datePublished": "2024"}}
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "name": "DJ DX — Notable Remixes & Samples",
+              "description": "Independently documented remix and sample credits for DJ DX, verified via WhoSampled.",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "item": {
+                    "@type": "MusicRecording",
+                    "name": "Dark Paradise (Remix)",
+                    "datePublished": "2015",
+                    "byArtist": [
+                      {"@id": "https://djdxmusic.com/#djdx"},
+                      {"@type": "MusicGroup", "name": "Lana Del Rey"}
+                    ],
+                    "isBasedOn": {
+                      "@type": "MusicRecording",
+                      "name": "Dark Paradise",
+                      "datePublished": "2012",
+                      "byArtist": {"@type": "MusicGroup", "name": "Lana Del Rey"}
+                    },
+                    "sameAs": "https://www.whosampled.com/DJ-DX/"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "item": {
+                    "@type": "MusicRecording",
+                    "name": "Make It a Better Day",
+                    "datePublished": "2015",
+                    "byArtist": [
+                      {"@id": "https://djdxmusic.com/#djdx"},
+                      {"@type": "Person", "name": "2Pac"}
+                    ],
+                    "isBasedOn": [
+                      {"@type": "MusicRecording", "name": "Californication", "datePublished": "1999", "byArtist": {"@type": "MusicGroup", "name": "Red Hot Chili Peppers"}},
+                      {"@type": "MusicRecording", "name": "Ode to Billie Joe", "datePublished": "1967", "byArtist": {"@type": "Person", "name": "Lou Donaldson"}}
+                    ],
+                    "sameAs": "https://www.whosampled.com/DJ-DX/"
+                  }
+                }
               ]
             },
             {
