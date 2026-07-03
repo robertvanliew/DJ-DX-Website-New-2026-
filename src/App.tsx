@@ -671,7 +671,7 @@ function App() {
                       "datePublished": "2012",
                       "byArtist": {"@type": "MusicGroup", "name": "Lana Del Rey"}
                     },
-                    "sameAs": "https://www.whosampled.com/DJ-DX/"
+                    "sameAs": "https://www.whosampled.com/DJ-DX/Dark-Paradise-(Remix)/"
                   }
                 },
                 {
@@ -689,7 +689,7 @@ function App() {
                       {"@type": "MusicRecording", "name": "Californication", "datePublished": "1999", "byArtist": {"@type": "MusicGroup", "name": "Red Hot Chili Peppers"}},
                       {"@type": "MusicRecording", "name": "Ode to Billie Joe", "datePublished": "1967", "byArtist": {"@type": "Person", "name": "Lou Donaldson"}}
                     ],
-                    "sameAs": "https://www.whosampled.com/DJ-DX/"
+                    "sameAs": "https://www.whosampled.com/DJ-DX/Make-It-a-Better-Day/"
                   }
                 }
               ]
