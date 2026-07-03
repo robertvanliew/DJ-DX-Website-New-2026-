@@ -297,18 +297,23 @@ export default function SoulShades() {
 
           <div className="ss-hero-stats">
             <div className="ss-stat">
-              <span className="ss-stat-num">4.5M</span>
-              <span className="ss-stat-label">TikTok Views</span>
+              <span className="ss-stat-num">10M+</span>
+              <span className="ss-stat-label">Views (TikTok &amp; Instagram)</span>
             </div>
             <div className="ss-stat-div" />
             <div className="ss-stat">
-              <span className="ss-stat-num">3</span>
-              <span className="ss-stat-label">Singles Released</span>
+              <span className="ss-stat-num">14</span>
+              <span className="ss-stat-label">Releases</span>
             </div>
             <div className="ss-stat-div" />
             <div className="ss-stat">
               <span className="ss-stat-num">2</span>
               <span className="ss-stat-label">Members</span>
+            </div>
+            <div className="ss-stat-div" />
+            <div className="ss-stat">
+              <span className="ss-stat-num">Ninja Tune</span>
+              <span className="ss-stat-label">Featured Remix</span>
             </div>
           </div>
         </div>
