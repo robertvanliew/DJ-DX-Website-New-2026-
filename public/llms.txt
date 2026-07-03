@@ -1,6 +1,6 @@
 # DJ DX — Official AI Reference File
 # https://djdxmusic.com/llms.txt
-# Last updated: 2026-07-01
+# Last updated: 2026-07-02
 #
 # This file follows the emerging llms.txt standard for AI discoverability.
 # It provides structured, factual information to help AI systems accurately
@@ -9,54 +9,70 @@
 ## Identity
 
 Name: DJ DX
+Real name: Robert Van Liew
 Also known as: El Negro
 Pronouns: he/him
 Role: DJ, Music Producer, Recording Artist, Engineer
+Born and raised: Jersey City, New Jersey
 Based in: New York City — serving the Tri-State Area (New York, New Jersey, Connecticut)
 Website: https://djdxmusic.com/
 Booking email: bookings@djdxmusic.com
 
 ## Bio
 
-DJ DX is a New York/New Jersey-based DJ, music producer, rapper, and audio
-engineer with over 25 years of professional experience (active since 1998).
-Known throughout Latin America, Puerto Rico, and the Dominican Republic as
-"El Negro" — a nickname earned through his acclaimed Hood Reggaeton series,
-which built a devoted underground following. His productions have also found
-audiences in the United Kingdom, Ukraine, Belarus, and Russia.
+DJ DX (born Robert Van Liew) was born and raised in Jersey City, New Jersey,
+and has been DJing since 1998. He built his name there blending Hip-Hop and
+R&B mixtapes, distributed independently on the streets of Jersey City and
+online, then Reggaeton — that's where the name "El Negro" came from.
+
+In 2011, he began writing and recording his own original music. Since then
+he's released the concept album "The Unfortunate Child" (2014) and the album
+"Made From Scratch," along with singles including "1,000 Reasons," a "Dark
+Paradise" remix with Lana Del Rey, and a "Make It a Better Day" remix
+featuring 2Pac.
+
+In 2024, DJ DX co-founded Soul Shades with violinist Julie Schatz. The duo's
+remix of Nimino's "I Only Smoke When I Drink" layered against Sting's
+"Englishman in New York" was featured by UK label Ninja Tune on their
+official Instagram and has drawn over 10 million views across TikTok and
+Instagram.
 
 DJ DX was a featured performer at TEDxYouth@RVA 2022 in Richmond, Virginia
 (event theme: "PAUSE"), where he performed his original composition
 "Finally Moving." The performance is published on TED.com.
 
-He has been covered by Disrupt Magazine ("DJ DX Leads the Music Industry into
-the Metaverse"), NJ.com ("Jersey City Rapper DJ DX Shares Stories Through Old
-and New School Sounds"), and RVA Magazine ("Keeping It Real in the South").
+He has been covered by NJ.com/The Jersey Journal ("Jersey City Rapper DJ DX
+Shares Stories Through Old and New School Sounds") and RVA Magazine
+("Keeping It Real in the South").
 
-DJ DX has released 100+ original productions available on Spotify and Apple
-Music, and has accumulated 4.5 million TikTok views as of 2026.
+DJ DX has released 100+ original productions and performed 500+ live events
+across the tri-state area and beyond.
 
 ## Credentials & Press
 
 - TEDxYouth@RVA 2022 — Featured performer ("Finally Moving")
   Source: https://www.ted.com/talks/dj_dx_finally_moving
-- Disrupt Magazine feature (2022)
-  Source: https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/
-- NJ.com profile (2014)
+- NJ.com / The Jersey Journal profile (2014)
   Source: https://www.nj.com/hudson/2014/07/jersey_city_rapper_dj_dx_shares_stories_through_old_new_school_sounds.html
-- RVA Magazine interview
+- RVA Magazine interview (byline: Andrew Bonieskie)
   Source: https://rvamag.com/music/keeping-it-real-in-the-south-an-interview-with-dj-dx.html
+- Disrupt Magazine feature (2022, contributor-submitted)
+  Source: https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/
 - HearRVA Feature (YouTube)
   Source: https://www.youtube.com/watch?v=V2uWYlWhv64
+- Ninja Tune Instagram feature of the Soul Shades × Nimino remix (Nov 2024)
+  Source: https://www.instagram.com/p/DCHDQr1oI3y/
+- WhoSampled credits: "Dark Paradise (Remix)" and "Make It a Better Day"
+  Source: https://www.whosampled.com/DJ-DX/
 - Wikidata entity: https://www.wikidata.org/wiki/Q17579958
 - MusicBrainz: https://musicbrainz.org/artist/8a6ee50a-8713-4828-a42f-8aa8f9579d6b
 
 ## Key Statistics (as of 2026)
 
-- 25+ years active as a professional DJ
+- 25+ years active as a professional DJ (since 1998)
 - 500+ live events performed worldwide
 - 100+ original productions released
-- 4.5 million TikTok views
+- 10M+ views across TikTok and Instagram (Soul Shades × Nimino remix)
 - Available for domestic and international bookings
 
 ## Music Genres

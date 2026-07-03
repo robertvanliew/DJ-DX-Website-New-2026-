@@ -51,22 +51,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://i.ytimg.com" />
 
-    <!-- JSON-LD — Person + MusicGroup -->
+    <!--
+      JSON-LD — Person + MusicGroup. This is the single canonical entity
+      block for #djdx — it used to be duplicated (with a different,
+      conflicting description/sameAs) in App.tsx's homepage-only Helmet.
+      react-helmet-async can only ADD script tags to this static shell,
+      never remove one, so both versions shipped simultaneously on the
+      homepage under the identical @id. Consolidated here since this
+      block ships globally on every route; App.tsx's duplicate was
+      deleted rather than merged-and-kept-separate.
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["Person", "MusicGroup"],
+      "@type": ["Person", "MusicGroup", "EntertainmentBusiness", "LocalBusiness"],
       "@id": "https://djdxmusic.com/#djdx",
       "name": "DJ DX",
-      "alternateName": "El Negro",
+      "alternateName": ["El Negro", "Robert Van Liew"],
       "url": "https://djdxmusic.com/",
-      "description": "DJ DX is a New York/New Jersey DJ, producer, rapper, and engineer with over 25 years of experience. Known as 'El Negro' throughout Latin America, Puerto Rico, and the Dominican Republic for his groundbreaking Hood Reggaeton series. His underground productions have built a dedicated following in the UK, Ukraine, Belarus, and Russia. Live sets blend R&B, hip-hop, house, and Afrobeats — built for the room, not the playlist. Featured at TEDxYouth@RVA 2022. Available for corporate events, weddings, clubs, concerts, and private parties throughout NY, NJ, and the tri-state area.",
+      "publication": {
+        "@type": "Periodical",
+        "name": "The DX Report",
+        "url": "https://djdxmusic.com/news",
+        "description": "The official news publication of DJ DX — covering music releases, events, and culture."
+      },
+      "description": "DJ DX (born Robert Van Liew) was born and raised in Jersey City, New Jersey, and has been DJing since 1998. He built his name there blending Hip-Hop and R&B mixtapes, distributed independently on the streets of Jersey City and online, then Reggaeton — that's where the name 'El Negro' came from. In 2011, he began writing and recording his own original music. Since then he's released the concept album 'The Unfortunate Child' (2014) and the album 'Made From Scratch', along with singles including '1,000 Reasons,' a 'Dark Paradise' remix with Lana Del Rey, and a 'Make It a Better Day' remix featuring 2Pac. In 2024, he formed Soul Shades with violinist Julie Schatz; their remix of Nimino's 'I Only Smoke When I Drink' and Sting's 'Englishman in New York' was featured by UK label Ninja Tune and has drawn over 10 million views across TikTok and Instagram. DJ DX performed at TEDxYouth@RVA in 2022, featured on TED.com, and has been covered by NJ.com/The Jersey Journal and RVA Magazine. He has released 100+ original productions and performed 500+ live events across the tri-state area.",
       "image": "https://djdxmusic.com/show-1.jpg",
       "jobTitle": ["DJ", "Music Producer", "Recording Artist"],
-      "genre": ["R&B", "Hip-Hop", "Afrobeats", "House", "Jersey Club", "Reggaeton", "Old School"],
+      "genre": ["R&B", "Hip-Hop", "Afrobeats", "House", "Jersey Club", "Reggaeton", "Old School", "Blends & Remixes"],
+      "knowsAbout": ["DJing", "Music Production", "R&B", "Hip-Hop", "Afrobeats", "House Music", "Jersey Club", "Live Performance", "Wedding DJ", "Corporate Event DJ", "Club DJ", "Music Blending"],
       "foundingLocation": {
         "@type": "Place",
-        "name": "New Jersey, USA"
+        "name": "Jersey City, New Jersey, USA"
       },
       "address": {
         "@type": "PostalAddress",
@@ -74,16 +90,52 @@
         "addressRegion": "NY",
         "addressCountry": "US"
       },
+      "email": "bookings@djdxmusic.com",
+      "priceRange": "$$-$$$",
+      "areaServed": [
+        {"@type": "City", "name": "New York City"},
+        {"@type": "State", "name": "New Jersey"},
+        {"@type": "AdministrativeArea", "name": "Tri-State Area"}
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "7",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "award": "Featured performer at TEDxYouth@RVA 2022",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DJ Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wedding DJ", "description": "Professional wedding DJ services in New York and New Jersey"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Event DJ", "description": "Corporate event DJ in New York City and New Jersey"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Club & Venue DJ", "description": "Nightclub and live venue DJ sets in the NYC/NJ area"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Live Violinist & DJ Package", "description": "Unique fusion of live violin over DJ sets for upscale events"}}
+        ]
+      },
       "sameAs": [
         "https://open.spotify.com/artist/4gGFdpDwEe8zIY1XSE3dGe",
         "https://music.apple.com/us/artist/dj-dx/1035405039",
         "https://www.youtube.com/channel/UCqXcClmim62rc3Jqnzp855w",
+        "https://www.youtube.com/c/djdxmusic",
+        "https://www.youtube.com/@djdxmusic",
         "https://twitter.com/djdxmusic",
         "https://www.instagram.com/djdx",
+        "https://facebook.com/djdxmusic",
+        "https://www.tiktok.com/@djdxmusic",
         "https://www.wikidata.org/wiki/Q17579958",
         "https://musicbrainz.org/artist/8a6ee50a-8713-4828-a42f-8aa8f9579d6b",
+        "https://isni.org/isni/0000000466004223",
+        "https://www.freebase.com/m/0h88rm_",
+        "https://genius.com/artists/Dj-dx",
+        "https://www.imdb.com/name/nm15146879",
+        "https://www.whosampled.com/DJ-DX/",
         "https://www.ted.com/talks/dj_dx_finally_moving",
-        "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/"
+        "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/",
+        "https://share.google/v7RARn4fdsghIcXyX",
+        "https://profile.google.com/@djdxmusic"
       ],
       "event": [
         {
@@ -162,6 +214,14 @@
           "embedUrl": "https://www.youtube.com/embed/V2uWYlWhv64",
           "url": "https://www.youtube.com/watch?v=V2uWYlWhv64",
           "publisher": { "@type": "Organization", "name": "HearRVA" }
+        },
+        {
+          "@type": "CreativeWork",
+          "headline": "Nimino 'I Only Smoke When I Drink' x 'Englishman In New York' — Soul Shades",
+          "description": "Soul Shades' remix of Nimino's 'I Only Smoke When I Drink' and Sting's 'Englishman in New York' was featured by UK record label Ninja Tune on their official Instagram, credited to @soulshadesmusic.",
+          "url": "https://www.instagram.com/p/DCHDQr1oI3y/",
+          "datePublished": "2024-11-08",
+          "publisher": { "@type": "Organization", "name": "Ninja Tune" }
         }
       ]
     }

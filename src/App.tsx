@@ -412,74 +412,6 @@ function App() {
           {`[
             {
               "@context": "https://schema.org",
-              "@type": ["MusicGroup", "EntertainmentBusiness", "LocalBusiness"],
-              "@id": "https://djdxmusic.com/#djdx",
-              "name": "DJ DX",
-              "url": "https://djdxmusic.com/",
-              "publication": {
-                "@type": "Periodical",
-                "name": "The DX Report",
-                "url": "https://djdxmusic.com/news",
-                "description": "The official news publication of DJ DX — covering music releases, events, and culture."
-              },
-              "description": "DJ DX is a New York/New Jersey-based DJ, producer, and recording artist with 25+ years of experience and 500+ events performed. Featured on TED, TEDxYouth@RVA, Disrupt Magazine, and NJ.com. Available for weddings, corporate events, nightclubs, and private parties.",
-              "image": "https://djdxmusic.com/epk-hero.jpg",
-              "email": "bookings@djdxmusic.com",
-              "priceRange": "$$-$$$",
-              "genre": ["R&B", "Hip-Hop", "Afrobeats", "House", "Jersey Club", "Reggaeton", "Old School", "Blends & Remixes"],
-              "knowsAbout": ["DJing", "Music Production", "R&B", "Hip-Hop", "Afrobeats", "House Music", "Jersey Club", "Live Performance", "Wedding DJ", "Corporate Event DJ", "Club DJ", "Music Blending"],
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "New York",
-                "addressRegion": "NY",
-                "addressCountry": "US"
-              },
-              "areaServed": [
-                {"@type": "City", "name": "New York City"},
-                {"@type": "State", "name": "New Jersey"},
-                {"@type": "AdministrativeArea", "name": "Tri-State Area"}
-              ],
-              "sameAs": [
-                "https://instagram.com/djdx",
-                "https://www.youtube.com/c/djdxmusic",
-                "https://www.youtube.com/@djdxmusic",
-                "https://facebook.com/djdxmusic",
-                "https://twitter.com/djdxmusic",
-                "https://open.spotify.com/artist/4gGFdpDwEe8zIY1XSE3dGe",
-                "https://music.apple.com/us/artist/dj-dx/",
-                "https://www.tiktok.com/@djdxmusic",
-                "https://www.wikidata.org/wiki/Q17579958",
-                "https://musicbrainz.org/artist/8a6ee50a-8713-4828-a42f-8aa8f9579d6b",
-                "https://isni.org/isni/0000000466004223",
-                "https://www.freebase.com/m/0h88rm_",
-                "https://genius.com/artists/Dj-dx",
-                "https://www.imdb.com/name/nm15146879",
-                "https://www.ted.com/talks/dj_dx_finally_moving",
-                "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/",
-                "https://share.google/v7RARn4fdsghIcXyX",
-                "https://profile.google.com/@djdxmusic"
-              ],
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "7",
-                "bestRating": "5",
-                "worstRating": "1"
-              },
-              "award": "Featured performer at TEDxYouth@RVA 2022",
-              "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "DJ Services",
-                "itemListElement": [
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wedding DJ", "description": "Professional wedding DJ services in New York and New Jersey"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Event DJ", "description": "Corporate event DJ in New York City and New Jersey"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Club & Venue DJ", "description": "Nightclub and live venue DJ sets in the NYC/NJ area"}},
-                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Live Violinist & DJ Package", "description": "Unique fusion of live violin over DJ sets for upscale events"}}
-                ]
-              }
-            },
-            {
-              "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
                 {
@@ -840,16 +772,19 @@ function App() {
               </div>
               <div className="about-body sr" data-sr-delay="0.12s">
                 <p>
-                  DJ DX has been DJing since 1998. Over 25 years of weddings, corporate events,
-                  clubs, and private parties across New York, New Jersey, and Connecticut. He's
-                  also a producer, rapper, and audio engineer with over 100 original tracks
-                  released independently.
+                  DJ DX (Robert Van Liew) was born and raised in Jersey City, NJ, and has been
+                  DJing since 1998. He built his name blending Hip-Hop and R&amp;B mixtapes on
+                  the streets of Jersey City and online, then Reggaeton — that's where the name
+                  "El Negro" came from. In 2011 he started writing and recording his own music,
+                  and has released over 100 original tracks since.
                 </p>
                 <p>
-                  Across Latin America he goes by <em>"El Negro."</em> His Hood Reggaeton series
-                  built a following throughout Puerto Rico and the Dominican Republic, and his
-                  underground releases have reached audiences in the UK, Ukraine, Belarus, and
-                  Russia.
+                  In 2024 he formed Soul Shades with violinist Julie Schatz. Their remix of
+                  Nimino's "I Only Smoke When I Drink" x Sting's "Englishman in New York" was
+                  posted by UK label Ninja Tune and has over 10 million views on TikTok and
+                  Instagram. DJ DX performed at TEDxYouth@RVA in 2022 — the talk is on{' '}
+                  <a href="https://www.ted.com/talks/dj_dx_finally_moving" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)' }}>TED.com</a>
+                  {' '}— and has been covered by Disrupt Magazine and NJ.com.
                 </p>
                 <p>
                   Live sets pull from R&amp;B, hip-hop, house, Afrobeats, Amapiano, Jersey Club,
