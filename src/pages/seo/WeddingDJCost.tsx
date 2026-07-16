@@ -57,18 +57,18 @@ export default function WeddingDJCost() {
   return (
     <>
       <Helmet>
-        <title>How Much Does a Wedding DJ Cost in NYC? (2026 Guide) | DJ DX</title>
-        <meta name="description" content="NYC wedding DJ pricing explained with real numbers: expect $1,500–$5,000 depending on hours, date, and add-ons. DJ DX publishes starting rates — weddings from $1,500, live violin + DJ duo from $2,400. 25+ years, 500+ events." />
+        <title>Wedding DJ Cost NYC: $1,500–$5,000 (2026 Guide) | DJ DX</title>
+        <meta name="description" content="$1,500–$5,000 — real NYC wedding DJ pricing, published upfront. See what actually affects the price and what's included. No quote-request games. 25+ years, TED-featured." />
         <link rel="canonical" href="https://djdxmusic.com/wedding-dj-cost-nyc" />
-        <meta property="og:title" content="How Much Does a Wedding DJ Cost in NYC? (2026 Guide)" />
-        <meta property="og:description" content="Real NYC wedding DJ pricing with published starting rates: $1,500–$5,000 depending on hours, date, and add-ons. No quote-request games." />
+        <meta property="og:title" content="Wedding DJ Cost NYC: $1,500–$5,000 (2026 Pricing Guide)" />
+        <meta property="og:description" content="Real NYC wedding DJ pricing, published upfront: $1,500–$5,000 depending on hours, date, and add-ons. No quote-request games." />
         <meta property="og:url" content="https://djdxmusic.com/wedding-dj-cost-nyc" />
         <meta property="og:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@djdxmusic" />
-        <meta name="twitter:title" content="How Much Does a Wedding DJ Cost in NYC? (2026 Guide)" />
-        <meta name="twitter:description" content="Real NYC wedding DJ pricing with published starting rates from a TED-featured DJ with 25+ years of experience." />
+        <meta name="twitter:title" content="Wedding DJ Cost NYC: $1,500–$5,000 (2026 Pricing Guide)" />
+        <meta name="twitter:description" content="Real NYC wedding DJ pricing: $1,500–$5,000, published upfront by a TED-featured DJ with 25+ years of experience." />
         <meta name="twitter:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <script type="application/ld+json">
           {`[
