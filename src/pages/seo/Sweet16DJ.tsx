@@ -99,7 +99,7 @@ export default function Sweet16DJ() {
                   "name": "Does DJ DX keep the music age-appropriate for sweet 16 parties?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. DJ DX is experienced with family-attended events and can maintain the energy and vibe of current music while keeping content appropriate for a mixed adult-teen audience. Clean versions, parental preference consultation, and reading the room are all part of the service."
+                    "text": "Yes. Every set is built with a mixed adult-teen audience in mind — clean versions, a parental preference consultation ahead of time, and reading the room throughout keep the energy high without anything inappropriate."
                   }
                 },
                 {
@@ -165,8 +165,8 @@ export default function Sweet16DJ() {
                 <h2 className="sec-title">Her Night. <span>Her Music.</span></h2>
               </div>
               <div className="about-body sr" data-sr-delay="0.1s">
-                <p>A sweet 16 is one of the most memorable nights of a teenager's life — and the DJ sets the entire tone. DJ DX approaches sweet sixteens differently than most: rather than assuming what teens want to hear, the process starts with a direct conversation about her specific music taste. What's in rotation on her Spotify right now? What artists does she actually love? Those are the starting points.</p>
-                <p>The sweet 16 crowd presents a unique challenge: teenagers with current tastes, parents who want appropriate content, and a birthday girl who needs to feel like the night was built specifically for her. DJ DX navigates this balance with experience built across 500+ events. The setlist is engineered in zones — an opening sequence that builds energy, a mid-point peak for the dance floor, a dedicated moment for the birthday highlight, and a closing hour that keeps the party going.</p>
+                <p>A sweet 16 is one of the most memorable nights of a teenager's life — and the DJ sets the entire tone. For every sweet 16, the process starts with a direct conversation about her specific music taste: what's in rotation on her Spotify right now, what artists she actually loves. Those are the starting points DJ DX builds the whole night around.</p>
+                <p>The sweet 16 crowd presents a unique challenge: teenagers with current tastes, parents who want appropriate content, and a birthday girl who needs to feel like the night was built specifically for her. DJ DX brings 25+ years and 500+ events across weddings, corporate galas, and private parties to that balance. The setlist is engineered in zones — an opening sequence that builds energy, a mid-point peak for the dance floor, a dedicated moment for the birthday highlight, and a closing hour that keeps the party going.</p>
                 <p>Today's teen crowd moves between hip-hop, pop, Afrobeats, Amapiano, Latin reggaeton, and TikTok-viral sounds without hesitation — and DJ DX moves with them. Parents in the room get moments too: a crowd-pleasing throwback sequence that signals the DJ understands the full room, not just the birthday girl.</p>
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function Sweet16DJ() {
           <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {[
               { q: 'What music does DJ DX play at sweet 16 parties?', a: 'DJ DX builds every sweet 16 setlist around what that specific group of teens is actually listening to — current hip-hop, pop, Afrobeats, Amapiano, dancehall, TikTok viral tracks, and Latin pop. The playlist is customized after a direct conversation with the birthday girl and her parents.' },
-              { q: 'Does DJ DX keep the music age-appropriate for sweet 16 parties?', a: 'Yes. DJ DX is experienced with family-attended events and maintains the energy of current music while keeping content appropriate for a mixed adult-teen audience. Clean versions, parental preference consultation, and room reading are all part of the service.' },
+              { q: 'Does DJ DX keep the music age-appropriate for sweet 16 parties?', a: 'Yes. Every set is built with a mixed adult-teen audience in mind — clean versions, a parental preference consultation ahead of time, and reading the room throughout keep the energy high without anything inappropriate.' },
               { q: 'Can DJ DX do a grand entrance or special moment for the sweet 16?', a: 'Absolutely. DJ DX coordinates grand entrances, birthday announcement moments, first dance songs, and special choreography breakout segments. These milestone moments are scripted with the host ahead of the event to ensure everything lands perfectly.' },
               { q: 'How much does a sweet 16 DJ cost in New York City?', a: 'Sweet 16 DJ rates in NYC and NJ typically range from $1,000 to $2,800+ depending on event duration, venue, and equipment needed. DJ DX provides transparent custom quotes — email bookings@djdxmusic.com with your date, venue, and expected guest count.' },
             ].map(({ q, a }) => (
