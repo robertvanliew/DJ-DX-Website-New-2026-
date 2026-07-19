@@ -37,6 +37,7 @@ const NewYearsEveDJ = lazy(() => import('./pages/seo/NewYearsEveDJ.tsx'))
 const PrivatePartyDJ = lazy(() => import('./pages/seo/PrivatePartyDJ.tsx'))
 const HipHopDJ    = lazy(() => import('./pages/seo/HipHopDJ.tsx'))
 const Sweet16DJ   = lazy(() => import('./pages/seo/Sweet16DJ.tsx'))
+const Sweet16HudsonValley = lazy(() => import('./pages/seo/Sweet16HudsonValley.tsx'))
 const RooftopDJ   = lazy(() => import('./pages/seo/RooftopDJ.tsx'))
 const RnBDJ       = lazy(() => import('./pages/seo/RnBDJ.tsx'))
 const HouseJerseyClubDJ = lazy(() => import('./pages/seo/HouseJerseyClubDJ.tsx'))
@@ -104,6 +105,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/private-party-dj-nyc-nj" element={<PrivatePartyDJ />} />
             <Route path="/hip-hop-dj-nyc-nj" element={<HipHopDJ />} />
             <Route path="/sweet-16-dj-nyc-nj" element={<Sweet16DJ />} />
+            <Route path="/sweet-16-dj-hudson-valley-ny" element={<Sweet16HudsonValley />} />
             <Route path="/rooftop-party-dj-nyc" element={<RooftopDJ />} />
             <Route path="/rb-dj-nyc-nj" element={<RnBDJ />} />
             <Route path="/house-jersey-club-dj-nyc-nj" element={<HouseJerseyClubDJ />} />

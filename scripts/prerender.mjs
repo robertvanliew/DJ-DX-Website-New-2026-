@@ -76,6 +76,7 @@ const STATIC_ROUTES = [
   '/private-party-dj-nyc-nj',
   '/hip-hop-dj-nyc-nj',
   '/sweet-16-dj-nyc-nj',
+  '/sweet-16-dj-hudson-valley-ny',
   '/rooftop-party-dj-nyc',
   '/rb-dj-nyc-nj',
   '/house-jersey-club-dj-nyc-nj',

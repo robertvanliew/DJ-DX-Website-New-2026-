@@ -177,6 +177,8 @@ International: Available worldwide for destination events (Italy, Mexico,
 | Hamptons DJ           | https://djdxmusic.com/hamptons-luxury-dj                   | Hamptons luxury events landing page   |
 | Destination DJ        | https://djdxmusic.com/destination-wedding-dj               | International/destination weddings    |
 | Afrobeats DJ          | https://djdxmusic.com/afrobeats-amapiano-dj-nyc-nj         | Afrobeats/Amapiano specialist page    |
+| Sweet 16 DJ NYC/NJ    | https://djdxmusic.com/sweet-16-dj-nyc-nj                   | Sweet 16 / teen milestone landing page|
+| Sweet 16 DJ Hudson Valley | https://djdxmusic.com/sweet-16-dj-hudson-valley-ny     | Kingston, New Paltz, Saugerties, Red Hook, Wappingers Falls, Millbrook, Catskill |
 
 ## Pricing
 
