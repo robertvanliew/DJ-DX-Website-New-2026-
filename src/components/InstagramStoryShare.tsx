@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import html2canvas from 'html2canvas';
+import { useState } from 'react';
 
 interface Props {
   headline: string;
@@ -11,63 +10,58 @@ interface Props {
 }
 
 export default function InstagramStoryShare({ headline, excerpt, image, category, url, variant = 'bar' }: Props) {
-  const cardRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<'idle' | 'rendering' | 'done' | 'error'>('idle');
 
   async function handleShare() {
-    if (!cardRef.current) return;
     setState('rendering');
 
     try {
-      const canvas = await html2canvas(cardRef.current, {
-        width: 1080,
-        height: 1920,
-        scale: 1,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#0a0805',
-        logging: false,
+      const params = new URLSearchParams({
+        type: 'news',
+        format: 'story',
+        headline,
+        excerpt,
+        category,
+        image,
+        url,
       });
+      const res = await fetch(`/api/og?${params.toString()}`);
+      if (!res.ok) { setState('error'); setTimeout(() => setState('idle'), 3000); return; }
 
-      canvas.toBlob(async (blob) => {
-        if (!blob) { setState('error'); return; }
+      const blob = await res.blob();
+      const file = new File([blob], 'djdx-story.png', { type: 'image/png' });
 
-        const file = new File([blob], 'djdx-story.png', { type: 'image/png' });
-
-        // On mobile: try native share with file (Instagram picks it up from share sheet)
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          try {
-            await navigator.share({
-              files: [file],
-              title: headline,
-              text: `${headline} — djdxmusic.com`,
-            });
-            setState('done');
-            setTimeout(() => setState('idle'), 3000);
-            return;
-          } catch {
-            // User cancelled or share failed — fall through to download
-          }
+      // On mobile: try native share with file (Instagram picks it up from share sheet)
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: headline,
+            text: `${headline} — djdxmusic.com`,
+          });
+          setState('done');
+          setTimeout(() => setState('idle'), 3000);
+          return;
+        } catch {
+          // User cancelled or share failed — fall through to download
         }
+      }
 
-        // Fallback: download the image so they can share from camera roll
-        const objectUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = objectUrl;
-        a.download = 'djdx-story.png';
-        a.click();
-        URL.revokeObjectURL(objectUrl);
-        setState('done');
-        setTimeout(() => setState('idle'), 4000);
-      }, 'image/png', 1.0);
+      // Fallback: download the image so they can share from camera roll
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = objectUrl;
+      a.download = 'djdx-story.png';
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+      setState('done');
+      setTimeout(() => setState('idle'), 4000);
 
     } catch {
       setState('error');
       setTimeout(() => setState('idle'), 3000);
     }
   }
-
-  const shortUrl = url.replace('https://', '');
 
   return (
     <>
@@ -109,192 +103,6 @@ export default function InstagramStoryShare({ headline, excerpt, image, category
           </span>
         </button>
       )}
-
-      {/* ── Hidden Story Card — 1080×1920 (Instagram Story dimensions) ── */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '-9999px',
-          left: '-9999px',
-          width: '1080px',
-          height: '1920px',
-          pointerEvents: 'none',
-          zIndex: -1,
-        }}
-        aria-hidden="true"
-      >
-        <div
-          ref={cardRef}
-          style={{
-            width: '1080px',
-            height: '1920px',
-            background: '#0a0805',
-            position: 'relative',
-            overflow: 'hidden',
-            fontFamily: "'Barlow Condensed', 'Barlow', sans-serif",
-          }}
-        >
-          {/* ── Cover image — upper 65% ── */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            height: '75%',
-          }}>
-            <img
-              src={image}
-              crossOrigin="anonymous"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-              }}
-              alt=""
-            />
-          </div>
-
-          {/* ── Gradient overlay — bottom 60% ── */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to bottom, transparent 25%, rgba(10,8,5,0.85) 55%, #0a0805 75%)',
-          }} />
-
-          {/* ── Top badge ── */}
-          <div style={{
-            position: 'absolute',
-            top: 80,
-            left: 80,
-            background: 'rgba(201,168,76,0.15)',
-            border: '2px solid rgba(201,168,76,0.5)',
-            borderRadius: '4px',
-            padding: '12px 32px',
-          }}>
-            <span style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '32px',
-              fontWeight: 800,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: '#C9A84C',
-            }}>{category}</span>
-          </div>
-
-          {/* ── Bottom content block ── */}
-          <div style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: '0 80px 120px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '32px',
-          }}>
-
-            {/* Artist / duo name */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '24px',
-            }}>
-              <div style={{ flex: '0 0 48px', height: '2px', background: '#C9A84C' }} />
-              <span style={{
-                fontFamily: "'Barlow Condensed', sans-serif",
-                fontSize: '36px',
-                fontWeight: 800,
-                letterSpacing: '0.25em',
-                textTransform: 'uppercase',
-                color: '#C9A84C',
-              }}>DJ DX</span>
-            </div>
-
-            {/* Headline */}
-            <div style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '104px',
-              fontWeight: 800,
-              lineHeight: 1.0,
-              color: '#f2f2f2',
-              letterSpacing: '-0.01em',
-            }}>
-              {headline.length > 60 ? headline.slice(0, 57) + '…' : headline}
-            </div>
-
-            {/* Excerpt snippet */}
-            {excerpt && (
-              <div style={{
-                fontFamily: "'Barlow', sans-serif",
-                fontSize: '34px',
-                fontWeight: 500,
-                lineHeight: 1.4,
-                color: 'rgba(242,242,242,0.75)',
-              }}>
-                {excerpt.length > 150 ? excerpt.slice(0, 147) + '…' : excerpt}
-              </div>
-            )}
-
-            {/* Divider */}
-            <div style={{ height: '2px', background: 'rgba(201,168,76,0.3)' }} />
-
-            {/* CTA row */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <span style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '30px',
-                  fontWeight: 600,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(242,242,242,0.5)',
-                }}>Read the full story at</span>
-                <span style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '36px',
-                  fontWeight: 800,
-                  letterSpacing: '0.08em',
-                  color: '#C9A84C',
-                }}>{shortUrl}</span>
-              </div>
-
-              {/* DJ DX logo mark */}
-              <div style={{
-                width: '140px',
-                height: '140px',
-                border: '3px solid rgba(201,168,76,0.4)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                gap: '2px',
-              }}>
-                <span style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '42px',
-                  fontWeight: 900,
-                  letterSpacing: '0.05em',
-                  color: '#f2f2f2',
-                  lineHeight: 1,
-                }}>DJ</span>
-                <span style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: '42px',
-                  fontWeight: 900,
-                  letterSpacing: '0.05em',
-                  color: '#C9A84C',
-                  lineHeight: 1,
-                }}>DX</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
 
       {/* Spin animation style */}
       <style>{`

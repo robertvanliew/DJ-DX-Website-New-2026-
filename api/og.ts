@@ -21,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     process.env.SITE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://djdxmusic.com')
 
-  const { type = 'store', track = '', album = '', format = 'og', trackId = '' } = req.query as Record<string, string>
+  const { type = 'store', track = '', album = '', format = 'og', trackId = '', headline = '', excerpt = '', category = '', image = '', url = '' } = req.query as Record<string, string>
   const isStory = format === 'story'
 
   // ── Determine background image ────────────────────────────────────────────
@@ -282,6 +282,145 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Design: OLED dark base + gold accent. Apple Music / Spotify premium feel.
   // IMPORTANT: Satori-only CSS — no boxShadow, no multi-value backgrounds,
   // no CSS grid, no gap, no inset shorthand, no filter, no backdropFilter.
+  if (isStory && type === 'news') {
+    // News article story card — server-rendered so there's no client-side
+    // canvas/CORS risk (the previous html2canvas approach tainted on mobile
+    // Safari when the same image URL was fetched in two different CORS modes
+    // on the same page). Satori composites everything here instead.
+    const newsImageUrl = image.startsWith('http') ? image : base(origin, image)
+    const shortUrl = url.replace(/^https?:\/\//, '')
+    const safeHeadline = headline.length > 60 ? headline.slice(0, 57) + '…' : headline
+    const safeExcerpt = excerpt.length > 150 ? excerpt.slice(0, 147) + '…' : excerpt
+    const headlineSize = safeHeadline.length > 45 ? '88px' : '104px'
+
+    const newsCard = h('div', {
+      style: {
+        width: '1080px', height: '1920px',
+        display: 'flex', position: 'relative',
+        background: '#0a0805',
+        fontFamily: 'Arial Black, sans-serif',
+        overflow: 'hidden',
+      }
+    },
+      // Cover image — top ~75%
+      h('img', {
+        src: newsImageUrl,
+        style: {
+          position: 'absolute', top: '0px', left: '0px', right: '0px',
+          width: '1080px', height: '1440px',
+          objectFit: 'cover',
+        },
+      }),
+      // Gradient overlay for legibility
+      h('div', {
+        style: {
+          position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px',
+          background: 'linear-gradient(to bottom, rgba(10,8,5,0) 25%, rgba(10,8,5,0.85) 55%, #0a0805 75%)',
+        }
+      }),
+      // Category badge — top left
+      h('div', {
+        style: {
+          position: 'absolute', top: '80px', left: '80px',
+          display: 'flex',
+          background: 'rgba(201,168,76,0.15)',
+          border: '2px solid rgba(201,168,76,0.5)',
+          borderRadius: '4px',
+          padding: '12px 32px',
+        }
+      },
+        h('div', {
+          style: {
+            fontSize: '32px', fontWeight: '800', letterSpacing: '4px',
+            textTransform: 'uppercase', color: '#C9A84C',
+            fontFamily: 'Arial, sans-serif',
+          }
+        }, category),
+      ),
+      // Bottom content block
+      h('div', {
+        style: {
+          position: 'absolute', left: '0px', right: '0px', bottom: '0px',
+          display: 'flex', flexDirection: 'column',
+          padding: '0px 80px 120px 80px',
+        }
+      },
+        // DJ DX eyebrow
+        h('div', {
+          style: {
+            display: 'flex', alignItems: 'center',
+            marginBottom: '32px',
+          }
+        },
+          h('div', { style: { width: '48px', height: '2px', background: '#C9A84C', marginRight: '24px' } }),
+          h('div', {
+            style: {
+              fontSize: '36px', fontWeight: '800', letterSpacing: '10px',
+              textTransform: 'uppercase', color: '#C9A84C',
+              fontFamily: 'Arial, sans-serif',
+            }
+          }, 'DJ DX'),
+        ),
+        // Headline
+        h('div', {
+          style: {
+            fontSize: headlineSize, fontWeight: '800', color: '#f2f2f2',
+            lineHeight: '1.05', letterSpacing: '-1px',
+            marginBottom: '32px',
+          }
+        }, safeHeadline),
+        // Excerpt
+        h('div', {
+          style: {
+            fontSize: '34px', fontWeight: '400', color: 'rgba(242,242,242,0.75)',
+            lineHeight: '1.4', marginBottom: '32px',
+            fontFamily: 'Arial, sans-serif',
+          }
+        }, safeExcerpt),
+        // Divider
+        h('div', { style: { width: '100%', height: '2px', background: 'rgba(201,168,76,0.3)', marginBottom: '32px' } }),
+        // Bottom row
+        h('div', {
+          style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }
+        },
+          h('div', { style: { display: 'flex', flexDirection: 'column' } },
+            h('div', {
+              style: {
+                fontSize: '30px', fontWeight: '600', letterSpacing: '2px',
+                textTransform: 'uppercase', color: 'rgba(242,242,242,0.5)',
+                marginBottom: '8px', fontFamily: 'Arial, sans-serif',
+              }
+            }, 'Read the full story at'),
+            h('div', {
+              style: { fontSize: '36px', fontWeight: '800', letterSpacing: '1px', color: '#C9A84C' }
+            }, shortUrl),
+          ),
+          // Circular DJ DX mark
+          h('div', {
+            style: {
+              width: '140px', height: '140px',
+              border: '3px solid rgba(201,168,76,0.4)',
+              borderRadius: '70px',
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center',
+            }
+          },
+            h('div', { style: { fontSize: '42px', fontWeight: '900', letterSpacing: '2px', color: '#f2f2f2' } }, 'DJ'),
+            h('div', { style: { fontSize: '42px', fontWeight: '900', letterSpacing: '2px', color: '#C9A84C' } }, 'DX'),
+          ),
+        ),
+      ),
+    )
+
+    const newsResponse = new ImageResponse(newsCard, { width: 1080, height: 1920 })
+    res.setHeader('Cache-Control', 'public, s-maxage=604800, stale-while-revalidate=86400')
+    res.setHeader('Content-Type', 'image/png')
+    res.setHeader('Content-Disposition', 'attachment; filename="djdx-story.png"')
+    const buf = Buffer.from(await newsResponse.arrayBuffer())
+    res.send(buf)
+    return
+  }
+
   if (isStory) {
     const artistLine = type === 'soul-shades' ? 'Soul Shades · DJ DX' : 'DJ DX'
     const trackLabel = label
