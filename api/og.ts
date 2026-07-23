@@ -383,7 +383,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         h('div', {
           style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }
         },
-          h('div', { style: { display: 'flex', flexDirection: 'column', flex: '1', minWidth: '0px', marginRight: '32px' } },
+          h('div', { style: { display: 'flex', flexDirection: 'column', flexGrow: '1', flexShrink: '1', flexBasis: '0%', minWidth: '0px', maxWidth: '720px', marginRight: '32px' } },
             h('div', {
               style: {
                 fontSize: '30px', fontWeight: '600', letterSpacing: '2px',
