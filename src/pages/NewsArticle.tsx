@@ -141,7 +141,7 @@ export default function NewsArticle() {
       {/* ── CINEMATIC HERO ── */}
       <div className="na-hero">
         <div className="na-hero-img-wrap">
-          <img src={post.image} alt={post.imageAlt} className="na-hero-img" fetchPriority="high" />
+          <img src={post.image} alt={post.imageAlt} className="na-hero-img" fetchPriority="high" crossOrigin="anonymous" />
           <div className="na-hero-vignette" />
           <div className="na-hero-gradient" />
         </div>
