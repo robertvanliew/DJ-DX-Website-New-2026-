@@ -14,7 +14,7 @@ const categoryColors: Record<string, string> = {
 };
 
 /* ── Share bar ── */
-function ShareBar({ url, headline, image, category }: { url: string; headline: string; image: string; category: string }) {
+function ShareBar({ url, headline, excerpt, image, category }: { url: string; headline: string; excerpt: string; image: string; category: string }) {
   const [copied, setCopied] = useState(false);
 
   function copyLink() {
@@ -36,6 +36,7 @@ function ShareBar({ url, headline, image, category }: { url: string; headline: s
         {/* Instagram Stories — canvas screenshot → save to camera roll */}
         <InstagramStoryShare
           headline={headline}
+          excerpt={excerpt}
           image={image}
           category={category}
           url={url}
@@ -201,6 +202,7 @@ export default function NewsArticle() {
               <div className="na-sidebar-share-stack">
                 <InstagramStoryShare
                   headline={post.headline}
+                  excerpt={post.excerpt}
                   image={fullImageUrl}
                   category={post.category}
                   url={canonicalUrl}
@@ -239,7 +241,7 @@ export default function NewsArticle() {
         {/* ── BOTTOM SHARE BAR ── */}
         <div className="na-bottom-share-wrap">
           <div className="na-bottom-share-inner">
-            <ShareBar url={canonicalUrl} headline={post.headline} image={fullImageUrl} category={post.category} />
+            <ShareBar url={canonicalUrl} headline={post.headline} excerpt={post.excerpt} image={fullImageUrl} category={post.category} />
           </div>
         </div>
 

@@ -136,96 +136,20 @@
         "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/",
         "https://share.google/v7RARn4fdsghIcXyX",
         "https://profile.google.com/@djdxmusic"
-      ],
-      "event": [
-        {
-          "@type": "MusicEvent",
-          "name": "TEDxYouth@RVA — PAUSE",
-          "description": "DJ DX performed as a featured artist at TEDxYouth@RVA 2022, a youth-led TEDx event themed 'PAUSE' held in Richmond, Virginia.",
-          "startDate": "2022-11-12T09:00:00-05:00",
-          "endDate": "2022-11-12T17:00:00-05:00",
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "image": "https://djdxmusic.com/show-2.jpg",
-          "location": {
-            "@type": "Place",
-            "name": "Richmond, Virginia",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Richmond",
-              "addressRegion": "VA",
-              "addressCountry": "US"
-            }
-          },
-          "organizer": {
-            "@type": "Organization",
-            "name": "TEDxYouth@RVA",
-            "url": "https://www.ted.com/tedx/events/52176"
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.ted.com/tedx/events/52176",
-            "price": "0",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/SoldOut",
-            "validFrom": "2022-09-01T00:00:00-05:00"
-          },
-          "url": "https://www.ted.com/tedx/events/52176",
-          "performer": { "@id": "https://djdxmusic.com/#djdx" }
-        }
-      ],
-      "subjectOf": [
-        {
-          "@type": "Article",
-          "headline": "DJ DX Leads the Music Industry into the Metaverse",
-          "url": "https://disruptmagazine.com/dj-dx-leads-the-music-industry-into-the-metaverse/",
-          "publisher": { "@type": "Organization", "name": "Disrupt Magazine" },
-          "datePublished": "2022-02"
-        },
-        {
-          "@type": "Article",
-          "headline": "Jersey City Rapper DJ DX Shares Stories Through Old, New School Sounds",
-          "url": "https://www.nj.com/hudson/2014/07/jersey_city_rapper_dj_dx_shares_stories_through_old_new_school_sounds.html",
-          "publisher": { "@type": "Organization", "name": "NJ.com" },
-          "datePublished": "2014-07"
-        },
-        {
-          "@type": "VideoObject",
-          "name": "DJ DX: Finally Moving",
-          "description": "DJ DX performs 'Finally Moving' — a live TED Talk performance by New York/New Jersey DJ, producer, and recording artist.",
-          "thumbnailUrl": "https://i.ytimg.com/vi/aG1KR7wPTBk/maxresdefault.jpg",
-          "uploadDate": "2022-12-09T00:00:00+00:00",
-          "embedUrl": "https://www.youtube.com/embed/aG1KR7wPTBk",
-          "url": "https://www.ted.com/talks/dj_dx_finally_moving",
-          "publisher": { "@type": "Organization", "name": "TED" }
-        },
-        {
-          "@type": "Article",
-          "headline": "Keeping It Real in the South — An Interview With DJ DX",
-          "url": "https://rvamag.com/music/keeping-it-real-in-the-south-an-interview-with-dj-dx.html",
-          "publisher": { "@type": "Organization", "name": "RVA Magazine" }
-        },
-        {
-          "@type": "VideoObject",
-          "name": "DJ DX — HearRVA Feature",
-          "description": "DJ DX featured on HearRVA — Richmond's premier music discovery channel. New York/New Jersey DJ, producer, and recording artist.",
-          "thumbnailUrl": "https://i.ytimg.com/vi/V2uWYlWhv64/maxresdefault.jpg",
-          "uploadDate": "2022-01-01T00:00:00+00:00",
-          "embedUrl": "https://www.youtube.com/embed/V2uWYlWhv64",
-          "url": "https://www.youtube.com/watch?v=V2uWYlWhv64",
-          "publisher": { "@type": "Organization", "name": "HearRVA" }
-        },
-        {
-          "@type": "CreativeWork",
-          "headline": "Nimino 'I Only Smoke When I Drink' x 'Englishman In New York' — Soul Shades",
-          "description": "Soul Shades' remix of Nimino's 'I Only Smoke When I Drink' and Sting's 'Englishman in New York' was featured by UK record label Ninja Tune on their official Instagram, credited to @soulshadesmusic.",
-          "url": "https://www.instagram.com/p/DCHDQr1oI3y/",
-          "datePublished": "2024-11-08",
-          "publisher": { "@type": "Organization", "name": "Ninja Tune" }
-        }
       ]
     }
     </script>
+    <!--
+      "event" (TEDxYouth@RVA MusicEvent) and "subjectOf" (press articles,
+      video features, the Ninja Tune feature) used to live inside the
+      #djdx block above — since that block is global (ships on every
+      route), Google Search Console's Video indexing report started
+      flagging the same HearRVA/TED video metadata as present on a
+      dozen unrelated SEO landing pages ('Video isn't on a watch page').
+      Moved here as a homepage-only supplementary declaration (App.tsx's
+      Helmet references the same @id) so press/media content only ships
+      where it's actually topical.
+    -->
 
     <!-- JSON-LD — Local Professional Service (DJ for hire) -->
     <script type="application/ld+json">

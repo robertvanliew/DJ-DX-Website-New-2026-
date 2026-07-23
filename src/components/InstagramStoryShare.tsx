@@ -3,13 +3,14 @@ import html2canvas from 'html2canvas';
 
 interface Props {
   headline: string;
+  excerpt: string;     // article snippet shown on the story card
   image: string;       // absolute URL e.g. https://djdxmusic.com/covers/...
   category: string;
   url: string;         // canonical article URL
   variant?: 'sidebar' | 'bar'; // sidebar = circular icon, bar = full button
 }
 
-export default function InstagramStoryShare({ headline, image, category, url, variant = 'bar' }: Props) {
+export default function InstagramStoryShare({ headline, excerpt, image, category, url, variant = 'bar' }: Props) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<'idle' | 'rendering' | 'done' | 'error'>('idle');
 
@@ -205,13 +206,13 @@ export default function InstagramStoryShare({ headline, image, category, url, va
                 letterSpacing: '0.25em',
                 textTransform: 'uppercase',
                 color: '#C9A84C',
-              }}>Soul Shades × DJ DX</span>
+              }}>DJ DX</span>
             </div>
 
             {/* Headline */}
             <div style={{
               fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: '112px',
+              fontSize: '104px',
               fontWeight: 800,
               lineHeight: 1.0,
               color: '#f2f2f2',
@@ -219,6 +220,19 @@ export default function InstagramStoryShare({ headline, image, category, url, va
             }}>
               {headline.length > 60 ? headline.slice(0, 57) + '…' : headline}
             </div>
+
+            {/* Excerpt snippet */}
+            {excerpt && (
+              <div style={{
+                fontFamily: "'Barlow', sans-serif",
+                fontSize: '34px',
+                fontWeight: 500,
+                lineHeight: 1.4,
+                color: 'rgba(242,242,242,0.75)',
+              }}>
+                {excerpt.length > 150 ? excerpt.slice(0, 147) + '…' : excerpt}
+              </div>
+            )}
 
             {/* Divider */}
             <div style={{ height: '2px', background: 'rgba(201,168,76,0.3)' }} />
