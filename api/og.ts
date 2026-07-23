@@ -383,7 +383,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         h('div', {
           style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }
         },
-          h('div', { style: { display: 'flex', flexDirection: 'column' } },
+          h('div', { style: { display: 'flex', flexDirection: 'column', flex: '1', minWidth: '0px', marginRight: '32px' } },
             h('div', {
               style: {
                 fontSize: '30px', fontWeight: '600', letterSpacing: '2px',
@@ -392,13 +392,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               }
             }, 'Read the full story at'),
             h('div', {
-              style: { fontSize: '36px', fontWeight: '800', letterSpacing: '1px', color: '#C9A84C' }
+              style: { fontSize: shortUrl.length > 32 ? '28px' : '36px', fontWeight: '800', letterSpacing: '1px', color: '#C9A84C' }
             }, shortUrl),
           ),
           // Circular DJ DX mark
           h('div', {
             style: {
               width: '140px', height: '140px',
+              flexShrink: '0',
               border: '3px solid rgba(201,168,76,0.4)',
               borderRadius: '70px',
               display: 'flex', flexDirection: 'column',
