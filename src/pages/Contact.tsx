@@ -1,8 +1,10 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
+import AddressAutocomplete from '../components/AddressAutocomplete';
+import { trackLead } from '../lib/analytics';
 
 const SUBJECT_OPTIONS = [
   { value: 'booking',    label: 'Booking inquiry (weddings, events, parties)' },
@@ -33,12 +35,18 @@ export default function Contact() {
     phone: '',
     subject: 'booking',
     eventDate: '',
-    eventTime: '',
+    eventStartTime: '',
+    eventEndTime: '',
     venue: '',
+    venueCity: '',
+    venueState: '',
+    venueCountry: '',
     message: '',
+    company: '', // honeypot — real visitors never see or fill this
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const mountedAt = useRef(Date.now());
 
   const set = (k: string, v: string) => setFields(f => ({ ...f, [k]: v }));
   const showEventFields = fields.subject === 'booking' || fields.subject === 'soulshades';
@@ -47,18 +55,26 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     setErrorMsg('');
+    const metaEventId = crypto.randomUUID();
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fields),
+        body: JSON.stringify({
+          ...fields,
+          honeypot: fields.company,
+          elapsedMs: Date.now() - mountedAt.current,
+          metaEventId,
+        }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error((data as { error?: string }).error || 'Failed to send');
       }
+      trackLead({ form: 'contact', subject: fields.subject }, metaEventId);
       setStatus('sent');
-      setFields({ name: '', email: '', phone: '', subject: 'booking', eventDate: '', eventTime: '', venue: '', message: '' });
+      setFields({ name: '', email: '', phone: '', subject: 'booking', eventDate: '', eventStartTime: '', eventEndTime: '', venue: '', venueCity: '', venueState: '', venueCountry: '', message: '', company: '' });
+      mountedAt.current = Date.now();
     } catch (err) {
       setStatus('error');
       setErrorMsg(err instanceof Error ? err.message : 'Something went wrong');
@@ -137,6 +153,19 @@ export default function Contact() {
               </div>
             ) : (
               <form className="booking-form" onSubmit={handleSubmit}>
+                {/* Honeypot — hidden from real visitors, bots fill it blindly */}
+                <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                  <label htmlFor="contact-company">Company</label>
+                  <input
+                    id="contact-company"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={fields.company}
+                    onChange={e => set('company', e.target.value)}
+                  />
+                </div>
+
                 <div className="form-row">
                   <div className="form-field">
                     <label htmlFor="contact-name">Full Name</label>
@@ -223,27 +252,37 @@ export default function Contact() {
                         />
                       </div>
                       <div className="form-field">
-                        <label htmlFor="contact-event-time">Event Time</label>
+                        <label htmlFor="contact-event-start-time">Start Time</label>
                         <input
-                          id="contact-event-time"
+                          id="contact-event-start-time"
                           type="time"
                           required
-                          value={fields.eventTime}
-                          onChange={e => set('eventTime', e.target.value)}
+                          value={fields.eventStartTime}
+                          onChange={e => set('eventStartTime', e.target.value)}
                         />
                       </div>
                     </div>
 
-                    <div className="form-field">
-                      <label htmlFor="contact-venue">Venue / Location</label>
-                      <input
+                    <div className="form-row">
+                      <div className="form-field">
+                        <label htmlFor="contact-event-end-time">End Time</label>
+                        <input
+                          id="contact-event-end-time"
+                          type="time"
+                          required
+                          value={fields.eventEndTime}
+                          onChange={e => set('eventEndTime', e.target.value)}
+                        />
+                      </div>
+                      <AddressAutocomplete
                         id="contact-venue"
-                        type="text"
+                        label="Venue / Location"
+                        placeholder="Venue name, city, state (e.g. The Plaza, New York, NY)"
                         required
                         maxLength={200}
-                        placeholder="Venue name, city, state (e.g. The Plaza, New York, NY)"
                         value={fields.venue}
-                        onChange={e => set('venue', e.target.value)}
+                        onChange={v => set('venue', v)}
+                        onSelect={d => setFields(f => ({ ...f, venueCity: d.city, venueState: d.state, venueCountry: d.country }))}
                       />
                     </div>
                   </>

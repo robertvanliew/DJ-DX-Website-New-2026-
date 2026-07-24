@@ -1,5 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
+import { isSpamSubmission } from '../src/lib/spamGuard';
+import { sendMetaLeadEvent } from './_lib/metaCapi';
+import { sendTikTokLeadEvent } from './_lib/tiktokEvents';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -32,10 +35,15 @@ const SUBJECT_ROUTING: Record<string, { to: string; label: string }> = {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, email, phone, subject, message, eventDate, eventTime, venue } = req.body;
+  const { name, email, phone, subject, message, eventDate, eventStartTime, eventEndTime, venue, honeypot, elapsedMs, metaEventId } = req.body;
 
   if (!name || !email || !phone || !subject || !message) {
     return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  if (isSpamSubmission({ honeypot, elapsedMs, message })) {
+    // Fake success so bots don't learn to route around this
+    return res.status(200).json({ success: true });
   }
 
   if (
@@ -55,12 +63,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const needsEventDetails = EVENT_SUBJECTS.has(subject);
 
   if (needsEventDetails) {
-    if (!eventDate || !eventTime || !venue) {
-      return res.status(400).json({ error: 'Event date, time, and venue are required for booking inquiries' });
+    if (!eventDate || !eventStartTime || !eventEndTime || !venue) {
+      return res.status(400).json({ error: 'Event date, start/end time, and venue are required for booking inquiries' });
     }
     if (
       typeof eventDate !== 'string' || eventDate.length > MAX.eventDate ||
-      typeof eventTime !== 'string' || eventTime.length > MAX.eventTime ||
+      typeof eventStartTime !== 'string' || eventStartTime.length > MAX.eventTime ||
+      typeof eventEndTime !== 'string' || eventEndTime.length > MAX.eventTime ||
       typeof venue !== 'string' || venue.length > MAX.venue
     ) {
       return res.status(400).json({ error: 'Invalid event details' });
@@ -75,7 +84,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const safeMessage = escapeHtml(message);
   const safeLabel = escapeHtml(route.label);
   const safeEventDate = needsEventDetails ? escapeHtml(eventDate) : '';
-  const safeEventTime = needsEventDetails ? escapeHtml(eventTime) : '';
+  const safeEventStartTime = needsEventDetails ? escapeHtml(eventStartTime) : '';
+  const safeEventEndTime = needsEventDetails ? escapeHtml(eventEndTime) : '';
   const safeVenue = needsEventDetails ? escapeHtml(venue) : '';
 
   const eventRowsHtml = needsEventDetails ? `
@@ -85,7 +95,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               </tr>
               <tr style="border-top: 1px solid #eee;">
                 <td style="padding: 10px 0; color: #888; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: top;">Event Time</td>
-                <td style="padding: 10px 0; color: #111; font-size: 15px; font-weight: 600;">${safeEventTime}</td>
+                <td style="padding: 10px 0; color: #111; font-size: 15px; font-weight: 600;">${safeEventStartTime} – ${safeEventEndTime}</td>
               </tr>
               <tr style="border-top: 1px solid #eee;">
                 <td style="padding: 10px 0; color: #888; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: top;">Venue</td>
@@ -160,6 +170,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         </div>
       `,
     });
+
+    const clientIp = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim();
+    const userAgent = req.headers['user-agent'];
+    const eventId = typeof metaEventId === 'string' ? metaEventId : undefined;
+
+    await Promise.all([
+      sendMetaLeadEvent({ email, phone, eventSourceUrl: 'https://djdxmusic.com/contact', eventId, clientIp, userAgent }),
+      sendTikTokLeadEvent({ email, phone, eventSourceUrl: 'https://djdxmusic.com/contact', eventId, clientIp, userAgent }),
+    ]);
 
     return res.status(200).json({ success: true });
   } catch (err) {

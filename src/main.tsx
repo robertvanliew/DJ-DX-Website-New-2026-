@@ -9,6 +9,10 @@ import App from './App.tsx'
 import { CartProvider } from './components/CartContext.tsx'
 import { PlayerProvider } from './components/PlayerContext.tsx'
 import { ToastProvider } from './components/Toast.tsx'
+import { trackPageView } from './lib/analytics.ts'
+import { initTrackingPixels } from './lib/pixels.ts'
+
+initTrackingPixels()
 
 // Lazy load all non-home routes — they only download when first visited
 const EPK        = lazy(() => import('./pages/EPK.tsx'))
@@ -51,6 +55,7 @@ const Contact           = lazy(() => import('./pages/Contact.tsx'))
 function ScrollManager() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
+    trackPageView(pathname)
     if (hash) {
       setTimeout(() => {
         const el = document.querySelector(hash) as HTMLElement | null

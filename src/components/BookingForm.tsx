@@ -1,4 +1,6 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
+import { trackLead } from '../lib/analytics';
+import AddressAutocomplete from './AddressAutocomplete';
 
 const Send = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -7,23 +9,33 @@ const Send = () => (
 );
 
 export default function BookingForm() {
-  const [fields, setFields] = useState({ name: '', email: '', phone: '', eventType: '', eventDate: '', eventTime: '', message: '' });
+  const [fields, setFields] = useState({ name: '', email: '', phone: '', eventType: '', eventDate: '', eventStartTime: '', eventEndTime: '', location: '', locationCity: '', locationState: '', locationCountry: '', message: '', company: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const mountedAt = useRef(Date.now());
 
   const set = (k: string, v: string) => setFields(f => ({ ...f, [k]: v }));
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
+    const metaEventId = crypto.randomUUID();
     try {
       const res = await fetch('/api/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fields),
+        body: JSON.stringify({
+          ...fields,
+          honeypot: fields.company,
+          elapsedMs: Date.now() - mountedAt.current,
+          metaEventId,
+          pageUrl: window.location.href,
+        }),
       });
       if (!res.ok) throw new Error();
+      trackLead({ form: 'booking_widget', event_type: fields.eventType }, metaEventId);
       setStatus('sent');
-      setFields({ name: '', email: '', phone: '', eventType: '', eventDate: '', eventTime: '', message: '' });
+      setFields({ name: '', email: '', phone: '', eventType: '', eventDate: '', eventStartTime: '', eventEndTime: '', location: '', locationCity: '', locationState: '', locationCountry: '', message: '', company: '' });
+      mountedAt.current = Date.now();
     } catch {
       setStatus('error');
     }
@@ -39,6 +51,12 @@ export default function BookingForm() {
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
+      {/* Honeypot — hidden from real visitors, bots fill it blindly */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+        <label htmlFor="bf-company">Company</label>
+        <input id="bf-company" type="text" tabIndex={-1} autoComplete="off" value={fields.company} onChange={e => set('company', e.target.value)} />
+      </div>
+
       <div className="form-row">
         <div className="form-field">
           <label htmlFor="bf-name">Full Name</label>
@@ -61,9 +79,15 @@ export default function BookingForm() {
       </div>
       <div className="form-row">
         <div className="form-field">
-          <label htmlFor="bf-event-time">Event Time</label>
-          <input id="bf-event-time" type="time" required value={fields.eventTime} onChange={e => set('eventTime', e.target.value)} />
+          <label htmlFor="bf-event-start-time">Start Time</label>
+          <input id="bf-event-start-time" type="time" required value={fields.eventStartTime} onChange={e => set('eventStartTime', e.target.value)} />
         </div>
+        <div className="form-field">
+          <label htmlFor="bf-event-end-time">End Time</label>
+          <input id="bf-event-end-time" type="time" required value={fields.eventEndTime} onChange={e => set('eventEndTime', e.target.value)} />
+        </div>
+      </div>
+      <div className="form-row">
         <div className="form-field">
           <label htmlFor="bf-event-type">Event Type</label>
           <select id="bf-event-type" required value={fields.eventType} onChange={e => set('eventType', e.target.value)}>
@@ -76,10 +100,20 @@ export default function BookingForm() {
             <option>Other</option>
           </select>
         </div>
+        <AddressAutocomplete
+          id="bf-location"
+          label="Event Location"
+          placeholder="Venue name, city, state"
+          required
+          maxLength={200}
+          value={fields.location}
+          onChange={v => set('location', v)}
+          onSelect={d => setFields(f => ({ ...f, locationCity: d.city, locationState: d.state, locationCountry: d.country }))}
+        />
       </div>
       <div className="form-field">
         <label htmlFor="bf-message">Tell me about your event</label>
-        <textarea id="bf-message" placeholder="Location, guest count, vibe you're going for, any special requests…" required value={fields.message} onChange={e => set('message', e.target.value)} />
+        <textarea id="bf-message" placeholder="Guest count, vibe you're going for, any special requests…" required value={fields.message} onChange={e => set('message', e.target.value)} />
       </div>
       {status === 'error' && <p className="form-error">Something went wrong. Please try again or email bookings@djdxmusic.com directly.</p>}
       <button type="submit" className="form-submit" disabled={status === 'sending'}>
