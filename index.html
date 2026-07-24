@@ -12,13 +12,15 @@
       gtag('config', 'G-8XB8C4F0WR', { send_page_view: false });
     </script>
 
-    <!-- Favicons -->
+    <!-- Favicons — PNG fallbacks alongside SVG: Google's search-result favicon
+         crawler and Apple's home-screen icon are both unreliable with SVG-only icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon.svg" />
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="msapplication-TileImage" content="/favicon.svg" />
+    <meta name="msapplication-TileImage" content="/favicon-192x192.png" />
     <meta name="msapplication-TileColor" content="#0c0c0c" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--
@@ -233,7 +235,7 @@
       "name": "DJ DX",
       "legalName": "DJ DX",
       "url": "https://djdxmusic.com/",
-      "logo": "https://djdxmusic.com/favicon.svg",
+      "logo": "https://djdxmusic.com/favicon-512x512.png",
       "contactPoint": [
         {
           "@type": "ContactPoint",
