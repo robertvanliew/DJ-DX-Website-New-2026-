@@ -1,10 +1,114 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { isSpamSubmission } from './_lib/spamGuard';
-import { sendMetaLeadEvent } from './_lib/metaCapi';
-import { sendTikTokLeadEvent } from './_lib/tiktokEvents';
+import { createHash } from 'crypto';
+
+// NOTE: everything this function needs is inlined below (no local relative
+// imports). Vercel's builder here does not bundle cross-file imports even
+// within api/ subdirectories — a prior version imported from ../src/lib and
+// then from ./_lib/, and both hard-crashed every request in production with
+// ERR_MODULE_NOT_FOUND. Confirmed via production logs before this fix.
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// ── Spam guard ────────────────────────────────────────────────────────────────
+const SPAM_URL_RE = /https?:\/\//gi;
+const MIN_FILL_MS = 2500;
+const MAX_LINKS = 2;
+
+function isSpamSubmission({ honeypot, elapsedMs, message }: { honeypot: unknown; elapsedMs: unknown; message: string }): boolean {
+  if (typeof honeypot === 'string' && honeypot.trim() !== '') return true;
+  if (typeof elapsedMs !== 'number' || !Number.isFinite(elapsedMs) || elapsedMs < MIN_FILL_MS) return true;
+  const linkCount = (message.match(SPAM_URL_RE) || []).length;
+  if (linkCount > MAX_LINKS) return true;
+  return false;
+}
+
+// ── Retargeting conversion reporting (best-effort, never blocks the response) ─
+function sha256(value: string): string {
+  return createHash('sha256').update(value.trim().toLowerCase()).digest('hex');
+}
+
+interface LeadEventInput {
+  email: string;
+  phone: string;
+  eventSourceUrl: string;
+  eventId?: string;
+  clientIp?: string;
+  userAgent?: string;
+}
+
+async function sendMetaLeadEvent(input: LeadEventInput): Promise<void> {
+  const pixelId = process.env.VITE_META_PIXEL_ID;
+  const accessToken = process.env.META_CAPI_ACCESS_TOKEN;
+  if (!pixelId || !accessToken) return;
+
+  const digitsOnlyPhone = input.phone.replace(/\D/g, '');
+  const payload = {
+    data: [{
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: input.eventId,
+      action_source: 'website',
+      event_source_url: input.eventSourceUrl,
+      user_data: {
+        em: [sha256(input.email)],
+        ph: digitsOnlyPhone ? [sha256(digitsOnlyPhone)] : undefined,
+        client_ip_address: input.clientIp,
+        client_user_agent: input.userAgent,
+      },
+    }],
+  };
+
+  try {
+    await fetch(`https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.error('Meta CAPI error:', err);
+  }
+}
+
+function normalizeTikTokPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
+  return `+${digits}`;
+}
+
+async function sendTikTokLeadEvent(input: LeadEventInput): Promise<void> {
+  const pixelId = process.env.VITE_TIKTOK_PIXEL_ID;
+  const accessToken = process.env.TIKTOK_EVENTS_API_ACCESS_TOKEN;
+  if (!pixelId || !accessToken) return;
+
+  const payload = {
+    event_source: 'web',
+    event_source_id: pixelId,
+    data: [{
+      event: 'SubmitForm',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: input.eventId,
+      user: {
+        email: [sha256(input.email)],
+        phone: [sha256(normalizeTikTokPhone(input.phone))],
+        ip: input.clientIp,
+        user_agent: input.userAgent,
+      },
+      page: { url: input.eventSourceUrl },
+    }],
+  };
+
+  try {
+    await fetch('https://business-api.tiktok.com/open_api/v1.3/event/track/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Access-Token': accessToken },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.error('TikTok Events API error:', err);
+  }
+}
 
 function escapeHtml(str: string): string {
   return str
