@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { isSpamSubmission } from '../src/lib/spamGuard';
+import { isSpamSubmission } from './_lib/spamGuard';
 import { sendMetaLeadEvent } from './_lib/metaCapi';
 import { sendTikTokLeadEvent } from './_lib/tiktokEvents';
 
