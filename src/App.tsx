@@ -1181,13 +1181,13 @@ function App() {
       </section>
 
       {/* ── REVIEWS ── */}
-      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,0.02)' }} aria-label="Google reviews for DJ DX">
+      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,0.02)' }} aria-label="Client testimonials for DJ DX">
         <div className="section-inner" style={{ maxWidth: '1000px' }}>
           <div className="sec-header center sr" style={{ textAlign: 'center' }}>
             <div className="sec-overline" style={{ justifyContent: 'center' }}>
-              <span className="sec-label">Google Reviews</span>
+              <span className="sec-label">Client Feedback</span>
             </div>
-            <h2 className="sec-title">5.0 <span>★★★★★</span> — 6 Reviews</h2>
+            <h2 className="sec-title">What <span>Clients</span> Say</h2>
           </div>
           <div style={{
             display: 'grid',
@@ -1196,10 +1196,8 @@ function App() {
             marginTop: '48px',
           }}>
             {[
-              { quote: "DJ DX is a true artist and true professional. He is my partner and has been apart of many of my favorite performances. There is no other DJ I have enjoyed working with more!", name: 'Julie Schatz', context: 'Soul Shades' },
-              { quote: "Where can I begin? Over the years DJ DX has been producing rapping and being a fantastic artist he has helped people better themselves with their craft. I love his music and can't wait until I hear more great music.", name: 'Edith Brown', context: null },
-              { quote: "Hell of a DJ! The vibe will always be on point, if you book DJ DX. We'll be booking you many times over!", name: 'Dirk Digglar', context: null },
-              { quote: "A real genuine person. Can't wait for what else he has in store.", name: 'Kaquan Van Liew', context: null },
+              { quote: "The music was just perfect and the vibe was great. I love the uniqueness of keyboard and violin together with DJing — I don't think there are a lot of DJs who come with this built into the duo.", name: 'Sue Krebs', context: 'NautaDutilh New York P.C.' },
+              { quote: "Your performance set the tone for our event, and the addition of the violin amplified our guests' experience and made the evening memorable.", name: 'Anna Naraine', context: 'NautaDutilh New York P.C.' },
             ].map(r => (
               <div key={r.name} style={{
                 background: 'rgba(255,255,255,0.03)',
