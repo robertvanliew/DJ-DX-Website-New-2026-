@@ -24,8 +24,6 @@ const services = [
 ];
 
 const marqueePhotos = [
-  { src: '/show-21.jpg', alt: 'DJ DX smiling at the DJ booth, 2024' },
-  { src: '/show-22.jpg', alt: 'DJ DX performing live, 2024' },
   { src: '/show-1.jpg', alt: 'DJ DX performing at TEDx Youth RVA' },
   { src: '/show-2.jpg', alt: 'DJ DX on stage at TEDx RVA' },
   { src: '/show-3.jpg', alt: 'DJ DX live performance TEDx' },
