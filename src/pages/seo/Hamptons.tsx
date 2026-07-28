@@ -67,6 +67,32 @@ export default function Hamptons() {
             },
             {
               "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How much does a Hamptons DJ cost?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Hamptons luxury DJ pricing typically starts at $3,000+ depending on estate size, event duration, and season. Peak summer weekends (July-August) command premium rates. DJ DX offers custom quotes — contact bookings@djdxmusic.com for your date."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is DJ DX available for Hamptons private estates and yacht events?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Yes. DJ DX performs private estate parties, yacht events, and summer galas from Southampton to Montauk, including Sag Harbor, Bridgehampton, East Hampton, Water Mill, and Amagansett."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can I book the DJ + live violin duo for a Hamptons event?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Yes. Soul Shades — DJ DX paired with violinist Julie Schatz — is available for Hamptons bookings starting at $2,400, adding live strings over the DJ set for cocktail hour and reception."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "How early should I book a Hamptons DJ?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Summer Hamptons dates (June-September) book up 6-12 months in advance given tight peak-season demand. Reach out as early as possible to confirm your date."}
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
@@ -150,6 +176,28 @@ export default function Hamptons() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section style={{ padding: '80px 40px' }}>
+        <div className="section-inner" style={{ maxWidth: '760px' }}>
+          <div className="sec-header center sr">
+            <h2 className="sec-title">Hamptons DJ <span>FAQ</span></h2>
+          </div>
+          <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {[
+              { q: 'How much does a Hamptons DJ cost?', a: 'Hamptons luxury DJ pricing typically starts at $3,000+ depending on estate size, event duration, and season. Peak summer weekends (July-August) command premium rates. DJ DX offers custom quotes — contact bookings@djdxmusic.com.' },
+              { q: 'Is DJ DX available for Hamptons private estates and yacht events?', a: 'Yes. DJ DX performs private estate parties, yacht events, and summer galas from Southampton to Montauk, including Sag Harbor, Bridgehampton, East Hampton, Water Mill, and Amagansett.' },
+              { q: 'Can I book the DJ + live violin duo for a Hamptons event?', a: 'Yes. Soul Shades — DJ DX paired with violinist Julie Schatz — is available for Hamptons bookings starting at $2,400, adding live strings over the DJ set for cocktail hour and reception.' },
+              { q: 'How early should I book a Hamptons DJ?', a: 'Summer Hamptons dates (June-September) book up 6-12 months in advance given tight peak-season demand. Reach out as early as possible to confirm your date.' },
+            ].map(({ q, a }) => (
+              <div key={q} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '20px' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '8px' }}>{q}</h3>
+                <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.58)', lineHeight: 1.7 }}>{a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

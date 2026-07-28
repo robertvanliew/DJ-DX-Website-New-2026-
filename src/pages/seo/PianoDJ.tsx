@@ -64,6 +64,32 @@ export default function PianoDJ() {
             },
             {
               "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How much does a Piano and DJ duo cost?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Piano and DJ duo pricing is quoted per event based on venue, hours, and guest count. Contact bookings@djdxmusic.com for a custom quote within 24 hours."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "What's included in the Piano and DJ duo package?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Live piano covers cocktail hour and ceremony moments — R&B, jazz, and modern hits played on live keys — then transitions into a full DJ set for the reception, with piano solos layered directly over the DJ's mix on the dance floor."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "How far in advance should I book the Piano and DJ duo?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Because it requires coordinating two musicians, book 6-12 months in advance to confirm availability for your date."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Where is the Piano and DJ duo available?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "The Piano and DJ duo is available for weddings and corporate galas across New York City, New Jersey, and Connecticut."}
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
@@ -147,6 +173,28 @@ export default function PianoDJ() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section style={{ padding: '80px 40px' }}>
+        <div className="section-inner" style={{ maxWidth: '760px' }}>
+          <div className="sec-header center sr">
+            <h2 className="sec-title">Piano & DJ Duo <span>FAQ</span></h2>
+          </div>
+          <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {[
+              { q: 'How much does a Piano and DJ duo cost?', a: 'Piano and DJ duo pricing is quoted per event based on venue, hours, and guest count. Contact bookings@djdxmusic.com for a custom quote within 24 hours.' },
+              { q: "What's included in the Piano and DJ duo package?", a: "Live piano covers cocktail hour and ceremony moments — R&B, jazz, and modern hits played on live keys — then transitions into a full DJ set for the reception, with piano solos layered directly over the DJ's mix on the dance floor." },
+              { q: 'How far in advance should I book the Piano and DJ duo?', a: 'Because it requires coordinating two musicians, book 6-12 months in advance to confirm availability for your date.' },
+              { q: 'Where is the Piano and DJ duo available?', a: 'The Piano and DJ duo is available for weddings and corporate galas across New York City, New Jersey, and Connecticut.' },
+            ].map(({ q, a }) => (
+              <div key={q} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '20px' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '8px' }}>{q}</h3>
+                <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.58)', lineHeight: 1.7 }}>{a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

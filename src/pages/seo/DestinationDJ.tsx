@@ -74,6 +74,32 @@ export default function DestinationDJ() {
             },
             {
               "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How much does a destination wedding DJ cost?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Destination and international DJ bookings start at $3,000, with travel and technical coordination quoted separately based on location. Contact bookings@djdxmusic.com with your destination and dates for a custom quote."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does DJ DX travel internationally for weddings?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Yes. DJ DX is based in New York and available for destination weddings worldwide, including Italy, Mexico, the Caribbean, France, Spain, and Greece."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "How does technical equipment work for an international destination wedding?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "DJ DX coordinates directly with the venue's local AV company and your wedding planner in advance, over email and video call, to confirm the technical rider is met on-site before arrival."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "How far in advance should I book a destination wedding DJ?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "International destination bookings require significant lead time for travel and technical coordination — reach out as early as possible with your destination and date to confirm availability."}
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
@@ -157,6 +183,28 @@ export default function DestinationDJ() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section style={{ padding: '80px 40px' }}>
+        <div className="section-inner" style={{ maxWidth: '760px' }}>
+          <div className="sec-header center sr">
+            <h2 className="sec-title">Destination Wedding DJ <span>FAQ</span></h2>
+          </div>
+          <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {[
+              { q: 'How much does a destination wedding DJ cost?', a: 'Destination and international DJ bookings start at $3,000, with travel and technical coordination quoted separately based on location. Contact bookings@djdxmusic.com with your destination and dates for a custom quote.' },
+              { q: 'Does DJ DX travel internationally for weddings?', a: 'Yes. DJ DX is based in New York and available for destination weddings worldwide, including Italy, Mexico, the Caribbean, France, Spain, and Greece.' },
+              { q: 'How does technical equipment work for an international destination wedding?', a: "DJ DX coordinates directly with the venue's local AV company and your wedding planner in advance, over email and video call, to confirm the technical rider is met on-site before arrival." },
+              { q: 'How far in advance should I book a destination wedding DJ?', a: 'International destination bookings require significant lead time for travel and technical coordination — reach out as early as possible with your destination and date to confirm availability.' },
+            ].map(({ q, a }) => (
+              <div key={q} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '20px' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '8px' }}>{q}</h3>
+                <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.58)', lineHeight: 1.7 }}>{a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
