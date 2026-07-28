@@ -4,6 +4,14 @@ import SiteNav from '../../components/SiteNav';
 import SiteFooter from '../../components/SiteFooter';
 import RelatedServices from '../../components/RelatedServices';
 import BookingForm from '../../components/BookingForm';
+import HeroPhotoSlideshow from '../../components/HeroPhotoSlideshow';
+
+// Real corporate event photos — add more here as they come in.
+const CORPORATE_HERO_PHOTOS = [
+  { src: '/nautadutilh-dj-booth-cathedral-nyc.jpg', alt: 'DJ DX at the DJ booth, NautaDutilh corporate reception rooftop, NYC skyline and St. Patrick\'s Cathedral' },
+  { src: '/nautadutilh-julie-violin-cathedral-nyc.jpg', alt: 'Julie Schatz performing live violin, NautaDutilh rooftop reception, St. Patrick\'s Cathedral backdrop' },
+  { src: '/nautadutilh-group-photo-cathedral-nyc.jpg', alt: 'NautaDutilh corporate reception guests, rooftop garden with St. Patrick\'s Cathedral and Manhattan skyline' },
+];
 
 export default function Corporate() {
   // Always start at top on load
@@ -137,7 +145,7 @@ export default function Corporate() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/latest-corporate-hero.jpg" alt="Corporate Event DJ New York City — DJ DX performing at gala" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <HeroPhotoSlideshow photos={CORPORATE_HERO_PHOTOS} />
         </div>
         <div className="epk-hero-overlay" style={{ 
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
