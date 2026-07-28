@@ -90,7 +90,7 @@ export default function WeddingDJCost() {
                 "aggregateRating": {
                   "@type": "AggregateRating",
                   "ratingValue": "5.0",
-                  "reviewCount": "7",
+                  "reviewCount": "6",
                   "bestRating": "5",
                   "worstRating": "1"
                 }

@@ -425,6 +425,25 @@ export default function SoulShades() {
               />
             </div>
           </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginTop: '32px' }}>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '24px' }}>
+              <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.75)', lineHeight: 1.7, marginBottom: '14px' }}>
+                &ldquo;The music was just perfect and the vibe was great. I love the uniqueness of keyboard and violin together with DJing — I don&apos;t think there are a lot of DJs who come with this built into the duo.&rdquo;
+              </p>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>
+                Sue Krebs<span style={{ fontWeight: 400, color: 'rgba(242,242,242,0.5)' }}> — NautaDutilh New York P.C.</span>
+              </div>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '24px' }}>
+              <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.75)', lineHeight: 1.7, marginBottom: '14px' }}>
+                &ldquo;Your performance set the tone for our event, and the addition of the violin amplified our guests&apos; experience and made the evening memorable.&rdquo;
+              </p>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>
+                Anna Naraine<span style={{ fontWeight: 400, color: 'rgba(242,242,242,0.5)' }}> — NautaDutilh New York P.C.</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ── EXCLUSIVE MUSIC STORE ── */}

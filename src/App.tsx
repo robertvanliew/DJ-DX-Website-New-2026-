@@ -1180,6 +1180,46 @@ function App() {
         </div>
       </section>
 
+      {/* ── REVIEWS ── */}
+      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,0.02)' }} aria-label="Google reviews for DJ DX">
+        <div className="section-inner" style={{ maxWidth: '1000px' }}>
+          <div className="sec-header center sr" style={{ textAlign: 'center' }}>
+            <div className="sec-overline" style={{ justifyContent: 'center' }}>
+              <span className="sec-label">Google Reviews</span>
+            </div>
+            <h2 className="sec-title">5.0 <span>★★★★★</span> — 6 Reviews</h2>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '24px',
+            marginTop: '48px',
+          }}>
+            {[
+              { quote: "DJ DX is a true artist and true professional. He is my partner and has been apart of many of my favorite performances. There is no other DJ I have enjoyed working with more!", name: 'Julie Schatz', context: 'Soul Shades' },
+              { quote: "Where can I begin? Over the years DJ DX has been producing rapping and being a fantastic artist he has helped people better themselves with their craft. I love his music and can't wait until I hear more great music.", name: 'Edith Brown', context: null },
+              { quote: "Hell of a DJ! The vibe will always be on point, if you book DJ DX. We'll be booking you many times over!", name: 'Dirk Digglar', context: null },
+              { quote: "A real genuine person. Can't wait for what else he has in store.", name: 'Kaquan Van Liew', context: null },
+            ].map(r => (
+              <div key={r.name} style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(201,168,76,0.15)',
+                borderRadius: '10px',
+                padding: '24px',
+              }}>
+                <div style={{ color: 'var(--gold)', fontSize: '0.9rem', marginBottom: '10px' }} aria-hidden="true">★★★★★</div>
+                <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.75)', lineHeight: 1.7, marginBottom: '14px' }}>
+                  &ldquo;{r.quote}&rdquo;
+                </p>
+                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--white)' }}>
+                  {r.name}{r.context && <span style={{ fontWeight: 400, color: 'rgba(242,242,242,0.5)' }}> — {r.context}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── BOOKING ── */}
       <section className="booking" id="booking">
         <div className="section-inner">
