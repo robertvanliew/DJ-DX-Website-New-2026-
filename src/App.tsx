@@ -42,6 +42,8 @@ const marqueePhotos = [
   { src: '/show-18.jpg', alt: 'DJ DX performance 2023' },
   { src: '/show-19.jpg', alt: 'DJ DX side profile' },
   { src: '/show-20.jpg', alt: 'DJ DX closeup performance' },
+  { src: '/show-21.jpg', alt: 'DJ DX smiling at the DJ booth, 2024' },
+  { src: '/show-22.jpg', alt: 'DJ DX performing live, 2024' },
 ];
 
 import MusicStore from './components/MusicStore';

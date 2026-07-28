@@ -14,8 +14,8 @@ export default function Corporate() {
   return (
     <>
       <Helmet>
-        <title>Corporate Event DJ NYC, NJ, CT | Luxury & Brand Activations | DJ DX</title>
-        <meta name="description" content="Looking for a professional corporate event DJ in NYC, NJ, or CT? DJ DX provides premium, brand-safe entertainment for corporate galas, holiday parties, and luxury activations." />
+        <title>Corporate Event DJ NYC, NJ, CT: From $2,000 | DJ DX</title>
+        <meta name="description" content="Corporate event DJ in NYC, NJ, or CT starting at $2,000. Brand-safe, HR-approved playlists for galas, holiday parties, and brand activations — including recent work for NautaDutilh at 620 Loft & Garden. Custom quote in 24 hours." />
         <link rel="canonical" href="https://djdxmusic.com/corporate-event-dj-nyc-nj-ct" />
         <meta property="og:title" content="Corporate Event DJ NYC, NJ, CT — DJ DX" />
         <meta property="og:description" content="Professional corporate event DJ for Fortune 500 galas, holiday parties, and luxury brand activations. DJ DX — NYC's premium corporate entertainment. TED-featured, 500+ events." />
