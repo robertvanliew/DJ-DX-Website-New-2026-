@@ -31,7 +31,7 @@ export default function HeroPhotoSlideshow({ photos, intervalMs = 6000 }: Props)
           src={photo.src}
           alt={i === index ? photo.alt : ''}
           width="1920"
-          height="1440"
+          height="720"
           loading={i === 0 ? 'eager' : 'lazy'}
           fetchPriority={i === 0 ? 'high' : 'auto'}
           decoding="async"
@@ -41,7 +41,7 @@ export default function HeroPhotoSlideshow({ photos, intervalMs = 6000 }: Props)
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            objectPosition: 'center 30%',
+            objectPosition: 'center',
             filter: 'contrast(1.05) saturate(1.1)',
             opacity: i === index ? 1 : 0,
             transition: 'opacity 1.2s ease-in-out',
