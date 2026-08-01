@@ -965,6 +965,7 @@ section { padding: 120px 40px; }
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
   transform: translateY(0);
   transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
 }
@@ -5630,12 +5631,11 @@ section { padding: 120px 40px; }
 }
 .ss-hero-bg {
   position: absolute;
-  top: -560px;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: calc(100% + 560px);
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 20%;
   z-index: 0;
 }
 .ss-hero-overlay {
