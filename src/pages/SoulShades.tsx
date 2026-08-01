@@ -392,8 +392,17 @@ export default function SoulShades() {
             steps from Rockefeller Center with St. Patrick's Cathedral as the backdrop.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.4fr)', gap: '24px', alignItems: 'stretch' }}>
-            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', aspectRatio: '9/16', maxHeight: '520px' }}>
+          <div className="cb-hero-shot sr" data-sr-delay="0s">
+            <img
+              src="/nautadutilh-violin-skyline-nyc.jpg"
+              alt="Julie Schatz on violin with the Manhattan skyline and St. Patrick's Cathedral, 620 Loft & Garden rooftop, NYC — Soul Shades"
+              loading="lazy"
+            />
+            <span className="cb-hero-tag">620 Loft &amp; Garden — NYC</span>
+          </div>
+
+          <div className="cb-gallery">
+            <div className="cb-shot sr" data-sr-delay="0.05s">
               <video
                 src="/videos/nautadutilh-rooftop-night-nyc.mp4"
                 poster="/nautadutilh-rooftop-night-poster.jpg"
@@ -402,46 +411,41 @@ export default function SoulShades() {
                 loop
                 playsInline
                 aria-label="Soul Shades rooftop setup at night, Manhattan skyline, NautaDutilh reception at 620 Loft & Garden"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+            <div className="cb-shot sr" data-sr-delay="0.1s">
               <img
                 src="/nautadutilh-soul-shades-violin-nyc.jpg"
                 alt="Julie Schatz performing live violin with Soul Shades at the NautaDutilh rooftop reception, 620 Loft & Garden, NYC"
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}
               />
+            </div>
+            <div className="cb-shot sr" data-sr-delay="0.15s">
               <img
                 src="/nautadutilh-dj-dx-620-loft-garden-nyc.jpg"
                 alt="DJ DX performing at the NautaDutilh corporate reception, 620 Loft & Garden rooftop, NYC, with St. Patrick's Cathedral in the background"
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}
-              />
-              <img
-                src="/nautadutilh-violin-skyline-nyc.jpg"
-                alt="Julie Schatz on violin with the Manhattan skyline and St. Patrick's Cathedral, 620 Loft & Garden rooftop, NYC — Soul Shades"
-                loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', gridColumn: '1 / -1', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}
               />
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginTop: '32px' }}>
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '24px' }}>
-              <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.75)', lineHeight: 1.7, marginBottom: '14px' }}>
-                &ldquo;The music was just perfect and the vibe was great. I love the uniqueness of keyboard and violin together with DJing — I don&apos;t think there are a lot of DJs who come with this built into the duo.&rdquo;
+          <div className="cb-quotes">
+            <div className="cb-quote sr" data-sr-delay="0.05s">
+              <span className="cb-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p className="cb-quote-text">
+                The music was just perfect and the vibe was great. I love the uniqueness of keyboard and violin together with DJing — I don&apos;t think there are a lot of DJs who come with this built into the duo.
               </p>
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>
-                Sue Krebs<span style={{ fontWeight: 400, color: 'rgba(242,242,242,0.5)' }}> — NautaDutilh New York P.C.</span>
+              <div className="cb-quote-name">
+                Sue Krebs<span> — NautaDutilh New York P.C.</span>
               </div>
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '24px' }}>
-              <p style={{ fontSize: '0.92rem', color: 'rgba(242,242,242,0.75)', lineHeight: 1.7, marginBottom: '14px' }}>
-                &ldquo;Your performance set the tone for our event, and the addition of the violin amplified our guests&apos; experience and made the evening memorable.&rdquo;
+            <div className="cb-quote sr" data-sr-delay="0.1s">
+              <span className="cb-quote-mark" aria-hidden="true">&ldquo;</span>
+              <p className="cb-quote-text">
+                Your performance set the tone for our event, and the addition of the violin amplified our guests&apos; experience and made the evening memorable.
               </p>
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>
-                Anna Naraine<span style={{ fontWeight: 400, color: 'rgba(242,242,242,0.5)' }}> — NautaDutilh New York P.C.</span>
+              <div className="cb-quote-name">
+                Anna Naraine<span> — NautaDutilh New York P.C.</span>
               </div>
             </div>
           </div>
