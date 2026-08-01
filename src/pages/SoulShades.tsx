@@ -4,6 +4,7 @@ import BookingForm from '../components/BookingForm';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import MusicStore from '../components/MusicStore';
+import ViralMomentsSection from '../components/ViralMomentsSection';
 import { fetchCatalog, type Track } from '../catalog';
 
 /* ── Icons ──────────────────────────────────────────────── */
@@ -476,6 +477,9 @@ export default function SoulShades() {
             ))}
           </div>
         </section>
+
+        {/* ── VIRAL MOMENTS ── */}
+        <ViralMomentsSection subtitle="Moments that moved the crowd — now moving the internet." />
 
         {/* ── VIDEO SLIDER ── */}
         <VideoSlider />
