@@ -51,10 +51,14 @@ export default function BookingForm() {
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
-      {/* Honeypot — hidden from real visitors, bots fill it blindly */}
+      {/* Honeypot — hidden from real visitors, bots fill it blindly.
+          Deliberately NOT named/labeled "Company"/"Organization" — that
+          matches a common saved browser autofill profile field, which was
+          silently autofilling this and causing real (often corporate)
+          submitters to get dropped as false-positive spam. */}
       <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
-        <label htmlFor="bf-company">Company</label>
-        <input id="bf-company" type="text" tabIndex={-1} autoComplete="off" value={fields.company} onChange={e => set('company', e.target.value)} />
+        <label htmlFor="bf-hp">Leave this field blank</label>
+        <input id="bf-hp" name="bf-hp" type="text" tabIndex={-1} autoComplete="off" value={fields.company} onChange={e => set('company', e.target.value)} />
       </div>
 
       <div className="form-row">

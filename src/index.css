@@ -2790,6 +2790,10 @@ section { padding: 120px 40px; }
   gap: 16px;
 }
 
+.cb-gallery--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .cb-shot {
   position: relative;
   border-radius: 14px;

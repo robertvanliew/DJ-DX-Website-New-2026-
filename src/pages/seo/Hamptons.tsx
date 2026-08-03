@@ -20,13 +20,14 @@ export default function Hamptons() {
         <meta property="og:title" content="Luxury DJ in The Hamptons — DJ DX" />
         <meta property="og:description" content="Exclusive DJ services for Hamptons estate parties, private summer galas, and luxury events from Southampton to Montauk. DJ DX — the NYC standard, delivered in the Hamptons." />
         <meta property="og:url" content="https://djdxmusic.com/hamptons-luxury-dj" />
-        <meta property="og:image" content="https://djdxmusic.com/hero-1.jpg" />
+        <meta property="og:image" content="https://djdxmusic.com/hero-hamptons.jpg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@djdxmusic" />
         <meta name="twitter:title" content="Luxury DJ in The Hamptons — DJ DX" />
         <meta name="twitter:description" content="Exclusive DJ services for Hamptons estate parties, private summer galas, and luxury events from Southampton to Montauk." />
-        <meta name="twitter:image" content="https://djdxmusic.com/hero-1.jpg" />
+        <meta name="twitter:image" content="https://djdxmusic.com/hero-hamptons.jpg" />
+        <link rel="preload" as="image" href="/hero-hamptons-1600.webp" fetchPriority="high" imageSrcSet="/hero-hamptons-800.webp 800w, /hero-hamptons-1600.webp 1600w, /hero-hamptons-2560.webp 2560w" imageSizes="100vw" />
         <script type="application/ld+json">
           {`[
             {
@@ -98,6 +99,15 @@ export default function Hamptons() {
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
                 {"@type": "ListItem", "position": 2, "name": "Hamptons Luxury DJ", "item": "https://djdxmusic.com/hamptons-luxury-dj"}
               ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": "DJ DX — Saks Fifth Avenue Private Estate Event, Water Mill",
+              "description": "DJ DX performing a golden-hour open-air set under a sailcloth tent at a private estate event for Saks Fifth Avenue in Water Mill, New York.",
+              "thumbnailUrl": "https://djdxmusic.com/saks-watermill-video-poster.jpg",
+              "uploadDate": "2026-07-30",
+              "contentUrl": "https://djdxmusic.com/videos/saks-watermill-djing-clip.mp4"
             }
           ]`}
         </script>
@@ -108,11 +118,32 @@ export default function Hamptons() {
       {/* ── HERO ── */}
       <section className="epk-hero" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="epk-hero-bg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <img src="/hero-1.jpg" alt="Luxury DJ in the Hamptons New York — DJ DX private estate party performance" width="1920" height="1080" fetchPriority="high" loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'contrast(1.05) saturate(1.1)' }} />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/hero-hamptons-800.webp 800w, /hero-hamptons-1600.webp 1600w, /hero-hamptons-2560.webp 2560w"
+              sizes="100vw"
+            />
+            <source
+              type="image/jpeg"
+              srcSet="/hero-hamptons-800.jpg 800w, /hero-hamptons-1600.jpg 1600w, /hero-hamptons-2560.jpg 2560w"
+              sizes="100vw"
+            />
+            <img
+              src="/hero-hamptons-1600.jpg"
+              alt="DJ DX performing a golden-hour set under a sailcloth tent at a private Saks Fifth Avenue estate event in Water Mill, NY"
+              width="1920"
+              height="1080"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', filter: 'contrast(1.05) saturate(1.1)' }}
+            />
+          </picture>
         </div>
-        <div className="epk-hero-overlay" style={{ 
+        <div className="epk-hero-overlay" style={{
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-          background: 'linear-gradient(to bottom, rgba(12,12,12,0.5) 0%, rgba(12,12,12,0.95) 100%), radial-gradient(circle at 50% 30%, rgba(235, 191, 109, 0.15) 0%, transparent 60%)'
+          background: 'linear-gradient(to bottom, rgba(12,12,12,0.58) 0%, rgba(12,12,12,0.96) 100%), radial-gradient(circle at 50% 30%, rgba(235, 191, 109, 0.15) 0%, transparent 60%)'
         }} />
         
         <div className="section-inner" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
@@ -177,6 +208,80 @@ export default function Hamptons() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── RECENT EVENT ── */}
+      <section style={{ padding: '80px 24px', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(201,168,76,0.12)', borderBottom: '1px solid rgba(201,168,76,0.12)' }}>
+        <div className="section-inner" style={{ maxWidth: '1100px' }}>
+          <div className="sec-overline" style={{ justifyContent: 'center' }}>
+            <span className="sec-overline-line" />
+            <span className="sec-label">Recently</span>
+            <span className="sec-overline-line" />
+          </div>
+          <h2 className="sec-title" style={{ textAlign: 'center', marginBottom: '12px' }}>
+            Saks Fifth Avenue — <span>Private Estate, Water Mill</span>
+          </h2>
+          <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.62)', maxWidth: '680px', margin: '0 auto 48px', fontSize: '1rem', lineHeight: 1.7 }}>
+            Most recently, I brought a golden-hour open-air set to a private estate in Water Mill for Saks Fifth Avenue. Under a sailcloth tent with string lights overhead, the night moved from cocktail-hour house and disco into a full late-set groove as the sky shifted from gold to navy.
+          </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
+            <div style={{ width: '100%', maxWidth: '380px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(201,168,76,0.2)', aspectRatio: '9/16' }}>
+              <video
+                src="/videos/saks-watermill-djing-clip.mp4"
+                poster="/saks-watermill-video-poster.jpg"
+                muted
+                loop
+                playsInline
+                preload="none"
+                controls
+                aria-label="DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+          </div>
+
+          <div className="cb-gallery cb-gallery--4">
+            <div className="cb-shot sr" data-sr-delay="0.05s">
+              <img
+                src="/saks-dj-dx-water-mill-hamptons.jpg"
+                alt="DJ DX performing at a Saks Fifth Avenue private estate event in Water Mill, New York"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+            <div className="cb-shot sr" data-sr-delay="0.1s">
+              <img
+                src="/saks-dj-dx-mixing-water-mill-hamptons.jpg"
+                alt="DJ DX mixing during a Saks Fifth Avenue private estate reception in Water Mill, New York"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+            <div className="cb-shot sr" data-sr-delay="0.15s">
+              <img
+                src="/saks-dj-booth-tent-water-mill-nyc.jpg"
+                alt="DJ booth under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+            <div className="cb-shot sr" data-sr-delay="0.2s">
+              <img
+                src="/saks-tent-bar-lounge-water-mill-nyc.jpg"
+                alt="Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* TODO: client testimonial goes here when received */}
         </div>
       </section>
 
