@@ -4,6 +4,15 @@ import SiteNav from '../../components/SiteNav';
 import SiteFooter from '../../components/SiteFooter';
 import RelatedServices from '../../components/RelatedServices';
 import BookingForm from '../../components/BookingForm';
+import HeroPhotoSlideshow from '../../components/HeroPhotoSlideshow';
+
+// Real photos from the Saks Fifth Avenue private estate event, Water Mill NY.
+const SAKS_GALLERY_PHOTOS = [
+  { src: '/saks-dj-dx-water-mill-hamptons.jpg', alt: 'DJ DX performing at a Saks Fifth Avenue private estate event in Water Mill, New York' },
+  { src: '/saks-dj-dx-mixing-water-mill-hamptons.jpg', alt: 'DJ DX mixing during a Saks Fifth Avenue private estate reception in Water Mill, New York' },
+  { src: '/saks-dj-booth-tent-water-mill-nyc.jpg', alt: 'DJ booth under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York' },
+  { src: '/saks-tent-bar-lounge-water-mill-nyc.jpg', alt: 'Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York' },
+];
 
 export default function Hamptons() {
   // Always start at top on load
@@ -137,7 +146,7 @@ export default function Hamptons() {
               fetchPriority="high"
               loading="eager"
               decoding="async"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', filter: 'contrast(1.05) saturate(1.1)' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%', filter: 'contrast(1.05) saturate(1.1)' }}
             />
           </picture>
         </div>
@@ -242,43 +251,8 @@ export default function Hamptons() {
             </div>
           </div>
 
-          <div className="cb-gallery cb-gallery--4">
-            <div className="cb-shot sr" data-sr-delay="0.05s">
-              <img
-                src="/saks-dj-dx-water-mill-hamptons.jpg"
-                alt="DJ DX performing at a Saks Fifth Avenue private estate event in Water Mill, New York"
-                width="900"
-                height="1200"
-                loading="lazy"
-              />
-            </div>
-            <div className="cb-shot sr" data-sr-delay="0.1s">
-              <img
-                src="/saks-dj-dx-mixing-water-mill-hamptons.jpg"
-                alt="DJ DX mixing during a Saks Fifth Avenue private estate reception in Water Mill, New York"
-                width="900"
-                height="1200"
-                loading="lazy"
-              />
-            </div>
-            <div className="cb-shot sr" data-sr-delay="0.15s">
-              <img
-                src="/saks-dj-booth-tent-water-mill-nyc.jpg"
-                alt="DJ booth under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York"
-                width="900"
-                height="1200"
-                loading="lazy"
-              />
-            </div>
-            <div className="cb-shot sr" data-sr-delay="0.2s">
-              <img
-                src="/saks-tent-bar-lounge-water-mill-nyc.jpg"
-                alt="Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York"
-                width="900"
-                height="1200"
-                loading="lazy"
-              />
-            </div>
+          <div className="cb-hero-shot sr" data-sr-delay="0.1s">
+            <HeroPhotoSlideshow photos={SAKS_GALLERY_PHOTOS} intervalMs={4200} />
           </div>
 
           {/* TODO: client testimonial goes here when received */}
