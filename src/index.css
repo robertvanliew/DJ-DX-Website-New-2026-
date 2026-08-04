@@ -2864,6 +2864,17 @@ section { padding: 120px 40px; }
   .cb-shot { aspect-ratio: 16 / 10; }
 }
 
+.saks-slideshow {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
 /* ─── BILLBOARD CHART ──────────────────────────────── */
 .billboard-wrap {
   display: flex;

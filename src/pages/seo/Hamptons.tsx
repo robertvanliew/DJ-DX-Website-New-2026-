@@ -251,7 +251,7 @@ export default function Hamptons() {
             </div>
           </div>
 
-          <div className="cb-hero-shot sr" data-sr-delay="0.1s">
+          <div className="saks-slideshow sr" data-sr-delay="0.1s">
             <HeroPhotoSlideshow photos={SAKS_GALLERY_PHOTOS} intervalMs={4200} />
           </div>
 
