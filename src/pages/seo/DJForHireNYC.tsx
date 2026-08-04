@@ -123,7 +123,7 @@ export default function DJForHireNYC() {
                   "name": "How much does it cost to hire a DJ in New York City?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DJ hire rates in NYC range based on event type, duration, equipment, and DJ experience. DJ DX rates typically range from $1,200 for smaller private parties up to $5,000+ for full-day weddings or corporate galas. Custom quotes are provided for every inquiry — email bookings@djdxmusic.com with your event details."
+                    "text": "DJ hire rates in NYC range based on event type, duration, equipment, and DJ experience. DJ DX rates typically range from $2,200 for smaller private parties up to $5,000+ for full-day weddings or corporate galas. Custom quotes are provided for every inquiry — email bookings@djdxmusic.com with your event details."
                   }
                 }
               ]
@@ -249,7 +249,7 @@ export default function DJForHireNYC() {
               { q: 'How do I hire a DJ in New York City?', a: 'Use the booking form on this page or email bookings@djdxmusic.com. Provide your event date, venue, event type, estimated guest count, and any music preferences. DJ DX responds within 24–48 hours with availability and a custom quote.' },
               { q: 'What events does DJ DX perform at in NYC and NJ?', a: 'DJ DX performs at weddings, corporate events, private birthday parties, sweet sixteens, rooftop parties, nightclub residencies, New Year\'s Eve events, brand activations, destination weddings, and Hamptons luxury events across NYC, NJ, CT, and internationally.' },
               { q: 'What makes DJ DX different from other DJs for hire in NYC?', a: 'DJ DX is a TED-featured artist, a music producer with 100+ originals on Spotify, and a DJ with 25+ years and 500+ events performed. DJ DX plays R&B, Hip-Hop, Afrobeats, Amapiano, House, Jersey Club, Old School, Dancehall, and Soca — one of the broadest authentic genre ranges of any DJ in the NYC market.' },
-              { q: 'How much does it cost to hire a DJ in New York City?', a: 'DJ DX rates typically range from $1,200 for smaller private parties up to $5,000+ for full-day weddings or corporate galas. Custom quotes are provided for every inquiry — email bookings@djdxmusic.com with your event details for transparent pricing.' },
+              { q: 'How much does it cost to hire a DJ in New York City?', a: 'DJ DX rates typically range from $2,200 for smaller private parties up to $5,000+ for full-day weddings or corporate galas. Custom quotes are provided for every inquiry — email bookings@djdxmusic.com with your event details for transparent pricing.' },
             ].map(({ q, a }) => (
               <div key={q} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '20px' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '8px' }}>{q}</h3>

@@ -114,7 +114,7 @@ export default function HipHopDJ() {
                   "name": "How much does a hip-hop DJ cost for an event in New York City?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Hip-hop DJ rates in New York City typically range from $1,200 to $3,500+ depending on event type, duration, equipment requirements, and the DJ's experience. DJ DX offers transparent custom quotes — email bookings@djdxmusic.com with your event date and details for pricing within 24 hours."
+                    "text": "Hip-hop DJ rates in New York City typically range from $2,200 to $3,500+ depending on event type, duration, equipment requirements, and the DJ's experience. DJ DX offers transparent custom quotes — email bookings@djdxmusic.com with your event date and details for pricing within 24 hours."
                   }
                 }
               ]
@@ -226,7 +226,7 @@ export default function HipHopDJ() {
               { q: 'Does DJ DX play both old school and new school hip-hop?', a: 'Yes. DJ DX curates across the full timeline — Golden Era classics from Biggie, Nas, Jay-Z, and Tupac through 2000s anthems (Kanye, Lil Wayne, T.I.) into modern trap and melodic hip-hop (Drake, Kendrick Lamar, Future, Cardi B, 21 Savage). Every set is custom-built for your crowd.' },
               { q: 'Can DJ DX mix hip-hop with R&B and Afrobeats at the same event?', a: 'Absolutely. DJ DX is a multi-genre specialist known for seamless cross-genre mixing. Hip-hop blended with R&B, Afrobeats, dancehall, and house is a DJ DX signature — keeping the entire crowd locked in without dead zones between genres.' },
               { q: 'Is DJ DX available for hip-hop themed birthday parties in NYC?', a: 'Yes. Hip-hop birthday parties and milestone celebrations are one of DJ DX\'s specialties in New York City and New Jersey. From intimate loft gatherings to large venue parties, DJ DX brings professional sound and an expertly curated setlist tailored to the guest of honor.' },
-              { q: 'How much does a hip-hop DJ cost for an event in New York City?', a: 'Hip-hop DJ rates in NYC typically range from $1,200 to $3,500+ depending on event type, duration, and equipment requirements. DJ DX offers transparent custom quotes — email bookings@djdxmusic.com with your event date and details.' },
+              { q: 'How much does a hip-hop DJ cost for an event in New York City?', a: 'Hip-hop DJ rates in NYC typically range from $2,200 to $3,500+ depending on event type, duration, and equipment requirements. DJ DX offers transparent custom quotes — email bookings@djdxmusic.com with your event date and details.' },
             ].map(({ q, a }) => (
               <div key={q} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '20px' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: '8px' }}>{q}</h3>
