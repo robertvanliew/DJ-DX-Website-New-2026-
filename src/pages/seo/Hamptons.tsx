@@ -4,14 +4,13 @@ import SiteNav from '../../components/SiteNav';
 import SiteFooter from '../../components/SiteFooter';
 import RelatedServices from '../../components/RelatedServices';
 import BookingForm from '../../components/BookingForm';
-import HeroPhotoSlideshow from '../../components/HeroPhotoSlideshow';
 
 // Real photos from the Saks Fifth Avenue private estate event, Water Mill NY.
 const SAKS_GALLERY_PHOTOS = [
-  { src: '/saks-dj-dx-water-mill-hamptons.jpg', alt: 'DJ DX performing at a Saks Fifth Avenue private estate event in Water Mill, New York' },
-  { src: '/saks-dj-dx-mixing-water-mill-hamptons.jpg', alt: 'DJ DX mixing during a Saks Fifth Avenue private estate reception in Water Mill, New York' },
-  { src: '/saks-dj-booth-tent-water-mill-nyc.jpg', alt: 'DJ booth under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York' },
-  { src: '/saks-tent-bar-lounge-water-mill-nyc.jpg', alt: 'Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York' },
+  { src: '/saks-dj-dx-water-mill-hamptons.jpg', alt: 'DJ DX performing at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Golden Hour' },
+  { src: '/saks-dj-dx-mixing-water-mill-hamptons.jpg', alt: 'DJ DX mixing during a Saks Fifth Avenue private estate reception in Water Mill, New York', caption: 'Dialed In' },
+  { src: '/saks-dj-booth-tent-water-mill-nyc.jpg', alt: 'DJ booth under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Under the Tent' },
+  { src: '/saks-tent-bar-lounge-water-mill-nyc.jpg', alt: 'Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Cocktail Hour' },
 ];
 
 export default function Hamptons() {
@@ -235,24 +234,30 @@ export default function Hamptons() {
             Most recently, I brought a golden-hour open-air set to a private estate in Water Mill for Saks Fifth Avenue. Under a sailcloth tent with string lights overhead, the night moved from cocktail-hour house and disco into a full late-set groove as the sky shifted from gold to navy.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
-            <div style={{ width: '100%', maxWidth: '380px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(201,168,76,0.2)', aspectRatio: '9/16' }}>
-              <video
-                src="/videos/saks-watermill-djing-clip.mp4"
-                poster="/saks-watermill-video-poster.jpg"
-                muted
-                loop
-                playsInline
-                preload="none"
-                controls
-                aria-label="DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
+          <div className="event-shelf">
+            <div className="event-shelf-item sr" data-sr-delay="0s">
+              <div className="event-shelf-frame">
+                <video
+                  src="/videos/saks-watermill-djing-clip.mp4"
+                  poster="/saks-watermill-video-poster.jpg"
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  controls
+                  aria-label="DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York"
+                />
+              </div>
+              <div className="event-shelf-caption">Live at the Booth</div>
             </div>
-          </div>
-
-          <div className="saks-slideshow sr" data-sr-delay="0.1s">
-            <HeroPhotoSlideshow photos={SAKS_GALLERY_PHOTOS} intervalMs={4200} />
+            {SAKS_GALLERY_PHOTOS.map((photo, i) => (
+              <div key={photo.src} className="event-shelf-item sr" data-sr-delay={`${(i + 1) * 0.05}s`}>
+                <div className="event-shelf-frame">
+                  <img src={photo.src} alt={photo.alt} width="900" height="1200" loading="lazy" />
+                </div>
+                <div className="event-shelf-caption">{photo.caption}</div>
+              </div>
+            ))}
           </div>
 
           {/* TODO: client testimonial goes here when received */}
