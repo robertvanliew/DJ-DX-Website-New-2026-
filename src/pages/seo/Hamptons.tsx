@@ -116,6 +116,15 @@ export default function Hamptons() {
               "thumbnailUrl": "https://djdxmusic.com/saks-watermill-video-poster.jpg",
               "uploadDate": "2026-07-30",
               "contentUrl": "https://djdxmusic.com/videos/saks-watermill-djing-clip.mp4"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": "DJ DX — Saks Fifth Avenue Private Estate Event, Water Mill (Clip 2)",
+              "description": "DJ DX setting the mood under a sailcloth tent at a private estate event for Saks Fifth Avenue in Water Mill, New York.",
+              "thumbnailUrl": "https://djdxmusic.com/saks-watermill-video2-poster.jpg",
+              "uploadDate": "2026-07-30",
+              "contentUrl": "https://djdxmusic.com/videos/saks-watermill-djing-clip2.mp4"
             }
           ]`}
         </script>
@@ -240,7 +249,6 @@ export default function Hamptons() {
                 <video
                   src="/videos/saks-watermill-djing-clip.mp4"
                   poster="/saks-watermill-video-poster.jpg"
-                  muted
                   loop
                   playsInline
                   preload="none"
@@ -250,8 +258,22 @@ export default function Hamptons() {
               </div>
               <div className="event-shelf-caption">Live at the Booth</div>
             </div>
+            <div className="event-shelf-item sr" data-sr-delay="0.05s">
+              <div className="event-shelf-frame">
+                <video
+                  src="/videos/saks-watermill-djing-clip2.mp4"
+                  poster="/saks-watermill-video2-poster.jpg"
+                  loop
+                  playsInline
+                  preload="none"
+                  controls
+                  aria-label="DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York, second clip"
+                />
+              </div>
+              <div className="event-shelf-caption">Setting the Mood</div>
+            </div>
             {SAKS_GALLERY_PHOTOS.map((photo, i) => (
-              <div key={photo.src} className="event-shelf-item sr" data-sr-delay={`${(i + 1) * 0.05}s`}>
+              <div key={photo.src} className="event-shelf-item sr" data-sr-delay={`${(i + 2) * 0.05}s`}>
                 <div className="event-shelf-frame">
                   <img src={photo.src} alt={photo.alt} width="900" height="1200" loading="lazy" />
                 </div>
