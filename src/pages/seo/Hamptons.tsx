@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import SiteNav from '../../components/SiteNav';
 import SiteFooter from '../../components/SiteFooter';
@@ -13,11 +13,45 @@ const SAKS_GALLERY_PHOTOS = [
   { src: '/saks-tent-bar-lounge-water-mill-nyc.jpg', alt: 'Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Cocktail Hour' },
 ];
 
+const SAKS_VIDEOS = [
+  { src: '/videos/saks-watermill-djing-clip.mp4', poster: '/saks-watermill-video-poster.jpg', caption: 'Live on the Decks', label: 'DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York' },
+  { src: '/videos/saks-watermill-djing-clip2.mp4', poster: '/saks-watermill-video2-poster.jpg', caption: 'Setting the Mood', label: 'DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York, second clip' },
+];
+
+function PlayIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
 export default function Hamptons() {
   // Always start at top on load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [activeVideo, setActiveVideo] = useState<typeof SAKS_VIDEOS[number] | null>(null);
+
+  useEffect(() => {
+    if (!activeVideo) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActiveVideo(null); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [activeVideo]);
 
   return (
     <>
@@ -154,7 +188,7 @@ export default function Hamptons() {
               fetchPriority="high"
               loading="eager"
               decoding="async"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%', filter: 'contrast(1.05) saturate(1.1)' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', filter: 'contrast(1.05) saturate(1.1)' }}
             />
           </picture>
         </div>
@@ -244,36 +278,22 @@ export default function Hamptons() {
           </p>
 
           <div className="event-shelf">
-            <div className="event-shelf-item sr" data-sr-delay="0s">
-              <div className="event-shelf-frame">
-                <video
-                  src="/videos/saks-watermill-djing-clip.mp4"
-                  poster="/saks-watermill-video-poster.jpg"
-                  loop
-                  playsInline
-                  preload="none"
-                  controls
-                  aria-label="DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York"
-                />
+            {SAKS_VIDEOS.map((v, i) => (
+              <div key={v.src} className="event-shelf-item sr" data-sr-delay={`${i * 0.05}s`}>
+                <button
+                  type="button"
+                  className="event-shelf-frame event-shelf-frame--video"
+                  onClick={() => setActiveVideo(v)}
+                  aria-label={`Play video: ${v.caption}`}
+                >
+                  <img src={v.poster} alt={v.label} loading={i === 0 ? 'eager' : 'lazy'} />
+                  <span className="event-play-btn"><PlayIcon /></span>
+                </button>
+                <div className="event-shelf-caption">{v.caption}</div>
               </div>
-              <div className="event-shelf-caption">Live at the Booth</div>
-            </div>
-            <div className="event-shelf-item sr" data-sr-delay="0.05s">
-              <div className="event-shelf-frame">
-                <video
-                  src="/videos/saks-watermill-djing-clip2.mp4"
-                  poster="/saks-watermill-video2-poster.jpg"
-                  loop
-                  playsInline
-                  preload="none"
-                  controls
-                  aria-label="DJ DX djing under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York, second clip"
-                />
-              </div>
-              <div className="event-shelf-caption">Setting the Mood</div>
-            </div>
+            ))}
             {SAKS_GALLERY_PHOTOS.map((photo, i) => (
-              <div key={photo.src} className="event-shelf-item sr" data-sr-delay={`${(i + 2) * 0.05}s`}>
+              <div key={photo.src} className="event-shelf-item sr" data-sr-delay={`${(i + SAKS_VIDEOS.length) * 0.05}s`}>
                 <div className="event-shelf-frame">
                   <img src={photo.src} alt={photo.alt} width="900" height="1200" loading="lazy" />
                 </div>
@@ -285,6 +305,25 @@ export default function Hamptons() {
           {/* TODO: client testimonial goes here when received */}
         </div>
       </section>
+
+      {activeVideo && (
+        <div className="event-modal-backdrop" onClick={() => setActiveVideo(null)}>
+          <div className="event-modal" onClick={e => e.stopPropagation()}>
+            <button type="button" className="event-modal-close" onClick={() => setActiveVideo(null)} aria-label="Close video">
+              <CloseIcon />
+            </button>
+            <video
+              key={activeVideo.src}
+              src={activeVideo.src}
+              poster={activeVideo.poster}
+              autoPlay
+              controls
+              playsInline
+              aria-label={activeVideo.label}
+            />
+          </div>
+        </div>
+      )}
 
       {/* ── FAQ ── */}
       <section style={{ padding: '80px 40px' }}>
