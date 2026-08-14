@@ -29,6 +29,7 @@ const Hamptons   = lazy(() => import('./pages/seo/Hamptons.tsx'))
 const PianoDJ    = lazy(() => import('./pages/seo/PianoDJ.tsx'))
 const DestinationDJ = lazy(() => import('./pages/seo/DestinationDJ.tsx'))
 const WeddingDJ  = lazy(() => import('./pages/seo/WeddingDJ.tsx'))
+const WeddingPackage = lazy(() => import('./pages/seo/WeddingPackage.tsx'))
 const WeddingDJManhattan   = lazy(() => import('./pages/seo/WeddingDJManhattan.tsx'))
 const WeddingDJLongIsland  = lazy(() => import('./pages/seo/WeddingDJLongIsland.tsx'))
 const WeddingDJStamford    = lazy(() => import('./pages/seo/WeddingDJStamford.tsx'))
@@ -98,6 +99,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/hamptons-luxury-dj" element={<Hamptons />} />
             <Route path="/destination-wedding-dj" element={<DestinationDJ />} />
             <Route path="/wedding-dj-nyc-nj" element={<WeddingDJ />} />
+            <Route path="/wedding-entertainment-package-nyc-nj" element={<WeddingPackage />} />
             <Route path="/wedding-dj-manhattan-nyc" element={<WeddingDJManhattan />} />
             <Route path="/wedding-dj-long-island-ny" element={<WeddingDJLongIsland />} />
             <Route path="/wedding-dj-stamford-ct" element={<WeddingDJStamford />} />
