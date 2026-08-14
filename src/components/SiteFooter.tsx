@@ -29,6 +29,7 @@ export default function SiteFooter({ email = 'bookings@djdxmusic.com', bookLabel
             <span className="footer-nav-heading">Services</span>
             <Link to="/dj-for-hire-nyc" className="footer-nav-link">DJ for Hire NYC</Link>
             <Link to="/wedding-dj-nyc-nj" className="footer-nav-link">Wedding DJ NYC</Link>
+            <Link to="/wedding-entertainment-package-nyc-nj" className="footer-nav-link">Wedding Entertainment Package</Link>
             <Link to="/corporate-event-dj-nyc-nj-ct" className="footer-nav-link">Corporate DJ NYC</Link>
             <Link to="/private-party-dj-nyc-nj" className="footer-nav-link">Private Party DJ</Link>
             <Link to="/afrobeats-amapiano-dj-nyc-nj" className="footer-nav-link">Afrobeats DJ NYC</Link>
