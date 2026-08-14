@@ -9,7 +9,7 @@ import BookingForm from '../../components/BookingForm';
 const FAQ_ITEMS = [
   {
     q: 'How much does a wedding DJ cost in NYC?',
-    a: 'Most NYC couples pay between $1,500 and $5,000 for a professional wedding DJ. Budget DJs advertise under $1,000 but usually cut corners on equipment, backup gear, or experience. Established solo DJs and boutique companies land in the $2,000–$3,500 range for a full reception. DJ DX weddings start at $1,500 with sound, wireless mics, and MC announcements included.',
+    a: 'Most NYC couples pay between $1,500 and $5,000 for a professional wedding DJ. Budget DJs advertise under $1,000 but usually cut corners on equipment, backup gear, or experience. Established solo DJs and boutique companies land in the $2,000–$3,500 range for a full reception. DJ DX weddings start at $2,800 with sound, wireless mics, and MC announcements included.',
   },
   {
     q: 'What affects the price of a wedding DJ?',
@@ -57,18 +57,18 @@ export default function WeddingDJCost() {
   return (
     <>
       <Helmet>
-        <title>Wedding DJ Cost NYC: $1,500–$5,000 (2026 Guide) | DJ DX</title>
-        <meta name="description" content="$1,500–$5,000 — real NYC wedding DJ pricing, published upfront. See what actually affects the price and what's included. No quote-request games. 25+ years, TED-featured." />
+        <title>Wedding DJ Cost NYC: $2,800–$6,000 (2026 Guide) | DJ DX</title>
+        <meta name="description" content="$2,800–$6,000 — real NYC wedding DJ pricing, published upfront. See what actually affects the price and what's included. No quote-request games. 25+ years, TED-featured." />
         <link rel="canonical" href="https://djdxmusic.com/wedding-dj-cost-nyc" />
-        <meta property="og:title" content="Wedding DJ Cost NYC: $1,500–$5,000 (2026 Pricing Guide)" />
-        <meta property="og:description" content="Real NYC wedding DJ pricing, published upfront: $1,500–$5,000 depending on hours, date, and add-ons. No quote-request games." />
+        <meta property="og:title" content="Wedding DJ Cost NYC: $2,800–$6,000 (2026 Pricing Guide)" />
+        <meta property="og:description" content="Real NYC wedding DJ pricing, published upfront: $2,800–$6,000 depending on hours, date, and add-ons. No quote-request games." />
         <meta property="og:url" content="https://djdxmusic.com/wedding-dj-cost-nyc" />
         <meta property="og:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@djdxmusic" />
-        <meta name="twitter:title" content="Wedding DJ Cost NYC: $1,500–$5,000 (2026 Pricing Guide)" />
-        <meta name="twitter:description" content="Real NYC wedding DJ pricing: $1,500–$5,000, published upfront by a TED-featured DJ with 25+ years of experience." />
+        <meta name="twitter:title" content="Wedding DJ Cost NYC: $2,800–$6,000 (2026 Pricing Guide)" />
+        <meta name="twitter:description" content="Real NYC wedding DJ pricing: $2,800–$6,000, published upfront by a TED-featured DJ with 25+ years of experience." />
         <meta name="twitter:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <script type="application/ld+json">
           {`[
@@ -106,8 +106,8 @@ export default function WeddingDJCost() {
                 {
                   "@type": "Offer",
                   "name": "Wedding DJ package",
-                  "priceSpecification": {"@type": "PriceSpecification", "minPrice": "1500", "priceCurrency": "USD"},
-                  "description": "Full reception coverage from $1,500 — sound system, wireless mics, MC announcements, planning consultation."
+                  "priceSpecification": {"@type": "PriceSpecification", "minPrice": "2800", "priceCurrency": "USD"},
+                  "description": "Full reception coverage from $2,800 — sound system, wireless mics, MC announcements, planning consultation."
                 },
                 {
                   "@type": "Offer",
@@ -172,8 +172,8 @@ export default function WeddingDJCost() {
             How Much Does a Wedding DJ <span>Cost in NYC?</span>
           </h1>
           <p style={{ maxWidth: '680px', margin: '0 auto', fontSize: '1.08rem', color: 'rgba(242,242,242,0.75)', lineHeight: 1.75 }}>
-            A professional wedding DJ in New York City costs <strong style={{ color: 'var(--gold)' }}>$1,500 to $5,000</strong>, depending
-            on hours, date, and add-ons. DJ DX weddings start at <strong style={{ color: 'var(--gold)' }}>$1,500</strong> with sound,
+            A professional wedding DJ in New York City costs <strong style={{ color: 'var(--gold)' }}>$2,800 to $6,000</strong>, depending
+            on hours, date, and add-ons. DJ DX weddings start at <strong style={{ color: 'var(--gold)' }}>$2,800</strong> with sound,
             wireless mics, and MC work included. Here is exactly where the money goes.
           </p>
           <p style={{ marginTop: '14px', fontSize: '12px', color: 'rgba(242,242,242,0.45)', letterSpacing: '0.08em' }}>
@@ -203,7 +203,7 @@ export default function WeddingDJCost() {
               </thead>
               <tbody>
                 {[
-                  ['Wedding DJ (reception)', '$1,500', 'Reception coverage, sound, mics, MC announcements'],
+                  ['Wedding DJ (reception)', '$2,800', 'Reception coverage, sound, mics, MC announcements'],
                   ['Ceremony + reception', 'Quoted', 'Separate ceremony sound, processional cues, officiant mic'],
                   ['DJ + Live Violin Duo (Soul Shades)', '$2,400', 'Live violin over DJ sets — ceremony through reception'],
                   ['Live violin add-on', '$150/hr', 'Added to any DJ package for cocktail hour or ceremony'],

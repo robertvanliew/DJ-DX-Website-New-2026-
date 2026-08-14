@@ -22,8 +22,8 @@ export default function Corporate() {
   return (
     <>
       <Helmet>
-        <title>Corporate Event DJ NYC, NJ, CT: From $2,000 | DJ DX</title>
-        <meta name="description" content="Corporate event DJ in NYC, NJ, or CT starting at $2,000. Brand-safe, HR-approved playlists for galas, holiday parties, and brand activations — including recent work for NautaDutilh at 620 Loft & Garden. Custom quote in 24 hours." />
+        <title>Corporate Event DJ NYC, NJ, CT: From $2,800 | DJ DX</title>
+        <meta name="description" content="Corporate event DJ in NYC, NJ, or CT starting at $2,800. Brand-safe, HR-approved playlists for galas, holiday parties, and brand activations — including recent work for NautaDutilh at 620 Loft & Garden. Custom quote in 24 hours." />
         <link rel="canonical" href="https://djdxmusic.com/corporate-event-dj-nyc-nj-ct" />
         <meta property="og:title" content="Corporate Event DJ NYC, NJ, CT — DJ DX" />
         <meta property="og:description" content="Professional corporate event DJ for Fortune 500 galas, holiday parties, and luxury brand activations. DJ DX — NYC's premium corporate entertainment. TED-featured, 500+ events." />
@@ -107,7 +107,7 @@ export default function Corporate() {
                   "name": "How much does a corporate event DJ cost in New York City?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Corporate event DJ pricing in New York City typically ranges from $2,000 to $8,000+ depending on event duration, guest count, setup complexity, and whether emcee or live entertainment add-ons like the Soul Shades violin duo are included. DJ DX provides transparent, itemized quotes within 24–48 hours — contact bookings@djdxmusic.com with your event date, venue, and estimated guest count."
+                    "text": "Corporate event DJ pricing in New York City typically ranges from $2,800 to $8,000+ depending on event duration, guest count, setup complexity, and whether emcee or live entertainment add-ons like the Soul Shades violin duo are included. DJ DX provides transparent, itemized quotes within 24–48 hours — contact bookings@djdxmusic.com with your event date, venue, and estimated guest count."
                   }
                 },
                 {
@@ -388,7 +388,7 @@ export default function Corporate() {
           <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {[
               { q: 'What makes DJ DX different from other corporate event DJs in NYC?', a: 'DJ DX brings 25+ years of professional experience, a TEDx performance credit, and a proven track record of 500+ events across New York, New Jersey, and Connecticut to every corporate booking. Specialties include clean, HR-approved playlist curation, professional emcee services, and the ability to read a room — shifting seamlessly from background networking music to a full dance floor closer.' },
-              { q: 'How much does a corporate event DJ cost in New York City?', a: 'Corporate event DJ pricing in NYC typically ranges from $2,000 to $8,000+ depending on event duration, guest count, and whether add-ons like the Soul Shades violin duo are included. DJ DX provides transparent, itemized quotes within 24–48 hours — contact bookings@djdxmusic.com with your event date, venue, and guest count.' },
+              { q: 'How much does a corporate event DJ cost in New York City?', a: 'Corporate event DJ pricing in NYC typically ranges from $2,800 to $8,000+ depending on event duration, guest count, and whether add-ons like the Soul Shades violin duo are included. DJ DX provides transparent, itemized quotes within 24–48 hours — contact bookings@djdxmusic.com with your event date, venue, and guest count.' },
               { q: 'Does DJ DX provide clean, work-appropriate playlists for corporate events?', a: 'Yes. DJ DX specializes in radio-edited, HR-approved music programming for professional corporate environments. Sets are curated to maintain appropriate volume for networking during cocktail hour, then escalate to high-energy dance floor programming for the social portion. No inappropriate lyrics, no embarrassing moments.' },
               { q: 'What types of corporate events does DJ DX perform at in NYC?', a: 'DJ DX performs at Fortune 500 holiday parties, corporate galas, product launches, brand activations, award ceremonies, rooftop events, and executive retreats across NYC, NJ, and CT. The Soul Shades violin and DJ duo is particularly popular for upscale brand activations and gala dinners.' },
               { q: 'Do you DJ corporate events in Brooklyn?', a: 'Yes. DJ DX regularly performs at corporate events across Brooklyn — including DUMBO loft spaces, Brooklyn Navy Yard venues, Williamsburg rooftops, and Industry City. Setup and load-in are factored into the quote so there are no day-of surprises around freight elevators or load-in windows.' },
