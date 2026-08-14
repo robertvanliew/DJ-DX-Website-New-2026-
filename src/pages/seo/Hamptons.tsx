@@ -274,7 +274,7 @@ export default function Hamptons() {
             Saks Fifth Avenue — <span>Private Estate, Water Mill</span>
           </h2>
           <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.62)', maxWidth: '680px', margin: '0 auto 48px', fontSize: '1rem', lineHeight: 1.7 }}>
-            Most recently, I brought a golden-hour open-air set to a private estate in Water Mill for Saks Fifth Avenue. Under a sailcloth tent with string lights overhead, the night moved from cocktail-hour house and disco into a full late-set groove as the sky shifted from gold to navy.
+            Most recently, I brought a golden-hour open-air set to a private estate in Water Mill for Saks Fifth Avenue — an intimate jewelry showcase featuring Jared Lehr, with a portion of the evening's sales supporting St. Jude Children's Research Hospital. Under a sailcloth tent with string lights overhead, the night moved from cocktail-hour house and disco into a full late-set groove as the sky shifted from gold to navy.
           </p>
 
           <div className="event-shelf">
