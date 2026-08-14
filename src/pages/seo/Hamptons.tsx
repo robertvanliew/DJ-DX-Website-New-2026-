@@ -273,9 +273,15 @@ export default function Hamptons() {
           <h2 className="sec-title" style={{ textAlign: 'center', marginBottom: '12px' }}>
             Saks Fifth Avenue — <span>Private Estate, Water Mill</span>
           </h2>
-          <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.62)', maxWidth: '680px', margin: '0 auto 48px', fontSize: '1rem', lineHeight: 1.7 }}>
+          <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.62)', maxWidth: '680px', margin: '0 auto 32px', fontSize: '1rem', lineHeight: 1.7 }}>
             Most recently, I brought a golden-hour open-air set to a private estate in Water Mill for Saks Fifth Avenue — an intimate jewelry showcase featuring Jared Lehr, with a portion of the evening's sales supporting St. Jude Children's Research Hospital. Under a sailcloth tent with string lights overhead, the night moved from cocktail-hour house and disco into a full late-set groove as the sky shifted from gold to navy.
           </p>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '32px', marginBottom: '48px', opacity: 0.85 }}>
+            <img src="/logo-saks-fifth-avenue.png" alt="Saks Fifth Avenue" style={{ height: '22px', width: 'auto' }} loading="lazy" />
+            <img src="/logo-jared-lehr.png" alt="Jared Lehr" style={{ height: '26px', width: 'auto' }} loading="lazy" />
+            <img src="/logo-st-jude.png" alt="St. Jude Children's Research Hospital" style={{ height: '30px', width: 'auto' }} loading="lazy" />
+          </div>
 
           <div className="event-shelf">
             {SAKS_VIDEOS.map((v, i) => (
