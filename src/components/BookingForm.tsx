@@ -1,5 +1,5 @@
 import { useRef, useState, type FormEvent } from 'react';
-import { trackLead } from '../lib/analytics';
+import { trackLead, trackFormSubmit, trackFormError } from '../lib/analytics';
 import AddressAutocomplete from './AddressAutocomplete';
 
 const Send = () => (
@@ -18,6 +18,7 @@ export default function BookingForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
+    trackFormSubmit('booking_widget');
     const metaEventId = crypto.randomUUID();
     try {
       const res = await fetch('/api/booking', {
@@ -31,12 +32,13 @@ export default function BookingForm() {
           pageUrl: window.location.href,
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) throw new Error(`http_${res.status}`);
       trackLead({ form: 'booking_widget', event_type: fields.eventType }, metaEventId);
       setStatus('sent');
       setFields({ name: '', email: '', phone: '', eventType: '', eventDate: '', eventStartTime: '', eventEndTime: '', location: '', locationCity: '', locationState: '', locationCountry: '', message: '', company: '' });
       mountedAt.current = Date.now();
-    } catch {
+    } catch (err) {
+      trackFormError('booking_widget', err instanceof Error ? err.message : 'network_error');
       setStatus('error');
     }
   };
@@ -123,6 +125,9 @@ export default function BookingForm() {
       <button type="submit" className="form-submit" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending…' : <><span>Send Inquiry</span> <Send /></>}
       </button>
+      <p style={{ fontSize: '12px', color: 'rgba(242,242,242,0.45)', marginTop: '12px', textAlign: 'center' }}>
+        Trouble with the form? Email <a href="mailto:bookings@djdxmusic.com" style={{ color: 'var(--gold)' }}>bookings@djdxmusic.com</a> directly.
+      </p>
     </form>
   );
 }

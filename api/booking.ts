@@ -12,15 +12,20 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ── Spam guard ────────────────────────────────────────────────────────────────
 const SPAM_URL_RE = /https?:\/\//gi;
-const MIN_FILL_MS = 2500;
+// Was 2500ms — real users with browser autofill/password managers fill every
+// field in well under a second and were being silently dropped as spam (fake
+// 200 returned, no email ever sent, no error shown). The honeypot field is
+// the primary bot signal; this is now just a backstop against sub-200ms
+// scripted submissions, not a real "did a human fill this out" check.
+const MIN_FILL_MS = 200;
 const MAX_LINKS = 2;
 
-function isSpamSubmission({ honeypot, elapsedMs, message }: { honeypot: unknown; elapsedMs: unknown; message: string }): boolean {
-  if (typeof honeypot === 'string' && honeypot.trim() !== '') return true;
-  if (typeof elapsedMs !== 'number' || !Number.isFinite(elapsedMs) || elapsedMs < MIN_FILL_MS) return true;
+function isSpamSubmission({ honeypot, elapsedMs, message }: { honeypot: unknown; elapsedMs: unknown; message: string }): { spam: boolean; reason?: string } {
+  if (typeof honeypot === 'string' && honeypot.trim() !== '') return { spam: true, reason: 'honeypot' };
+  if (typeof elapsedMs !== 'number' || !Number.isFinite(elapsedMs) || elapsedMs < MIN_FILL_MS) return { spam: true, reason: 'too_fast' };
   const linkCount = (message.match(SPAM_URL_RE) || []).length;
-  if (linkCount > MAX_LINKS) return true;
-  return false;
+  if (linkCount > MAX_LINKS) return { spam: true, reason: 'link_spam' };
+  return { spam: false };
 }
 
 // ── Retargeting conversion reporting (best-effort, never blocks the response) ─
@@ -131,7 +136,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  if (isSpamSubmission({ honeypot, elapsedMs, message })) {
+  const spamCheck = isSpamSubmission({ honeypot, elapsedMs, message });
+  if (spamCheck.spam) {
+    console.warn('Booking submission flagged as spam', { reason: spamCheck.reason, elapsedMs, email });
     // Fake success so bots don't learn to route around this
     return res.status(200).json({ success: true });
   }

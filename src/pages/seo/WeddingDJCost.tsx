@@ -57,18 +57,18 @@ export default function WeddingDJCost() {
   return (
     <>
       <Helmet>
-        <title>Wedding DJ Cost NYC: $2,800–$6,000 (2026 Guide) | DJ DX</title>
-        <meta name="description" content="$2,800–$6,000 — real NYC wedding DJ pricing, published upfront. See what actually affects the price and what's included. No quote-request games. 25+ years, TED-featured." />
+        <title>Wedding DJ Cost in NYC: Real 2026 Prices | DJ DX</title>
+        <meta name="description" content="What a wedding DJ actually costs in NYC and NJ in 2026: real hourly rates, travel fees, and what's included. Straight numbers from a working DJ." />
         <link rel="canonical" href="https://djdxmusic.com/wedding-dj-cost-nyc" />
-        <meta property="og:title" content="Wedding DJ Cost NYC: $2,800–$6,000 (2026 Pricing Guide)" />
-        <meta property="og:description" content="Real NYC wedding DJ pricing, published upfront: $2,800–$6,000 depending on hours, date, and add-ons. No quote-request games." />
+        <meta property="og:title" content="Wedding DJ Cost in NYC: Real 2026 Prices | DJ DX" />
+        <meta property="og:description" content="What a wedding DJ actually costs in NYC and NJ in 2026: real hourly rates, travel fees, and what's included. Straight numbers from a working DJ." />
         <meta property="og:url" content="https://djdxmusic.com/wedding-dj-cost-nyc" />
         <meta property="og:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@djdxmusic" />
-        <meta name="twitter:title" content="Wedding DJ Cost NYC: $2,800–$6,000 (2026 Pricing Guide)" />
-        <meta name="twitter:description" content="Real NYC wedding DJ pricing: $2,800–$6,000, published upfront by a TED-featured DJ with 25+ years of experience." />
+        <meta name="twitter:title" content="Wedding DJ Cost in NYC: Real 2026 Prices | DJ DX" />
+        <meta name="twitter:description" content="What a wedding DJ actually costs in NYC and NJ in 2026: real hourly rates, travel fees, and what's included. Straight numbers from a working DJ." />
         <meta name="twitter:image" content="https://djdxmusic.com/epk-hero.jpg" />
         <script type="application/ld+json">
           {`[

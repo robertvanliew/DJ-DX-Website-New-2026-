@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import AddressAutocomplete from '../components/AddressAutocomplete';
-import { trackLead } from '../lib/analytics';
+import { trackLead, trackFormSubmit, trackFormError } from '../lib/analytics';
 
 const SUBJECT_OPTIONS = [
   { value: 'booking',    label: 'Booking inquiry (weddings, events, parties)' },
@@ -55,6 +55,7 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     setErrorMsg('');
+    trackFormSubmit('contact');
     const metaEventId = crypto.randomUUID();
     try {
       const res = await fetch('/api/contact', {
@@ -76,8 +77,10 @@ export default function Contact() {
       setFields({ name: '', email: '', phone: '', subject: 'booking', eventDate: '', eventStartTime: '', eventEndTime: '', venue: '', venueCity: '', venueState: '', venueCountry: '', message: '', company: '' });
       mountedAt.current = Date.now();
     } catch (err) {
+      const reason = err instanceof Error ? err.message : 'Something went wrong';
+      trackFormError('contact', reason);
       setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong');
+      setErrorMsg(reason);
     }
   };
 
@@ -325,6 +328,12 @@ export default function Contact() {
 
                 <p style={{ fontSize: '12px', color: 'rgba(242,242,242,0.45)', marginTop: '16px', textAlign: 'center' }}>
                   We respect your inbox. No spam. No newsletters unless you ask.
+                </p>
+                <p style={{ fontSize: '12px', color: 'rgba(242,242,242,0.45)', marginTop: '8px', textAlign: 'center' }}>
+                  Trouble with the form? Email{' '}
+                  <a href={`mailto:${DIRECT_EMAILS[fields.subject] || 'bookings@djdxmusic.com'}`} style={{ color: 'var(--gold)' }}>
+                    {DIRECT_EMAILS[fields.subject] || 'bookings@djdxmusic.com'}
+                  </a>{' '}directly.
                 </p>
               </form>
             )}

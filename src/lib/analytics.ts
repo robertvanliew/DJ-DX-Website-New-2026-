@@ -17,6 +17,19 @@ export function trackEvent(name: string, params: Record<string, unknown> = {}) {
   });
 }
 
+// GA4 enhanced measurement's automatic form_submit listener only fires on a
+// native browser form submission. Every form on this site calls
+// e.preventDefault() and submits via fetch() instead, so that automatic
+// event never fires — these forms need to report explicitly or GA4 has zero
+// visibility into submit attempts or failures.
+export function trackFormSubmit(formName: string) {
+  trackEvent('form_submit', { form_name: formName });
+}
+
+export function trackFormError(formName: string, reason: string) {
+  trackEvent('form_error', { form_name: formName, reason });
+}
+
 // Fires the "this visitor converted" signal to every connected platform at
 // once — GA4, Meta, and TikTok all build "people who actually booked" audiences
 // from this, which is what powers lookalike/retargeting campaigns later.
