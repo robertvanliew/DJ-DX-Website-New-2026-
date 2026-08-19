@@ -56,7 +56,7 @@ async function sendMetaLeadEvent(input: LeadEventInput): Promise<void> {
       action_source: 'website',
       event_source_url: input.eventSourceUrl,
       user_data: {
-        em: [sha256(input.email)],
+        em: input.email ? [sha256(input.email)] : undefined,
         ph: digitsOnlyPhone ? [sha256(digitsOnlyPhone)] : undefined,
         client_ip_address: input.clientIp,
         client_user_agent: input.userAgent,
@@ -95,8 +95,8 @@ async function sendTikTokLeadEvent(input: LeadEventInput): Promise<void> {
       event_time: Math.floor(Date.now() / 1000),
       event_id: input.eventId,
       user: {
-        email: [sha256(input.email)],
-        phone: [sha256(normalizeTikTokPhone(input.phone))],
+        email: input.email ? [sha256(input.email)] : undefined,
+        phone: input.phone ? [sha256(normalizeTikTokPhone(input.phone))] : undefined,
         ip: input.clientIp,
         user_agent: input.userAgent,
       },
@@ -130,9 +130,25 @@ const MAX = { name: 120, email: 254, phone: 30, eventType: 100, eventDate: 40, e
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, email, phone, eventType, eventDate, eventStartTime, eventEndTime, location, message, honeypot, elapsedMs, metaEventId, pageUrl } = req.body;
+  // "quick" is the stripped-down 4-field sticky-CTA form (name, phone-or-email,
+  // event date, event type) — everything else gets a sensible placeholder so
+  // the same email pipeline handles both, and DJ DX follows up by phone for
+  // the missing details.
+  const quick = req.body.quick === true;
+  const { name, eventType, eventDate, honeypot, elapsedMs, metaEventId, pageUrl } = req.body;
+  let { email, phone, eventStartTime, eventEndTime, location, message } = req.body;
 
-  if (!name || !email || !phone || !eventType || !eventDate || !eventStartTime || !eventEndTime || !location || !message) {
+  if (quick) {
+    if (!name || !eventType || !eventDate || (!email && !phone)) {
+      return res.status(400).json({ error: 'Name, contact info, event date, and event type are required' });
+    }
+    email = email || '';
+    phone = phone || '';
+    eventStartTime = eventStartTime || 'TBD';
+    eventEndTime = eventEndTime || 'TBD';
+    location = location || 'Not provided (quick inquiry)';
+    message = message || '(Quick inquiry — submitted via sticky CTA, no additional details provided.)';
+  } else if (!name || !email || !phone || !eventType || !eventDate || !eventStartTime || !eventEndTime || !location || !message) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
@@ -158,7 +174,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Invalid input' });
   }
 
-  if (!EMAIL_RE.test(email)) {
+  if (email && !EMAIL_RE.test(email)) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
+  if (!quick && !email) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
@@ -177,13 +196,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await resend.emails.send({
       from: process.env.FROM_EMAIL || 'DJ DX <noreply@djdxmusic.com>',
       to: ['bookings@djdxmusic.com'],
-      replyTo: email,
-      subject: `New Booking Inquiry — ${safeEventType} | ${safeEventDate}`,
+      replyTo: email || undefined,
+      subject: `${quick ? 'Quick Inquiry' : 'New Booking Inquiry'} — ${safeEventType} | ${safeEventDate}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; color: #111; padding: 0; border-radius: 8px; overflow: hidden; border: 1px solid #e5e5e5;">
           <div style="background: #111111; padding: 28px 32px; border-bottom: 3px solid #C9A84C;">
-            <h1 style="color: #C9A84C; font-size: 22px; margin: 0; letter-spacing: 0.04em;">NEW BOOKING INQUIRY</h1>
-            <p style="color: rgba(255,255,255,0.5); margin: 4px 0 0; font-size: 13px;">via djdxmusic.com</p>
+            <h1 style="color: #C9A84C; font-size: 22px; margin: 0; letter-spacing: 0.04em;">${quick ? 'QUICK INQUIRY' : 'NEW BOOKING INQUIRY'}</h1>
+            <p style="color: rgba(255,255,255,0.5); margin: 4px 0 0; font-size: 13px;">via djdxmusic.com${quick ? ' — sticky CTA, follow up by phone for full details' : ''}</p>
           </div>
 
           <div style="padding: 28px 32px;">
@@ -194,11 +213,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               </tr>
               <tr style="border-top: 1px solid #eee;">
                 <td style="padding: 10px 0; color: #888; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: top;">Email</td>
-                <td style="padding: 10px 0; font-size: 15px;"><a href="mailto:${safeEmail}" style="color: #C9A84C; text-decoration: none;">${safeEmail}</a></td>
+                <td style="padding: 10px 0; font-size: 15px;">${safeEmail ? `<a href="mailto:${safeEmail}" style="color: #C9A84C; text-decoration: none;">${safeEmail}</a>` : '—'}</td>
               </tr>
               <tr style="border-top: 1px solid #eee;">
                 <td style="padding: 10px 0; color: #888; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: top;">Phone</td>
-                <td style="padding: 10px 0; color: #111; font-size: 15px;"><a href="tel:${safePhone}" style="color: #C9A84C; text-decoration: none;">${safePhone}</a></td>
+                <td style="padding: 10px 0; color: #111; font-size: 15px;">${safePhone ? `<a href="tel:${safePhone}" style="color: #C9A84C; text-decoration: none;">${safePhone}</a>` : '—'}</td>
               </tr>
               <tr style="border-top: 1px solid #eee;">
                 <td style="padding: 10px 0; color: #888; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: top;">Event Type</td>
@@ -223,35 +242,41 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             </table>
 
             <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid #eee;">
+              ${safeEmail ? `
               <a href="mailto:${safeEmail}" style="display: inline-block; background: #C9A84C; color: #111; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 13px; letter-spacing: 0.06em;">
                 REPLY TO ${safeName.split(' ')[0].toUpperCase()}
-              </a>
+              </a>` : `
+              <a href="tel:${safePhone}" style="display: inline-block; background: #C9A84C; color: #111; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 13px; letter-spacing: 0.06em;">
+                CALL ${safeName.split(' ')[0].toUpperCase()}
+              </a>`}
             </div>
           </div>
         </div>
       `,
     });
 
-    // Send confirmation to the person who inquired
-    await resend.emails.send({
-      from: process.env.FROM_EMAIL || 'DJ DX <noreply@djdxmusic.com>',
-      to: [email],
-      subject: `Got your inquiry, ${safeName.split(' ')[0]} — DJ DX`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0c0c0c; color: #fff; padding: 40px; border-radius: 12px;">
-          <h1 style="color: #C9A84C; font-size: 24px; margin: 0 0 16px;">Thanks for reaching out.</h1>
-          <p style="color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.7; margin: 0 0 24px;">
-            Hey ${safeName.split(' ')[0]}, your booking inquiry for <strong style="color:#fff;">${safeEventType}</strong> on <strong style="color:#fff;">${safeEventDate}</strong> from <strong style="color:#fff;">${safeEventStartTime} to ${safeEventEndTime}</strong> has been received.
-          </p>
-          <p style="color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.7; margin: 0 0 32px;">
-            DJ DX will review your request and get back to you within <strong style="color:#C9A84C;">24–48 hours</strong> to discuss availability and pricing.
-          </p>
-          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; color: rgba(255,255,255,0.4); font-size: 13px;">
-            DJ DX · djdxmusic.com · New York / New Jersey
+    // Send confirmation to the person who inquired — only possible if we have their email
+    if (email) {
+      await resend.emails.send({
+        from: process.env.FROM_EMAIL || 'DJ DX <noreply@djdxmusic.com>',
+        to: [email],
+        subject: `Got your inquiry, ${safeName.split(' ')[0]} — DJ DX`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0c0c0c; color: #fff; padding: 40px; border-radius: 12px;">
+            <h1 style="color: #C9A84C; font-size: 24px; margin: 0 0 16px;">Thanks for reaching out.</h1>
+            <p style="color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.7; margin: 0 0 24px;">
+              Hey ${safeName.split(' ')[0]}, your booking inquiry for <strong style="color:#fff;">${safeEventType}</strong> on <strong style="color:#fff;">${safeEventDate}</strong>${quick ? '' : ` from <strong style="color:#fff;">${safeEventStartTime} to ${safeEventEndTime}</strong>`} has been received.
+            </p>
+            <p style="color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.7; margin: 0 0 32px;">
+              DJ DX will review your request and get back to you within <strong style="color:#C9A84C;">24–48 hours</strong> to discuss availability and pricing.
+            </p>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; color: rgba(255,255,255,0.4); font-size: 13px;">
+              DJ DX · djdxmusic.com · New York / New Jersey
+            </div>
           </div>
-        </div>
-      `,
-    });
+        `,
+      });
+    }
 
     const eventSourceUrl = typeof pageUrl === 'string' && pageUrl.startsWith('https://djdxmusic.com') ? pageUrl : 'https://djdxmusic.com/';
     const clientIp = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim();
