@@ -42,6 +42,14 @@ function CloseIcon() {
   );
 }
 
+function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ transform: direction === 'left' ? 'rotate(180deg)' : undefined }}>
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
 export default function Hamptons() {
   // Always start at top on load
   useEffect(() => {
@@ -49,6 +57,7 @@ export default function Hamptons() {
   }, []);
 
   const [activeVideo, setActiveVideo] = useState<typeof SAKS_VIDEOS[number] | null>(null);
+  const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (!activeVideo) return;
@@ -60,6 +69,24 @@ export default function Hamptons() {
       document.body.style.overflow = '';
     };
   }, [activeVideo]);
+
+  // Full-size interactive photo lightbox — click any gallery photo to pop it
+  // out, arrow-key/swipe through the rest of the set, see the full frame
+  // instead of the cropped 9:16 thumbnail.
+  useEffect(() => {
+    if (activePhotoIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActivePhotoIndex(null);
+      if (e.key === 'ArrowRight') setActivePhotoIndex(i => i === null ? null : (i + 1) % SAKS_GALLERY_PHOTOS.length);
+      if (e.key === 'ArrowLeft') setActivePhotoIndex(i => i === null ? null : (i - 1 + SAKS_GALLERY_PHOTOS.length) % SAKS_GALLERY_PHOTOS.length);
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [activePhotoIndex]);
 
   return (
     <>
@@ -340,9 +367,19 @@ export default function Hamptons() {
             ))}
             {SAKS_GALLERY_PHOTOS.map((photo, i) => (
               <div key={photo.src} className="event-shelf-item sr" data-sr-delay={`${(i + SAKS_VIDEOS.length) * 0.05}s`}>
-                <div className="event-shelf-frame">
+                <button
+                  type="button"
+                  className="event-shelf-frame event-shelf-frame--photo"
+                  onClick={() => setActivePhotoIndex(i)}
+                  aria-label={`View full photo: ${photo.caption}`}
+                >
                   <img src={photo.src} alt={photo.alt} width="900" height="1200" loading="lazy" />
-                </div>
+                  <span className="event-expand-btn" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" />
+                    </svg>
+                  </span>
+                </button>
                 <div className="event-shelf-caption">{photo.caption}</div>
                 {photo.credit && (
                   <div style={{ fontSize: '10px', color: 'rgba(242,242,242,0.35)', marginTop: '2px' }}>Photo: {photo.credit}</div>
@@ -371,6 +408,47 @@ export default function Hamptons() {
               aria-label={activeVideo.label}
             />
           </div>
+        </div>
+      )}
+
+      {activePhotoIndex !== null && (
+        <div className="photo-lightbox-backdrop" onClick={() => setActivePhotoIndex(null)}>
+          <button type="button" className="event-modal-close photo-lightbox-close" onClick={() => setActivePhotoIndex(null)} aria-label="Close photo">
+            <CloseIcon />
+          </button>
+
+          <button
+            type="button"
+            className="photo-lightbox-nav photo-lightbox-nav--prev"
+            onClick={e => { e.stopPropagation(); setActivePhotoIndex(i => i === null ? null : (i - 1 + SAKS_GALLERY_PHOTOS.length) % SAKS_GALLERY_PHOTOS.length); }}
+            aria-label="Previous photo"
+          >
+            <ChevronIcon direction="left" />
+          </button>
+
+          <div className="photo-lightbox" onClick={e => e.stopPropagation()}>
+            <img
+              key={SAKS_GALLERY_PHOTOS[activePhotoIndex].src}
+              src={SAKS_GALLERY_PHOTOS[activePhotoIndex].src}
+              alt={SAKS_GALLERY_PHOTOS[activePhotoIndex].alt}
+            />
+            <div className="photo-lightbox-caption">
+              <span>{SAKS_GALLERY_PHOTOS[activePhotoIndex].caption}</span>
+              {SAKS_GALLERY_PHOTOS[activePhotoIndex].credit && (
+                <span className="photo-lightbox-credit">Photo: {SAKS_GALLERY_PHOTOS[activePhotoIndex].credit}</span>
+              )}
+              <span className="photo-lightbox-count">{activePhotoIndex + 1} / {SAKS_GALLERY_PHOTOS.length}</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="photo-lightbox-nav photo-lightbox-nav--next"
+            onClick={e => { e.stopPropagation(); setActivePhotoIndex(i => i === null ? null : (i + 1) % SAKS_GALLERY_PHOTOS.length); }}
+            aria-label="Next photo"
+          >
+            <ChevronIcon direction="right" />
+          </button>
         </div>
       )}
 

@@ -2957,6 +2957,136 @@ section { padding: 120px 40px; }
   z-index: 1;
 }
 
+.event-shelf-frame--photo {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.event-expand-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: rgba(12,12,12,0.55);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms cubic-bezier(0.23, 1, 0.32, 1), background 200ms ease;
+}
+
+.event-shelf-frame--photo:hover .event-expand-btn,
+.event-shelf-frame--photo:active .event-expand-btn {
+  opacity: 1;
+  background: rgba(201,168,76,0.35);
+}
+
+/* Always show on touch devices — no hover state to reveal it otherwise */
+@media (hover: none) {
+  .event-expand-btn { opacity: 1; }
+}
+
+/* ── Photo lightbox: click any gallery photo to see it full-frame ── */
+.photo-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(4px);
+  animation: bottom-sheet-fade-in 0.2s ease;
+}
+
+.photo-lightbox {
+  position: relative;
+  max-width: min(90vw, 900px);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-lightbox img {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  object-fit: contain;
+}
+
+.photo-lightbox-caption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: rgba(242,242,242,0.7);
+}
+
+.photo-lightbox-caption span:first-child {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.photo-lightbox-credit,
+.photo-lightbox-count {
+  color: rgba(242,242,242,0.4);
+}
+
+.photo-lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.photo-lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 251;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.photo-lightbox-nav--prev { left: max(12px, env(safe-area-inset-left)); }
+.photo-lightbox-nav--next { right: max(12px, env(safe-area-inset-right)); }
+
+.photo-lightbox-nav:hover {
+  background: rgba(201,168,76,0.35);
+  border-color: rgba(201,168,76,0.4);
+}
+
+.photo-lightbox-nav:active { transform: translateY(-50%) scale(0.92); }
+
+@media (max-width: 480px) {
+  .photo-lightbox-nav { width: 38px; height: 38px; }
+}
+
 .event-modal-backdrop {
   position: fixed;
   inset: 0;
