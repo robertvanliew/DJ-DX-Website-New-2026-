@@ -300,6 +300,7 @@ function App() {
   const [paused, setPaused] = useState(false);
 
   const [allTracks, setAllTracks] = useState<Track[]>(defaultCatalog);
+  const [liveVideoPlaying, setLiveVideoPlaying] = useState(false);
 
   useEffect(() => {
     // Check for Stripe success
@@ -910,6 +911,58 @@ function App() {
 
       {/* ── CATALOG — Billboard-style ── */}
       <MusicStore catalog={catalog} title={<>Music <span>Store</span></>} subTitle="Music" />
+
+      {/* ── LIVE IN ACTION — real footage of DJ DX djing, not a music video ── */}
+      <section className="videos" id="live" aria-label="Watch DJ DX DJing live">
+        <div className="section-inner">
+          <div className="videos-header sr" data-sr-delay="0s">
+            <div>
+              <div className="sec-overline">
+                <span className="sec-label">See It Live</span>
+              </div>
+              <h2 className="sec-title">Watch DJ DX <span>In Action</span></h2>
+            </div>
+          </div>
+
+          <div className="video-stage sr" data-sr-delay="0.1s">
+            <div className="video-gold-frame">
+              <div className="video-embed-wrap">
+                {liveVideoPlaying ? (
+                  <video
+                    src="/videos/saks-watermill-howdeepisyourlove.mp4"
+                    poster="/saks-watermill-howdeepisyourlove-poster.jpg"
+                    autoPlay
+                    controls
+                    playsInline
+                    aria-label="DJ DX djing live at a private Saks Fifth Avenue estate event in Water Mill, New York"
+                    style={{ width: '100%', height: '100%', display: 'block' }}
+                  />
+                ) : (
+                  <button
+                    className="video-play-overlay"
+                    onClick={() => setLiveVideoPlaying(true)}
+                    aria-label="Play video: DJ DX djing live in Water Mill, New York"
+                  >
+                    <img src="/saks-watermill-howdeepisyourlove-poster.jpg" alt="DJ DX djing live at a private Saks Fifth Avenue estate event in Water Mill, New York" className="video-thumb" />
+                    <div className="video-play-btn" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5,3 19,12 5,21" />
+                      </svg>
+                    </div>
+                  </button>
+                )}
+              </div>
+              <span className="vf-corner vf-corner--tl" aria-hidden="true" />
+              <span className="vf-corner vf-corner--tr" aria-hidden="true" />
+              <span className="vf-corner vf-corner--bl" aria-hidden="true" />
+              <span className="vf-corner vf-corner--br" aria-hidden="true" />
+            </div>
+          </div>
+          <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.5)', fontSize: '0.85rem', marginTop: '16px' }}>
+            Live at a private Saks Fifth Avenue estate event, Water Mill, NY
+          </p>
+        </div>
+      </section>
 
       {/* ── OFFICIAL MUSIC VIDEOS ── */}
       <section className="videos" id="videos" aria-label="Official Music Videos by DJ DX">
