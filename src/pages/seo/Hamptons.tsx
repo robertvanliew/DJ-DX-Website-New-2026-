@@ -7,11 +7,18 @@ import BookingForm from '../../components/BookingForm';
 import StickyMobileCTA from '../../components/StickyMobileCTA';
 
 // Real photos from the Saks Fifth Avenue private estate event, Water Mill NY.
+// The four "credit" entries are professional shots by Linsey Kromer
+// (@linseyslens_ on Instagram; "Linsey Kromer" for press/online/print per her
+// terms) — credit must stay attached wherever these are used.
 const SAKS_GALLERY_PHOTOS = [
+  { src: '/saks-dj-dx-dancefloor-water-mill-hamptons.jpg', alt: 'Guests dancing as DJ DX performs at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Packed Floor', credit: 'Linsey Kromer' },
+  { src: '/saks-dj-dx-behind-the-decks-water-mill-hamptons.jpg', alt: 'DJ DX behind the decks at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Behind the Decks', credit: 'Linsey Kromer' },
   { src: '/saks-dj-dx-water-mill-hamptons.jpg', alt: 'DJ DX performing at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Golden Hour' },
   { src: '/saks-dj-dx-mixing-water-mill-hamptons.jpg', alt: 'DJ DX mixing during a Saks Fifth Avenue private estate reception in Water Mill, New York', caption: 'Dialed In' },
   { src: '/saks-dj-booth-tent-water-mill-nyc.jpg', alt: 'DJ booth under a sailcloth tent at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Under the Tent' },
   { src: '/saks-tent-bar-lounge-water-mill-nyc.jpg', alt: 'Cocktail lounge and bar setup at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Cocktail Hour' },
+  { src: '/saks-golden-hour-tent-water-mill-hamptons.jpg', alt: 'Golden-hour sailcloth tent reception at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'Sunset at the Estate', credit: 'Linsey Kromer' },
+  { src: '/saks-jared-lehr-showcase-water-mill-hamptons.jpg', alt: 'Jared Lehr jewelry showcase and guests at a Saks Fifth Avenue private estate event in Water Mill, New York', caption: 'The Showcase', credit: 'Linsey Kromer' },
 ];
 
 const SAKS_VIDEOS = [
@@ -142,6 +149,38 @@ export default function Hamptons() {
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://djdxmusic.com/"},
                 {"@type": "ListItem", "position": 2, "name": "Hamptons Luxury DJ", "item": "https://djdxmusic.com/hamptons-luxury-dj"}
               ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "ImageObject",
+              "name": "DJ DX — Packed Dance Floor, Saks Fifth Avenue Private Estate Event, Water Mill",
+              "contentUrl": "https://djdxmusic.com/saks-dj-dx-dancefloor-water-mill-hamptons.jpg",
+              "creator": {"@type": "Person", "name": "Linsey Kromer"},
+              "uploadDate": "2026-08-21"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "ImageObject",
+              "name": "DJ DX — Behind the Decks, Saks Fifth Avenue Private Estate Event, Water Mill",
+              "contentUrl": "https://djdxmusic.com/saks-dj-dx-behind-the-decks-water-mill-hamptons.jpg",
+              "creator": {"@type": "Person", "name": "Linsey Kromer"},
+              "uploadDate": "2026-08-21"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "ImageObject",
+              "name": "Golden Hour Under the Tent — Saks Fifth Avenue Private Estate Event, Water Mill",
+              "contentUrl": "https://djdxmusic.com/saks-golden-hour-tent-water-mill-hamptons.jpg",
+              "creator": {"@type": "Person", "name": "Linsey Kromer"},
+              "uploadDate": "2026-08-21"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "ImageObject",
+              "name": "Jared Lehr Showcase — Saks Fifth Avenue Private Estate Event, Water Mill",
+              "contentUrl": "https://djdxmusic.com/saks-jared-lehr-showcase-water-mill-hamptons.jpg",
+              "creator": {"@type": "Person", "name": "Linsey Kromer"},
+              "uploadDate": "2026-08-21"
             },
             {
               "@context": "https://schema.org",
@@ -305,6 +344,9 @@ export default function Hamptons() {
                   <img src={photo.src} alt={photo.alt} width="900" height="1200" loading="lazy" />
                 </div>
                 <div className="event-shelf-caption">{photo.caption}</div>
+                {photo.credit && (
+                  <div style={{ fontSize: '10px', color: 'rgba(242,242,242,0.35)', marginTop: '2px' }}>Photo: {photo.credit}</div>
+                )}
               </div>
             ))}
           </div>
