@@ -929,21 +929,21 @@ function App() {
               <div className="video-embed-wrap">
                 {liveVideoPlaying ? (
                   <video
-                    src="/videos/saks-watermill-howdeepisyourlove.mp4"
-                    poster="/saks-watermill-howdeepisyourlove-poster.jpg"
+                    src="/videos/dj-dx-hourglass-sessions-highlight.mp4"
+                    poster="/dj-dx-hourglass-sessions-highlight-poster.jpg"
                     autoPlay
                     controls
                     playsInline
-                    aria-label="DJ DX djing live at a private Saks Fifth Avenue estate event in Water Mill, New York"
+                    aria-label="DJ DX djing live"
                     style={{ width: '100%', height: '100%', display: 'block' }}
                   />
                 ) : (
                   <button
                     className="video-play-overlay"
                     onClick={() => setLiveVideoPlaying(true)}
-                    aria-label="Play video: DJ DX djing live in Water Mill, New York"
+                    aria-label="Play video: DJ DX djing live"
                   >
-                    <img src="/saks-watermill-howdeepisyourlove-poster.jpg" alt="DJ DX djing live at a private Saks Fifth Avenue estate event in Water Mill, New York" className="video-thumb" />
+                    <img src="/dj-dx-hourglass-sessions-highlight-poster.jpg" alt="DJ DX djing live" className="video-thumb" />
                     <div className="video-play-btn" aria-hidden="true">
                       <svg viewBox="0 0 24 24" fill="currentColor">
                         <polygon points="5,3 19,12 5,21" />
@@ -958,9 +958,6 @@ function App() {
               <span className="vf-corner vf-corner--br" aria-hidden="true" />
             </div>
           </div>
-          <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.5)', fontSize: '0.85rem', marginTop: '16px' }}>
-            Live at a private Saks Fifth Avenue estate event, Water Mill, NY
-          </p>
         </div>
       </section>
 
