@@ -929,21 +929,21 @@ function App() {
               <div className="video-embed-wrap">
                 {liveVideoPlaying ? (
                   <video
-                    src="/videos/dj-dx-hourglass-sessions-highlight.mp4"
-                    poster="/dj-dx-hourglass-sessions-highlight-poster.jpg"
+                    src="/videos/dj-dx-metaverse-hourglass-sessions.mp4"
+                    poster="/dj-dx-metaverse-hourglass-sessions-poster.jpg"
                     autoPlay
                     controls
                     playsInline
-                    aria-label="DJ DX djing live"
+                    aria-label="DJ DX djing live in the Metaverse, in collaboration with Hourglass Sessions"
                     style={{ width: '100%', height: '100%', display: 'block' }}
                   />
                 ) : (
                   <button
                     className="video-play-overlay"
                     onClick={() => setLiveVideoPlaying(true)}
-                    aria-label="Play video: DJ DX djing live"
+                    aria-label="Play video: DJ DX djing live in the Metaverse, in collaboration with Hourglass Sessions"
                   >
-                    <img src="/dj-dx-hourglass-sessions-highlight-poster.jpg" alt="DJ DX djing live" className="video-thumb" />
+                    <img src="/dj-dx-metaverse-hourglass-sessions-poster.jpg" alt="DJ DX djing live in the Metaverse, in collaboration with Hourglass Sessions" className="video-thumb" />
                     <div className="video-play-btn" aria-hidden="true">
                       <svg viewBox="0 0 24 24" fill="currentColor">
                         <polygon points="5,3 19,12 5,21" />
@@ -958,6 +958,9 @@ function App() {
               <span className="vf-corner vf-corner--br" aria-hidden="true" />
             </div>
           </div>
+          <p style={{ textAlign: 'center', color: 'rgba(242,242,242,0.5)', fontSize: '0.85rem', marginTop: '16px' }}>
+            Live in the Metaverse — in collaboration with Hourglass Sessions
+          </p>
         </div>
       </section>
 
