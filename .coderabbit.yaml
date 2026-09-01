@@ -1,0 +1,20 @@
+language: "en-US"
+tone_instructions: "Be concise and practical. Focus on bugs, security issues, and performance problems. Skip style nitpicks."
+early_access: false
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_filters:
+    - "!**/*.lock"
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+  auto_review:
+    enabled: true
+    drafts: false
+chat:
+  allow_non_org_members: false
+  auto_reply: true
